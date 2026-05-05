@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Imported KB — Análise Completa</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         max-width: 960px; margin: 2em auto; padding: 0 1em; color: #222; line-height: 1.55; }
+  h1, h2, h3 { color: #1a3552; }
+  h1 { border-bottom: 2px solid #3B82F6; padding-bottom: .3em; }
+  h2 { border-bottom: 1px solid #ddd; padding-bottom: .2em; margin-top: 2em; }
+  table { border-collapse: collapse; margin: 1em 0; width: 100%; }
+  th, td { border: 1px solid #ddd; padding: .5em .8em; text-align: left; }
+  th { background: #f5f8fc; }
+  code { background: #eef2f7; padding: .1em .3em; border-radius: 3px; font-size: .92em; }
+  .meta { background: #f5f8fc; padding: 1em; border-left: 4px solid #3B82F6;
+          margin: 1em 0; border-radius: 4px; }
+  ul.toc { background: #fafbfd; padding: 1em 1em 1em 2em; border-radius: 4px; }
+  .warning { color: #b25e00; }
+</style>
+</head>
+<body>
+<h1>Imported KB — Análise Completa</h1>
+<div class="meta">
+<strong>Origem:</strong> GeneXus 18 (KMW=4, Build=185416)<br>
+<strong>KB Name:</strong> ?<br>
+<strong>Total objects:</strong> 14<br>
+<strong>XPZ original:</strong> glpportal-subset.xpz
+</div>
+<h2>Conteúdo</h2>
+<ul class="toc">
+<li><a href="#exec">Resumo executivo</a></li>
+<li><a href="#inventory">Inventário</a></li>
+<li><a href="#datamodel">Modelo de dados</a></li>
+<li><a href="#procs">Rotinas</a></li>
+<li><a href="#ui">Telas e UI</a></li>
+<li><a href="#patterns">Patterns</a></li>
+<li><a href="#i18n">i18n</a></li>
+<li><a href="#warnings">Warnings</a></li>
+</ul>
+<h2 id="exec">Resumo Executivo</h2>
+<p>Esta KB GeneXus contém 14 objetos no total, distribuídos entre 14 tipos identificados. A KB foi exportada de GeneXus 18 e contém 1 procedures, 1 web panels, 1 transactions e 1 domains. Foram detectadas 1 instâncias de patterns WorkWithPlus, indicando uso intensivo de geração automática de UI. O conteúdo bruto está preservado em `.cloudpilot/` para inspeção.</p>
+<h2 id="inventory">Inventário</h2>
+<table><tr><th>Kind</th><th>Quantidade</th></tr>
+<tr><td>FOLDER</td><td>1</td></tr>
+<tr><td>MODULE</td><td>1</td></tr>
+<tr><td>DOMAIN</td><td>1</td></tr>
+<tr><td>TRANSACTION</td><td>1</td></tr>
+<tr><td>TABLE</td><td>1</td></tr>
+<tr><td>INDEX</td><td>1</td></tr>
+<tr><td>SUBTYPE_GROUP</td><td>1</td></tr>
+<tr><td>STRUCTURED_DATA_TYPE</td><td>1</td></tr>
+<tr><td>EXTERNAL_OBJECT</td><td>1</td></tr>
+<tr><td>PROCEDURE</td><td>1</td></tr>
+<tr><td>WEB_PANEL</td><td>1</td></tr>
+<tr><td>THEME_CLASS</td><td>1</td></tr>
+<tr><td>IMAGE</td><td>1</td></tr>
+<tr><td>WORK_WITH_PLUS_PATTERN</td><td>1</td></tr>
+</table>
+<h2 id="datamodel">Modelo de dados</h2>
+<h3>DOMAIN (1)</h3>
+<ul>
+<li><strong>FilterRelationType</strong></li>
+</ul>
+<h3>TRANSACTION (1)</h3>
+<ul>
+<li><strong>Empresa</strong> — <code>levels=1</code></li>
+</ul>
+<h3>TABLE (1)</h3>
+<ul>
+<li><strong>Empresa</strong></li>
+</ul>
+<h3>INDEX (1)</h3>
+<ul>
+<li><strong>CC2010_PK</strong></li>
+</ul>
+<h3>SUBTYPE_GROUP (1)</h3>
+<ul>
+<li><strong>SGUsuarioEmpresa</strong></li>
+</ul>
+<h3>STRUCTURED_DATA_TYPE (1)</h3>
+<ul>
+<li><strong>Route</strong></li>
+</ul>
+<h2 id="procs">Rotinas</h2>
+<h3>PROCEDURE (1)</h3>
+<ul>
+<li><strong>GoogleDirectionsServiceRequest</strong> — <code>parm=parm(in:&amp;DirectionsRequestParameters, out:&amp;Routes, out:&amp;errorMessages)</code></li>
+</ul>
+<h3>EXTERNAL_OBJECT (1)</h3>
+<ul>
+<li><strong>Geolocation</strong></li>
+</ul>
+<h2 id="ui">Telas e UI</h2>
+<h3>WEB_PANEL (1)</h3>
+<ul>
+<li><strong>AppMasterPage</strong> — <code>form=present</code></li>
+</ul>
+<h3>THEME_CLASS (1)</h3>
+<ul>
+<li><strong>AttSubTitle</strong></li>
+</ul>
+<h3>IMAGE (1)</h3>
+<ul>
+<li><strong>asc</strong></li>
+</ul>
+<h2 id="patterns">Patterns</h2>
+<h3>WORK_WITH_PLUS_PATTERN (1)</h3>
+<ul>
+<li><strong>WorkWithPlusAcessoCliente</strong> — <code>pattern=07135890</code>, <code>version=1.3</code></li>
+</ul>
+<h2 id="i18n">i18n</h2>
+<p><strong>Linguagem padrão:</strong> (não declarado)</p>
+<p><strong>Translations inline:</strong> 0</p>
+<h2 id="warnings">Warnings</h2>
+<ul>
+<li class="warning">KB name absent from &lt;KnowledgeBase&gt; header</li>
+</ul>
+
+</body>
+</html>

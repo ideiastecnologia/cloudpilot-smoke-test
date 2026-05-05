@@ -1,0 +1,67 @@
+════════════════════════════════════════════════
+ANALISE ESTRUTURAL DO REPOSITORIO (auto-gerada)
+STACK DETECTADA: GeneXus 18
+════════════════════════════════════════════════
+
+GENEXUS VERSION: 18 (KMW MajorVersion=4, Build=185416)
+KB NAME: unknown
+TOTAL OBJECTS: 14
+
+OBJECT INVENTORY (by kind):
+    - FOLDER: 1
+    - MODULE: 1
+    - DOMAIN: 1
+    - TRANSACTION: 1
+    - TABLE: 1
+    - INDEX: 1
+    - SUBTYPE_GROUP: 1
+    - STRUCTURED_DATA_TYPE: 1
+    - EXTERNAL_OBJECT: 1
+    - PROCEDURE: 1
+    - WEB_PANEL: 1
+    - THEME_CLASS: 1
+    - IMAGE: 1
+    - WORK_WITH_PLUS_PATTERN: 1
+
+DOMAINS (1):
+    # name + dataType (extracted from ATTCUSTOMTYPE Property when available)
+    - FilterRelationType
+
+PROCEDURES (1):
+    # name + parm signature (extracted from Source DSL when available)
+    - GoogleDirectionsServiceRequest [parm=parm(in:&DirectionsRequestParameters, out:&Routes, out:&errorMessages)]
+
+WEB PANELS (1):
+    # name + 'has form layout' marker when a Source Part is present
+    - AppMasterPage [form=present]
+
+TRANSACTIONS (1):
+    # name + level count (best-effort from RawXml structure)
+    - Empresa [levels=1]
+
+PATTERN INSTANCES (WorkWithPlus) (1):
+    # name + pattern GUID + version
+    - WorkWithPlusAcessoCliente [pattern=07135890, version=1.3]
+
+THEMES / THEME CLASSES (1 total):
+    - AttSubTitle
+
+I18N:
+    Default language: unknown
+    Inline <Translation> elements: 0
+
+PATTERNS DETECTED:
+    - pattern 07135890 — 1 instances
+
+WARNINGS:
+    - KB name absent from <KnowledgeBase> header
+
+INSTRUCOES PARA AGENTES:
+    - Este projeto e uma KB GeneXus importada via Legacy Import
+    - Consulte a knowledge base GENEXUS_MAPPING (categoria NEXA_REFERENCE)
+      para semantica oficial dos tipos GeneXus
+    - Object kinds marcados como UNKNOWN(<guid>) nao tem mapping definido —
+      proponha mapping baseado em fullyQualifiedName quando relevante
+    - Patterns WorkWithPlus geram objetos derivados (Prompts, Selections,
+      WorkWith*) — tratar como artefatos generated, nao logica de negocio
+════════════════════════════════════════════════
