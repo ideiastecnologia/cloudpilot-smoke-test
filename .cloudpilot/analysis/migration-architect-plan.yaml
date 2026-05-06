@@ -9,102 +9,158 @@ modules:
     artifacts:
       - name: EmpresaEntity
         type: Entity
-        language: CSharp
-        path: src/Domain/Empresa/EmpresaEntity.cs
+        target_file: Models/Empresa.cs
         notes: >
-          Mapear campos da Transaction GeneXus para propriedades C#.
-          EmpresaId como chave primária (string, verificar se deve migrar para Guid).
-          EmpresaEmail recomenda uso de tipo semântico (Email domain) — validar com atributo [EmailAddress].
-          EmpresaFoto mapeado como string URI ou blob conforme decisão de storage.
-          EmpresaAtivo mapeado como bool.
-          EmpresaTipoRelatorio mapeado como string ou enum após levantamento de valores possíveis.
-          EmpresaAdministradorId/EmpresaAdministradorNome indicam FK para entidade Administrador/Usuário — confirmar existência no inventário completo.
-      - name: IEmpresaRepository
-        type: Repository
-        language: CSharp
-        path: src/Domain/Empresa/IEmpresaRepository.cs
-        notes: >
-          Interface de repositório com operações CRUD básicas.
-          Estratégia REBUILD implica recriação do schema — usar EF Core Code-First com migrations.
-      - name: EmpresaRepository
-        type: Repository
-        language: CSharp
-        path: src/Infrastructure/Empresa/EmpresaRepository.cs
-        notes: >
-          Implementação concreta com Entity Framework Core.
-          Configurar DbContext e DbSet<EmpresaEntity>.
-          Índice único recomendado sobre EmpresaCNPJ e EmpresaDominio.
-      - name: EmpresaService
-        type: Service
-        language: CSharp
-        path: src/Application/Empresa/EmpresaService.cs
-        notes: >
-          Encapsular regras de negócio equivalentes às Rules da Transaction GeneXus.
-          Validar CNPJ (formato), unicidade de EmpresaDominio e EmpresaCNPJ.
-          EmpresaAtivo como flag de soft-delete recomendado.
-          Mapear lógica de Error/Msg GeneXus para exceções de domínio ou FluentValidation.
-      - name: EmpresaController
-        type: Controller
-        language: CSharp
-        path: src/API/Controllers/EmpresaController.cs
-        notes: >
-          REST Controller com endpoints GET, POST, PUT, DELETE para /api/empresa.
-          Expor EmpresaId como chave de rota.
-          Retornar DTOs (EmpresaDto) — nunca expor a entidade diretamente.
-          Usar [Authorize] conforme política de segurança do sistema.
-      - name: EmpresaDto
-        type: DTO
-        language: CSharp
-        path: src/Application/Empresa/EmpresaDto.cs
-        notes: >
-          DTO de transferência para leitura e escrita.
-          Separar CreateEmpresaDto e UpdateEmpresaDto se campos editáveis diferirem do payload de criação.
-      - name: EmpresaReactPage
-        type: UIComponent
-        language: TypeScript
-        framework: React
-        path: frontend/src/pages/Empresa/EmpresaPage.tsx
-        ui_strategy_applied: PRESERVE_WITH_ADJUSTMENTS
-        notes: >
-          Reproduzir fluxo funcional do WebPanel/Transaction GeneXus com ajustes visuais.
-          Usar componentes shadcn/ui para formulários, tabelas e feedback.
-          Campos: EmpresaNome, EmpresaCNPJ, EmpresaContato, EmpresaEndereco, EmpresaEmail, EmpresaAtivo (toggle), EmpresaFoto (upload), EmpresaTipoRelatorio (select), EmpresaDominio.
-          EmpresaFundoLogin: campo de upload de imagem para personalização da tela de login.
-          EmpresaAdministradorId/Nome: exibir como campo de seleção vinculado à entidade Administrador.
+          Mapear todos os campos da transação GeneXus como propriedades C#.
+          EmpresaId deve ser configurado como chave primária.
+          EmpresaEmail deve usar anotação de validação [EmailAddress].
+          EmpresaAtivo deve ser convertido para tipo bool.
+          EmpresaFoto e EmpresaFundoLogin devem ser tratados como string de URL ou path binário;
+          avaliar uso de armazenamento de blob (Azure Storage / S3) em vez de coluna direta.
+          EmpresaCNPJ deve ter validação customizada de formato brasileiro.
       - name: EmpresaDbContext
         type: DbContext
-        language: CSharp
-        path: src/Infrastructure/Data/AppDbContext.cs
+        target_file: Data/AppDbContext.cs
         notes: >
-          Registrar DbSet<EmpresaEntity>.
-          Configurar mapeamento via Fluent API: tamanhos de coluna, índices únicos, constraints.
-          Estratégia REBUILD: gerar migration inicial do zero — sem reverse engineering do schema GeneXus.
-
-db_migration:
-  strategy: REBUILD
-  orm: EntityFrameworkCore
-  database_hint: SQL Server ou PostgreSQL (definir conforme ambiente alvo)
-  notes: >
-    Schema será criado via Code-First migrations.
-    Revisar tipos de dado: todos os campos no inventário estão mapeados como String/length:60 — validar tipos reais (ex: EmpresaAtivo deve ser bool, EmpresaFoto pode ser blob/URI, EmpresaAdministradorId pode ser Guid ou int).
-    Criar índice único em EmpresaCNPJ e EmpresaDominio.
-    Avaliar soft-delete via campo EmpresaAtivo ao invés de DELETE físico.
-
-ui_notes:
-  master_page: AppMasterPage
-  tabs_detected: []
-  notes: >
-    Inventário de UI contém AppMasterPage sem tabs definidas.
-    Estratégia PRESERVE_WITH_ADJUSTMENTS: recriar o layout master com header/footer/nav equivalentes usando React + shadcn/ui.
-    Sem tabs no MasterPage — estrutura de navegação lateral ou top-nav a definir com o time de UX.
-
+          Registrar DbSet<Empresa> no contexto EF Core.
+          Configurar via Fluent API: chave primária, tamanhos máximos de colunas e índices.
+          Estratégia REBUILD implica criação do schema do zero via migrations EF Core.
+      - name: IEmpresaRepository
+        type: Repository
+        target_file: Repositories/IEmpresaRepository.cs
+        notes: >
+          Interface com operações CRUD básicas: GetByIdAsync, GetAllAsync,
+          AddAsync, UpdateAsync, DeleteAsync.
+          Incluir método FindByCNPJAsync para garantir unicidade de CNPJ.
+      - name: EmpresaRepository
+        type: Repository
+        target_file: Repositories/EmpresaRepository.cs
+        notes: >
+          Implementação concreta usando EF Core.
+          Injetar AppDbContext via construtor.
+          Seguir padrão Unit of Work; commits gerenciados pelo Service.
+      - name: EmpresaService
+        type: Service
+        target_file: Services/EmpresaService.cs
+        notes: >
+          Concentrar regras de negócio herdadas das Rules GeneXus:
+          validação de CNPJ, obrigatoriedade de campos, lógica de ativação/desativação.
+          Usar anotação [Transactional] equivalente via TransactionScope ou savepoint EF Core.
+          Mapear erros para exceções de domínio customizadas (ex: EmpresaNotFoundException,
+          CNPJDuplicadoException).
+      - name: EmpresaController
+        type: Controller
+        target_file: Controllers/EmpresaController.cs
+        notes: >
+          REST API com endpoints:
+          GET    /api/empresas          - listagem paginada
+          GET    /api/empresas/{id}     - detalhe
+          POST   /api/empresas          - criação
+          PUT    /api/empresas/{id}     - atualização
+          DELETE /api/empresas/{id}     - exclusão lógica (EmpresaAtivo = false)
+          Usar [ApiController] e ActionResult<T>.
+          Retornar RFC 7807 ProblemDetails em erros de validação e negócio.
+      - name: EmpresaDto
+        type: DTO
+        target_file: DTOs/EmpresaDto.cs
+        notes: >
+          Separar EmpresaCreateDto, EmpresaUpdateDto e EmpresaResponseDto.
+          Usar FluentValidation ou DataAnnotations para validações de entrada.
+          Não expor campos internos sensíveis diretamente no ResponseDto.
+      - name: EmpresaMappingProfile
+        type: Mapper
+        target_file: Mappings/EmpresaMappingProfile.cs
+        notes: >
+          Configurar AutoMapper entre Entity <-> Dto.
+          Mapear EmpresaAtivo (string legado) para bool no DTO de resposta.
+  - name: UI
+    source_entity: AppMasterPage
+    target_package: frontend.components
+    artifacts:
+      - name: AppShell
+        type: ReactComponent
+        target_file: src/layout/AppShell.tsx
+        notes: >
+          Recriar estrutura do AppMasterPage GeneXus como componente React de layout raiz.
+          Estratégia PRESERVE_WITH_ADJUSTMENTS: manter fluxo e hierarquia de navegação
+          do sistema original, substituindo controles GeneXus por componentes shadcn/ui
+          com dark-mode (dark-devstudio).
+          Identificar e mapear tabs do MasterPage; o inventário atual retornou lista vazia —
+          ver aviso abaixo.
+      - name: EmpresaListPage
+        type: ReactPage
+        target_file: src/pages/empresa/EmpresaListPage.tsx
+        notes: >
+          Tabela paginada com colunas: Nome, CNPJ, Contato, Ativo.
+          Ações por linha: Editar, Desativar.
+          Consumir GET /api/empresas com React Query (TanStack Query).
+      - name: EmpresaFormPage
+        type: ReactPage
+        target_file: src/pages/empresa/EmpresaFormPage.tsx
+        notes: >
+          Formulário de criação e edição.
+          Campos: Nome, CNPJ (máscara), Contato, Endereço, E-mail, Administrador,
+          Tipo Relatório, Domínio, Foto (upload), Fundo Login (upload), Ativo (toggle).
+          Usar React Hook Form + Zod para validação client-side.
+          Upload de imagens (Foto, FundoLogin) deve apontar para endpoint dedicado de blob storage.
+      - name: EmpresaApiClient
+        type: ApiClient
+        target_file: src/api/empresaApi.ts
+        notes: >
+          Funções de acesso à API REST usando fetch/axios.
+          Tipagem com TypeScript baseada nos DTOs do backend.
+infrastructure:
+  database:
+    strategy: REBUILD
+    engine: SQL Server
+    migration_tool: EF Core Migrations
+    notes: >
+      Gerar migration inicial via `dotnet ef migrations add InitialCreate`.
+      Criar schema completo do zero; não há aproveitamento de schema GeneXus legado.
+      Definir índice único em EmpresaCNPJ para garantir integridade.
+      Avaliar índice em EmpresaAdministradorId para consultas de administrador.
+  auth:
+    notes: >
+      GeneXus GAM não é portado diretamente.
+      Implementar autenticação via ASP.NET Core Identity + JWT (stateless).
+      Mapear roles e permissões do GAM para claims JWT.
+      Proteger endpoints do EmpresaController com [Authorize] e políticas de roles.
+  error_handling:
+    notes: >
+      Implementar middleware global de tratamento de exceções retornando RFC 7807 ProblemDetails.
+      Traduzir mensagens de erro GeneXus (msg(), Error()) para respostas HTTP padronizadas.
+  logging:
+    notes: >
+      Usar Serilog com saída estruturada (JSON).
+      Mapear log.msg() GeneXus para ILogger<T> com níveis apropriados.
+  pagination:
+    notes: >
+      Paginação manual GeneXus (Skip/Count) substituída por IQueryable + Skip/Take EF Core.
+      Retornar envelope de paginação com totalCount, page, pageSize, items.
 warnings:
-  - "EmpresaId está mapeado como String (length 60) no inventário — verificar se é um identificador alfanumérico legado ou deve ser migrado para Guid/int no sistema alvo."
-  - "EmpresaAdministradorId e EmpresaAdministradorNome sugerem FK para uma entidade Administrador ou Usuário não presente no inventário fornecido — confirmar existência e incluir módulo correspondente no plan."
-  - "Todos os campos no Semantic Inventory estão com resolved_from: fallback:not-found — os tipos GeneXus originais não foram resolvidos. Revisar tipos reais antes de gerar as migrations."
-  - "EmpresaFoto e EmpresaFundoLogin são campos de imagem — definir estratégia de storage (blob no banco, sistema de arquivos, ou object storage como S3/Azure Blob) antes de implementar."
-  - "EmpresaTipoRelatorio requer levantamento dos valores possíveis no sistema legado para decidir entre string livre ou enum tipado no sistema alvo."
-  - "EmpresaEmail deve ter validação de formato aplicada tanto no frontend (React Hook Form + zod) quanto no backend (FluentValidation ou DataAnnotations)."
-  - "AppMasterPage não possui tabs definidas no UI Inventory — o layout de navegação global precisa ser mapeado manualmente com o time de produto antes da implementação do frontend."
-  - "Estratégia REBUILD de banco implica perda do schema legado — garantir backup e plano de migração de dados existentes antes de executar migrations em ambiente com dados produtivos."
-  - "Campos length:60 uniformes no inventário são provavelmente padrão de fallback do parser GeneXus — ajustar tamanhos reais de coluna conforme regras de negócio antes de gerar o DbContext."
+  - "CNPJ (EmpresaCNPJ): todos os campos do inventário retornaram java_type=String/length=60 sem
+    distinção de tipo semântico. O campo CNPJ deve receber validação específica de formato
+    brasileiro (14 dígitos + dígito verificador). Confirmar com o time de negócio se há
+    validação existente no GeneXus que precisa ser replicada."
+  - "EmpresaFoto e EmpresaFundoLogin: o inventário não esclarece se são paths de arquivo,
+    BLOBs ou URLs. Definir estratégia de armazenamento (blob storage vs coluna DB) antes
+    de implementar Entity e endpoints de upload."
+  - "EmpresaAtivo: campo mapeado como String no inventário; verificar domínio real no GeneXus
+    (Boolean, Char 1, Enum) para garantir conversão correta para bool em C#."
+  - "EmpresaAdministradorId / EmpresaAdministradorNome: parecem referência a outra entidade
+    (possível FK). O inventário fornecido não inclui entidade Administrador/Usuário.
+    Validar se existe Transaction relacionada que precisa ser migrada em conjunto."
+  - "EmpresaTipoRelatorio e EmpresaDominio: verificar se são campos livres ou domínios
+    enumerados no GeneXus original. Se forem enums, criar Domain enum equivalente em C#."
+  - "AppMasterPage: o inventário de UI retornou lista de tabs vazia. Não foi possível mapear
+    a estrutura de navegação do MasterPage. Solicitar ao time legado o inventário completo
+    de WebPanels, menus e tabs vinculados ao AppMasterPage antes de implementar o AppShell React."
+  - "Sessão stateful GeneXus: o sistema legado utiliza sessão stateful. A migração para JWT
+    stateless requer revisão de todos os pontos que dependem de estado de sessão
+    (ex: usuário logado, permissões em memória) para garantir compatibilidade."
+  - "GeneXus GAM não possui mapeamento automático neste plano. As regras de autenticação,
+    autorização e permissões do GAM precisam ser levantadas e mapeadas manualmente
+    para políticas ASP.NET Core Identity antes do início da implementação."
+  - "O inventário contém apenas a entidade Empresa. Caso o sistema GLPPortal possua outras
+    Transactions (ex: Usuário, Relatorio, Contrato), elas não estão cobertas por este plano
+    e deverão ser submetidas em inventários complementares."
