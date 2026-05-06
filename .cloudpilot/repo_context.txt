@@ -41,7 +41,7 @@ TRANSACTIONS (1):
 
 PATTERN INSTANCES (WorkWithPlus) (1):
     # name + pattern GUID + version
-    - WorkWithPlusAcessoCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusAcessoCliente [pattern=07135890, version=1.3]
 
 THEMES / THEME CLASSES (1 total):
     - AttSubTitle
