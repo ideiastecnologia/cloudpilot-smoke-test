@@ -2,7 +2,6 @@ system: glpportal-subset
 target_stack: React + .NET Core
 ui_strategy: PRESERVE_WITH_ADJUSTMENTS
 db_strategy: REBUILD
-
 modules:
   - name: Empresa
     source_entity: Empresa
@@ -11,185 +10,168 @@ modules:
       - name: EmpresaEntity
         type: Entity
         language: csharp
-        path: src/Domain/Empresa/EmpresaEntity.cs
+        description: Modelo de domínio mapeado para a tabela Empresa no banco reconstruído
         fields:
           - name: EmpresaId
             type: string
-            maxLength: 60
-            isPrimaryKey: true
+            max_length: 60
+            nullable: false
+            is_pk: true
           - name: EmpresaNome
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: false
           - name: EmpresaCNPJ
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
           - name: EmpresaContato
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
           - name: EmpresaEndereco
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
           - name: EmpresaAdministradorId
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
+            notes: FK lógico para entidade de Administrador; validar se existe Transaction relacionada no inventário completo
           - name: EmpresaAdministradorNome
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
+            notes: Atributo estendido (extended attribute) do GeneXus; replicar como campo desnormalizado ou resolver via JOIN em Service
           - name: EmpresaEmail
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
+            notes: Mapear para tipo EmailAddress com validação de formato no Service
           - name: EmpresaAtivo
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
+            notes: Tipo original não resolvido (fallback); provável boolean — confirmar e migrar para bool no modelo .NET
           - name: EmpresaFoto
             type: string
-            maxLength: 60
-            notes: Likely a URL or file reference; confirm storage strategy (blob vs path)
+            max_length: 60
+            nullable: true
+            notes: Provável URL ou caminho de imagem; confirmar estratégia de armazenamento (blob, filesystem, CDN)
           - name: EmpresaTipoRelatorio
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
+            notes: Possível domínio enumerado GeneXus; mapear para enum C# após levantamento dos valores permitidos
           - name: EmpresaDominio
             type: string
-            maxLength: 60
+            max_length: 60
+            nullable: true
           - name: EmpresaFundoLogin
             type: string
-            maxLength: 60
-            notes: Likely a URL or file reference; confirm storage strategy (blob vs path)
-
-      - name: IEmpresaRepository
-        type: Repository
-        language: csharp
-        path: src/Infrastructure/Empresa/IEmpresaRepository.cs
-        notes: Define interface with CRUD methods; implement with EF Core DbContext targeting rebuilt schema
-
+            max_length: 60
+            nullable: true
+            notes: Provável URL ou caminho de imagem de customização de tela de login
       - name: EmpresaRepository
         type: Repository
         language: csharp
-        path: src/Infrastructure/Empresa/EmpresaRepository.cs
-        notes: EF Core implementation; map EmpresaEntity to table Empresa in rebuilt database
-
+        description: Interface IEmpresaRepository + implementação EmpresaRepository usando Entity Framework Core
+        operations:
+          - GetByIdAsync
+          - GetAllAsync
+          - AddAsync
+          - UpdateAsync
+          - DeleteAsync
+        notes: Usar padrão Repository + Unit of Work; banco reconstruído via db_strategy REBUILD implica migrations EF Core do zero
       - name: EmpresaService
         type: Service
         language: csharp
-        path: src/Application/Empresa/EmpresaService.cs
+        description: Camada de negócio; traduz regras GeneXus (Error/Default/NoAccept) para validações .NET
         responsibilities:
-          - CRUD orchestration
-          - EmpresaAtivo flag validation before activation
-          - EmpresaCNPJ format validation (14-digit Brazilian CNPJ)
-          - EmpresaEmail format validation
-          - Business rules derived from original GeneXus Transaction rules (Error/Default/NoAccept)
-
+          - Validação de formato de EmpresaEmail
+          - Verificação de unicidade de EmpresaCNPJ
+          - Resolução de EmpresaAdministradorNome via repositório de Administrador (se existir)
+          - Controle de EmpresaAtivo (ativação/desativação)
+        patterns:
+          - FluentValidation para regras declarativas equivalentes às GeneXus Rules
+          - Transações gerenciadas via IUnitOfWork com rollback em exceções de negócio
       - name: EmpresaController
         type: Controller
         language: csharp
-        path: src/Api/Controllers/EmpresaController.cs
+        description: REST Controller ASP.NET Core expondo endpoints CRUD para Empresa
+        base_route: /api/empresas
         endpoints:
           - method: GET
-            route: /api/empresas
-            description: List all companies
+            path: /api/empresas
+            operation: ListAll
           - method: GET
-            route: /api/empresas/{id}
-            description: Get company by EmpresaId
+            path: /api/empresas/{id}
+            operation: GetById
           - method: POST
-            route: /api/empresas
-            description: Create new company
+            path: /api/empresas
+            operation: Create
           - method: PUT
-            route: /api/empresas/{id}
-            description: Update existing company
+            path: /api/empresas/{id}
+            operation: Update
           - method: DELETE
-            route: /api/empresas/{id}
-            description: Soft-delete or deactivate company (set EmpresaAtivo = false)
-
+            path: /api/empresas/{id}
+            operation: Delete
+        notes: Seguir padrão RFC 7807 Problem Details para respostas de erro; equivalente ao msg()/Error() GeneXus
       - name: EmpresaDto
         type: DTO
         language: csharp
-        path: src/Application/Empresa/EmpresaDto.cs
-        notes: Request and response DTOs mapped from EmpresaEntity; separate CreateEmpresaDto and UpdateEmpresaDto
-
-      - name: EmpresaListPage
-        type: ReactComponent
-        path: frontend/src/pages/Empresa/EmpresaListPage.tsx
-        ui_strategy_notes: Preserve original GeneXus grid layout structure; apply shadcn/ui Table component and dark-devstudio theme tokens
-        features:
-          - Tabular listing of companies
-          - Column for EmpresaNome, EmpresaCNPJ, EmpresaEmail, EmpresaAtivo
-          - Row-level actions (Edit, Delete/Deactivate)
-          - Add new company button
-
-      - name: EmpresaFormPage
-        type: ReactComponent
-        path: frontend/src/pages/Empresa/EmpresaFormPage.tsx
-        ui_strategy_notes: Preserve original GeneXus form layout; apply shadcn/ui Form, Input, and Button components with dark-devstudio theme
-        features:
-          - Create and Edit modes
-          - Fields for all Empresa attributes
-          - Image/logo upload for EmpresaFoto
-          - Background image upload for EmpresaFundoLogin
-          - EmpresaAtivo toggle (checkbox or switch)
-          - Client-side validation aligned with backend rules
-
-      - name: EmpresaDbMigration
-        type: DatabaseMigration
-        language: csharp
-        path: src/Infrastructure/Migrations/CreateEmpresaTable.cs
-        notes: EF Core migration; REBUILD strategy means schema is generated from scratch from EmpresaEntity definition; no legacy schema carried over
-
-  - name: AppMasterPage
-    source_entity: AppMasterPage
-    target_package: com.glpportal.shell
-    artifacts:
-      - name: AppShellLayout
-        type: ReactComponent
-        path: frontend/src/layouts/AppShellLayout.tsx
+        description: DTOs de request e response para desacoplar entidade de domínio da camada HTTP
+        variants:
+          - EmpresaRequestDto
+          - EmpresaResponseDto
+      - name: EmpresaReactPage
+        type: UIComponent
+        language: typescript_react
+        description: Página React preservando fluxo e campos do WebPanel GeneXus com ajustes visuais (shadcn/ui)
         ui_strategy_notes: >
-          Source GeneXus MasterPage had no tabs defined. Reconstruct a minimal shell layout
-          preserving the original navigation structure. Apply shadcn/ui layout primitives
-          and dark-devstudio theme. Slot for header, sidebar/nav, and main content area.
-        features:
-          - Top navigation bar or sidebar navigation (confirm with UX owner — no tabs in source)
-          - Branding area (EmpresaFoto / EmpresaFundoLogin integration point)
-          - Authenticated user context display
-          - Route outlet for page content
+          PRESERVE_WITH_ADJUSTMENTS — manter mesma sequência de campos e comportamento de formulário
+          do objeto GeneXus original; aplicar componentes shadcn/ui para inputs, botões e feedback;
+          não redesenhar fluxo UX; adaptar EmpresaFoto e EmpresaFundoLogin para componentes de upload/preview
+        components:
+          - EmpresaForm
+          - EmpresaList
+          - EmpresaDetail
+        state_management: React Query para cache e sincronização com API REST
+        validation: react-hook-form + zod espelhando validações do EmpresaService
+
+db:
+  strategy: REBUILD
+  engine_recommendation: SQL Server ou PostgreSQL (confirmar com time de infraestrutura)
+  migration_tool: Entity Framework Core Migrations
+  notes: >
+    Banco será reconstruído do zero via EF Core; não há aproveitamento de schema legado GeneXus.
+    Definir convenções de nomenclatura de tabelas e colunas no DbContext antes de gerar primeira migration.
+    Revisar campos com tipo fallback:not-found antes de executar migration inicial.
+
+cross_cutting:
+  auth:
+    pattern: JWT stateless + refresh token
+    notes: Substituir gerenciamento de sessão stateful GeneXus por JWT; implementar middleware de autenticação ASP.NET Core
+  error_handling:
+    pattern: GlobalExceptionMiddleware + RFC 7807 ProblemDetails
+    notes: Equivalente ao ControllerAdvice; capturar exceções de negócio lançadas pelo Service
+  logging:
+    pattern: SLF4J equivalente no .NET é Microsoft.Extensions.Logging + Serilog
+    notes: Mapear msg()/log.msg() GeneXus para níveis Info/Warning/Error Serilog
+  validation:
+    pattern: FluentValidation
+    notes: Traduzir regras GeneXus Error/Default/NoAccept para validators FluentValidation no Service
+  i18n:
+    pattern: i18next no frontend React
+    notes: Textos hardcoded em português nos campos GeneXus devem ser externalizados para arquivos de tradução
 
 warnings:
-  - >
-    All field types in the Semantic Inventory resolved as 'fallback:not-found', meaning original
-    GeneXus attribute metadata (DataType, length, domain, autonumber) was not resolved.
-    The current mapping assumes string/varchar(60) for all fields. The implementation team must
-    review original GeneXus Transaction definitions and refine types before generating migrations.
-  - >
-    EmpresaId is assumed to be the primary key (string, length 60). If the original GeneXus
-    Transaction used Autonumber (Numeric), the type must be changed to int or Guid in the
-    EF Core Entity and the database migration must be updated accordingly.
-  - >
-    EmpresaAtivo is typed as string (length 60) from the inventory. The likely intent is Boolean.
-    Confirm with the legacy system and convert to bool in EmpresaEntity and EmpresaDto.
-  - >
-    EmpresaCNPJ requires Brazilian CNPJ format validation (14 digits). Implement a custom
-    FluentValidation validator in EmpresaService and client-side validation in EmpresaFormPage.
-  - >
-    EmpresaFoto and EmpresaFundoLogin are likely image/blob references in the legacy system.
-    Define a storage strategy (Azure Blob, AWS S3, or local filesystem) before implementing
-    the upload endpoints and React file-upload components.
-  - >
-    EmpresaAdministradorId and EmpresaAdministradorNome suggest a foreign key relationship
-    to a User or Administrator entity not present in the provided inventory. Clarify whether
-    this is a self-referencing key or a reference to a separate entity and add the corresponding
-    module and navigation property.
-  - >
-    AppMasterPage had no tabs defined in the UI Inventory. The React shell layout will be
-    generated with a placeholder navigation structure. The UX team must define the navigation
-    taxonomy before the shell implementation is finalized.
-  - >
-    db_strategy is REBUILD. No legacy schema migration scripts will be generated. All tables
-    will be created from scratch via EF Core Code-First migrations. Ensure the target database
-    (SQL Server or PostgreSQL — confirm with infrastructure team) is provisioned before running
-    migrations.
-  - >
-    No authentication or authorization artifacts are included in this plan. If the original
-    GeneXus system used GAM (GeneXus Access Manager), the team must design an equivalent
-    JWT + ASP.NET Core Identity or external IdP strategy before exposing any API endpoints.
-  - >
-    The STACK_MAPPING knowledge base entry for GeneXus to Java Spring is present but target
-    stack is React + .NET Core. The Java Spring mapping rules were not applied. Confirm the
-    target stack selection is correct before implementation begins.
+  - "Todos os campos têm resolved_from: fallback:not-found — os tipos GeneXus originais não foram resolvidos; é obrigatório revisar cada campo e confirmar tipo real (boolean, numeric, image, email, enum) antes de gerar migrations EF Core"
+  - "EmpresaAdministradorId e EmpresaAdministradorNome sugerem FK para uma Transaction de Administrador/Usuário não presente no inventário fornecido; solicitar inventário completo para mapear relacionamento e evitar dados desnormalizados"
+  - "EmpresaAtivo com tipo fallback string é provável boolean GeneXus; validar e migrar para bool para evitar lógica de conversão em runtime"
+  - "EmpresaFoto e EmpresaFundoLogin são provavelmente blobs ou caminhos de arquivo; definir estratégia de armazenamento de mídia (Azure Blob, S3, disco local) antes de implementar upload no React e endpoint no Controller"
+  - "EmpresaTipoRelatorio sugere domínio enumerado GeneXus; levantar todos os valores possíveis no sistema legado e criar enum C# correspondente para garantir type-safety"
+  - "EmpresaCNPJ não possui validação de formato no inventário; implementar validação de CNPJ brasileiro no EmpresaService e no schema Zod do frontend"
+  - "AppMasterPage do UI Inventory não possui tabs mapeadas; verificar se há lógica de layout ou navegação global no MasterPage GeneXus que precise ser reproduzida como layout shell React (header, sidebar, footer)"
+  - "db_strategy REBUILD implica ausência de dados migrados por padrão; confirmar se há necessidade de script de carga inicial (seed) para dados de Empresa existentes no sistema legado"
+  - "O inventário semântico fornecido cobre apenas a entidade Empresa; o plano de migração deve ser expandido conforme inventário completo do sistema glpportal for disponibilizado"
