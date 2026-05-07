@@ -8,4 +8,4 @@
 
 ## Object kinds geradas por patterns
 
-- **WorkWithPlusAcessoCliente** — `pattern=07135890`, `version=1.3`
+- **WorkWithPlusAcessoCliente** — `version=1.3`, `pattern=07135890`
