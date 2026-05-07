@@ -6,7 +6,7 @@
 
 Sinais identificados na análise estrutural:
 
-- **Procedures**: 1 (parm signatures extraídas no `repo_context.txt`)
-- **Transactions**: 1 (Levels e Items disponíveis em RawXml para mapping)
+- **Procedures**: 844 (parm signatures extraídas no `repo_context.txt`)
+- **Transactions**: 159 (Levels e Items disponíveis em RawXml para mapping)
 - **DataProviders**: 0
 - **DataSelectors**: 0

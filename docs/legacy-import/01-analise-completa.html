@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<title>Imported KB — Análise Completa</title>
+<title>GLPPortal — Análise Completa</title>
 <style>
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
          max-width: 960px; margin: 2em auto; padding: 0 1em; color: #222; line-height: 1.55; }
@@ -20,12 +20,13 @@
 </style>
 </head>
 <body>
-<h1>Imported KB — Análise Completa</h1>
+<h1>GLPPortal — Análise Completa</h1>
 <div class="meta">
 <strong>Origem:</strong> GeneXus 18 (KMW=4, Build=185416)<br />
-<strong>KB Name:</strong> ?<br />
-<strong>Total objects:</strong> 14<br />
-<strong>XPZ original:</strong> glpportal-subset.xpz
+<strong>KB Name:</strong> GLPPortal<br />
+<strong>Default language:</strong> Portuguese<br />
+<strong>Total objects:</strong> 5517<br />
+<strong>XPZ original:</strong> glpportal-full.xpz
 </div>
 <h2>Conteúdo</h2>
 <ul class="toc">
@@ -39,82 +40,704 @@
 <li><a href="#warnings">Warnings</a></li>
 </ul>
 <h2 id="exec">Resumo Executivo</h2>
-<p>Esta KB GeneXus contém 14 objetos no total, distribuídos entre 14 tipos identificados. A KB foi exportada de GeneXus 18 e contém 1 procedures, 1 web panels, 1 transactions e 1 domains. Foram detectadas 1 instâncias de patterns WorkWithPlus, indicando uso intensivo de geração automática de UI. O conteúdo bruto está preservado em `.cloudpilot/` para inspeção.</p>
+<p>Esta KB GeneXus contém 5517 objetos no total, distribuídos entre 15 tipos identificados. A KB foi exportada de GeneXus 18 e contém 844 procedures, 589 web panels, 159 transactions e 376 domains. Foram detectadas 290 instâncias de patterns WorkWithPlus, indicando uso intensivo de geração automática de UI. O conteúdo bruto está preservado em `.cloudpilot/` para inspeção.</p>
 <h2 id="inventory">Inventário</h2>
 <table><tr><th>Kind</th><th>Quantidade</th></tr>
-<tr><td>FOLDER</td><td>1</td></tr>
-<tr><td>MODULE</td><td>1</td></tr>
-<tr><td>DOMAIN</td><td>1</td></tr>
-<tr><td>TRANSACTION</td><td>1</td></tr>
-<tr><td>TABLE</td><td>1</td></tr>
-<tr><td>INDEX</td><td>1</td></tr>
-<tr><td>SUBTYPE_GROUP</td><td>1</td></tr>
-<tr><td>STRUCTURED_DATA_TYPE</td><td>1</td></tr>
-<tr><td>EXTERNAL_OBJECT</td><td>1</td></tr>
-<tr><td>PROCEDURE</td><td>1</td></tr>
-<tr><td>WEB_PANEL</td><td>1</td></tr>
-<tr><td>THEME_CLASS</td><td>1</td></tr>
-<tr><td>IMAGE</td><td>1</td></tr>
-<tr><td>WORK_WITH_PLUS_PATTERN</td><td>1</td></tr>
+<tr><td>FOLDER</td><td>10</td></tr>
+<tr><td>MODULE</td><td>128</td></tr>
+<tr><td>DOMAIN</td><td>376</td></tr>
+<tr><td>TRANSACTION</td><td>159</td></tr>
+<tr><td>TABLE</td><td>158</td></tr>
+<tr><td>INDEX</td><td>168</td></tr>
+<tr><td>SUBTYPE_GROUP</td><td>112</td></tr>
+<tr><td>STRUCTURED_DATA_TYPE</td><td>263</td></tr>
+<tr><td>EXTERNAL_OBJECT</td><td>238</td></tr>
+<tr><td>PROCEDURE</td><td>844</td></tr>
+<tr><td>WEB_PANEL</td><td>589</td></tr>
+<tr><td>THEME_CLASS</td><td>1446</td></tr>
+<tr><td>IMAGE</td><td>250</td></tr>
+<tr><td>WORK_WITH_PLUS_PATTERN</td><td>281</td></tr>
+<tr><td>UNKNOWN</td><td>495</td></tr>
+<tr><td>UNKNOWN(<code>c84ec0ea</code>)</td><td>1</td></tr>
+<tr><td>UNKNOWN(<code>1132ac08</code>)</td><td>37</td></tr>
+<tr><td>UNKNOWN(<code>3affc0b3</code>)</td><td>4</td></tr>
+<tr><td>UNKNOWN(<code>36e32e2d</code>)</td><td>1</td></tr>
+<tr><td>UNKNOWN(<code>78cecefe</code>)</td><td>6</td></tr>
+<tr><td>UNKNOWN(<code>c804fdbd</code>)</td><td>7</td></tr>
+<tr><td>UNKNOWN(<code>c88fffcd</code>)</td><td>51</td></tr>
+<tr><td>UNKNOWN(<code>83476c1e</code>)</td><td>3</td></tr>
+<tr><td>UNKNOWN(<code>562f4793</code>)</td><td>21</td></tr>
+<tr><td>UNKNOWN(<code>dcdcdcdc</code>)</td><td>3</td></tr>
+<tr><td>UNKNOWN(<code>88313f43</code>)</td><td>3</td></tr>
+<tr><td>UNKNOWN(<code>5592de59</code>)</td><td>135</td></tr>
+<tr><td>UNKNOWN(<code>19abc6ff</code>)</td><td>21</td></tr>
+<tr><td>UNKNOWN(<code>faeb588c</code>)</td><td>1</td></tr>
+<tr><td>UNKNOWN(<code>ecececec</code>)</td><td>4</td></tr>
+<tr><td>UNKNOWN(<code>624a8b31</code>)</td><td>4</td></tr>
+<tr><td>UNKNOWN(<code>ffd44be7</code>)</td><td>78</td></tr>
+<tr><td>UNKNOWN(<code>bf08dfb1</code>)</td><td>2</td></tr>
+<tr><td>UNKNOWN(<code>2a9e9aba</code>)</td><td>21</td></tr>
+<tr><td>UNKNOWN(<code>78b3fa0e</code>)</td><td>10</td></tr>
+<tr><td>UNKNOWN(<code>083f1b21</code>)</td><td>82</td></tr>
 </table>
 <h2 id="datamodel">Modelo de dados</h2>
-<h3>DOMAIN (1)</h3>
+<h3>DOMAIN (376)</h3>
 <ul>
 <li><strong>FilterRelationType</strong></li>
+<li><strong>FilterOperation</strong></li>
+<li><strong>TargetType</strong></li>
+<li><strong>NotificationBadgeType</strong></li>
+<li><strong>StorageProviderType</strong></li>
+<li><strong>RuntimeEnvironment</strong></li>
+<li><strong>MapType</strong></li>
+<li><strong>LogLevel</strong></li>
+<li><strong>TransportType</strong></li>
+<li><strong>DirectionsServiceProviders</strong></li>
+<li><strong>ColorScheme</strong></li>
+<li><strong>DynamicCallOption</strong></li>
+<li><strong>LocationAccuracyAuthorization</strong></li>
+<li><strong>LocationAccuracy</strong></li>
+<li><strong>SocketStatus</strong></li>
+<li><strong>StorePurchaseState</strong></li>
+<li><strong>StorePurchasePlatform</strong></li>
+<li><strong>StoreProductType</strong></li>
+<li><strong>StorePurchaseStatus</strong></li>
+<li><strong>MediaMetadataKey</strong></li>
+<li><strong>MediaStreamType</strong></li>
+<li><strong>VideoFormat</strong></li>
+<li><strong>DeviceFolder</strong></li>
+<li><strong>SaveMode</strong></li>
+<li><strong>ResultCode</strong></li>
+<li><strong>DeviceAuthenticationPolicy</strong></li>
+<li><strong>CardDetectionMode</strong></li>
+<li><strong>CreditCardType</strong></li>
+<li><strong>RegionStatus</strong></li>
+<li><strong>FetchStatus</strong></li>
+<li><strong>OneTimeCode</strong></li>
+<li><strong>MobileSettingsOptions</strong></li>
+<li><strong>MobileSettings</strong></li>
+<li><strong>AccessTokenProvider</strong></li>
+<li><strong>Url</strong></li>
+<li><strong>IMEMode</strong></li>
+<li><strong>Time</strong></li>
+<li><strong>Encoding</strong></li>
+<li><strong>Timezones</strong></li>
+<li><strong>Effect</strong></li>
+<li><strong>CallType</strong></li>
+<li><strong>CryptoEncryptAlgorithm</strong></li>
+<li><strong>CryptoHashAlgorithm</strong></li>
+<li><strong>CryptoSignAlgorithm</strong></li>
+<li><strong>TrnMode</strong></li>
+<li><strong>Address</strong></li>
+<li><strong>Component</strong></li>
+<li><strong>Email</strong></li>
+<li><strong>Geolocation</strong></li>
+<li><strong>Html</strong></li>
+<li><em>... e mais 326</em></li>
 </ul>
-<h3>TRANSACTION (1)</h3>
+<h3>TRANSACTION (159)</h3>
 <ul>
 <li><strong>Empresa</strong> — <code>levels=1</code></li>
+<li><strong>Usuario</strong> — <code>levels=1</code></li>
+<li><strong>Cliente</strong> — <code>levels=5</code></li>
+<li><strong>Setor</strong> — <code>levels=1</code></li>
+<li><strong>Natureza</strong> — <code>levels=3</code></li>
+<li><strong>GestaoServico</strong> — <code>levels=1</code></li>
+<li><strong>Parametro</strong> — <code>levels=1</code></li>
+<li><strong>ParametroEmail</strong> — <code>levels=1</code></li>
+<li><strong>Notificacao</strong> — <code>levels=1</code></li>
+<li><strong>Favorito</strong> — <code>levels=1</code></li>
+<li><strong>UsuarioBC</strong> — <code>levels=1</code></li>
+<li><strong>Mensagem</strong> — <code>levels=1</code></li>
+<li><strong>ClienteContato</strong> — <code>levels=1</code></li>
+<li><strong>ClienteEndereco</strong> — <code>levels=1</code></li>
+<li><strong>GestaoServicoBC</strong> — <code>levels=1</code></li>
+<li><strong>GestaoServicoExecutante</strong> — <code>levels=1</code></li>
+<li><strong>OrdemExecutante</strong> — <code>levels=3</code></li>
+<li><strong>OrdemExecutanteAnexo</strong> — <code>levels=1</code></li>
+<li><strong>NaturezaLista</strong> — <code>levels=1</code></li>
+<li><strong>GestaoServicoLista</strong> — <code>levels=1</code></li>
+<li><strong>Funcao</strong> — <code>levels=1</code></li>
+<li><strong>User</strong> — <code>levels=1</code></li>
+<li><strong>PurchaseOrder</strong> — <code>levels=2</code></li>
+<li><strong>Subscription</strong> — <code>levels=3</code></li>
+<li><strong>Plan</strong> — <code>levels=1</code></li>
+<li><strong>Payment</strong> — <code>levels=1</code></li>
+<li><strong>LogRecord</strong> — <code>levels=1</code></li>
+<li><strong>Cart</strong> — <code>levels=2</code></li>
+<li><strong>Item</strong> — <code>levels=1</code></li>
+<li><strong>AccessToken</strong> — <code>levels=1</code></li>
+<li><strong>TipoHora</strong> — <code>levels=1</code></li>
+<li><strong>MercadoPagoServices</strong> — <code>levels=2</code></li>
+<li><strong>MercadoPagoInfo</strong> — <code>levels=1</code></li>
+<li><strong>Faturamento</strong> — <code>levels=1</code></li>
+<li><strong>Meta</strong> — <code>levels=1</code></li>
+<li><strong>Produto</strong> — <code>levels=1</code></li>
+<li><strong>GestaoServicoAnexo</strong> — <code>levels=1</code></li>
+<li><strong>GestaoServicoTipo</strong> — <code>levels=1</code></li>
+<li><strong>ClienteTipoHora</strong> — <code>levels=1</code></li>
+<li><strong>FuncaoTipoHora</strong> — <code>levels=1</code></li>
+<li><strong>Contrato</strong> — <code>levels=9</code></li>
+<li><strong>ContratoFaturamento</strong> — <code>levels=1</code></li>
+<li><strong>FaturamentoAglutinado</strong> — <code>levels=1</code></li>
+<li><strong>ContratoAglutinado</strong> — <code>levels=1</code></li>
+<li><strong>TipoContrato</strong> — <code>levels=1</code></li>
+<li><strong>ContratoAnexo</strong> — <code>levels=1</code></li>
+<li><strong>OrdemExecutanteProduto</strong> — <code>levels=1</code></li>
+<li><strong>ClienteTipoServico</strong> — <code>levels=1</code></li>
+<li><strong>ContratoResponsavel</strong> — <code>levels=1</code></li>
+<li><strong>ContratoVendedor</strong> — <code>levels=1</code></li>
+<li><em>... e mais 109</em></li>
 </ul>
-<h3>TABLE (1)</h3>
+<h3>TABLE (158)</h3>
 <ul>
 <li><strong>Empresa</strong></li>
+<li><strong>Usuario</strong></li>
+<li><strong>Setor</strong></li>
+<li><strong>Natureza</strong></li>
+<li><strong>GestaoServico</strong></li>
+<li><strong>Parametro</strong></li>
+<li><strong>ParametroEmail</strong></li>
+<li><strong>Notificacao</strong></li>
+<li><strong>Favorito</strong></li>
+<li><strong>Mensagem</strong></li>
+<li><strong>ClienteEndereco</strong></li>
+<li><strong>ClienteContato</strong></li>
+<li><strong>OrdemExecutante</strong></li>
+<li><strong>OrdemExecutanteAnexo</strong></li>
+<li><strong>NaturezaLista</strong></li>
+<li><strong>GestaoServicoLista</strong></li>
+<li><strong>Funcao</strong></li>
+<li><strong>User</strong></li>
+<li><strong>Cart</strong></li>
+<li><strong>CartItem</strong></li>
+<li><strong>PurchaseOrder</strong></li>
+<li><strong>PurchaseOrderItems</strong></li>
+<li><strong>Item</strong></li>
+<li><strong>Suscription</strong></li>
+<li><strong>SuscriptionInvoicy</strong></li>
+<li><strong>SuscriptionInvoicyPayments</strong></li>
+<li><strong>Plan</strong></li>
+<li><strong>LogRecord</strong></li>
+<li><strong>AccessToken</strong></li>
+<li><strong>TipoHora</strong></li>
+<li><strong>MercadoPagoServices</strong></li>
+<li><strong>MercadoPagoServicesInfo</strong></li>
+<li><strong>Faturamento</strong></li>
+<li><strong>Meta</strong></li>
+<li><strong>Produto</strong></li>
+<li><strong>GestaoServicoAnexo</strong></li>
+<li><strong>GestaoServicoTipo</strong></li>
+<li><strong>Cliente</strong></li>
+<li><strong>ClienteTipoHora</strong></li>
+<li><strong>FuncaoTipoHora</strong></li>
+<li><strong>Contrato</strong></li>
+<li><strong>ContratoResponsavel</strong></li>
+<li><strong>ContratoFaturamento</strong></li>
+<li><strong>FaturamentoAglutinado</strong></li>
+<li><strong>ContratoAglutinado</strong></li>
+<li><strong>TipoContrato</strong></li>
+<li><strong>ContratoAnexo</strong></li>
+<li><strong>ClienteTipoServico</strong></li>
+<li><strong>ContratoVendedor</strong></li>
+<li><strong>GestaoServicoProgramada</strong></li>
+<li><em>... e mais 108</em></li>
 </ul>
-<h3>INDEX (1)</h3>
+<h3>INDEX (168)</h3>
 <ul>
 <li><strong>CC2010_PK</strong></li>
+<li><strong>CC20101</strong></li>
+<li><strong>CC20102</strong></li>
+<li><strong>CC20103</strong></li>
+<li><strong>CC20104</strong></li>
+<li><strong>CC20105</strong></li>
+<li><strong>CC2010_UNQ</strong></li>
+<li><strong>SB1010_PK</strong></li>
+<li><strong>SB10101</strong></li>
+<li><strong>SB10102</strong></li>
+<li><strong>SB10103</strong></li>
+<li><strong>SB10104</strong></li>
+<li><strong>SB10105</strong></li>
+<li><strong>SB10106</strong></li>
+<li><strong>SB10107</strong></li>
+<li><strong>SB10108</strong></li>
+<li><strong>SB10109</strong></li>
+<li><strong>SB1010A</strong></li>
+<li><strong>SB1010B</strong></li>
+<li><strong>SB1010C</strong></li>
+<li><strong>SB1010D</strong></li>
+<li><strong>SB1010_UNQ</strong></li>
+<li><strong>SAH010_PK</strong></li>
+<li><strong>SAH0101</strong></li>
+<li><strong>SAH0102</strong></li>
+<li><strong>SAH0103</strong></li>
+<li><strong>SAH010_UNQ</strong></li>
+<li><strong>SYA010_PK</strong></li>
+<li><strong>SYA0101</strong></li>
+<li><strong>SYA0102</strong></li>
+<li><strong>SYA0103</strong></li>
+<li><strong>SYA010_UNQ</strong></li>
+<li><strong>SA4010_PK</strong></li>
+<li><strong>SA40101</strong></li>
+<li><strong>SA40102</strong></li>
+<li><strong>SA40103</strong></li>
+<li><strong>SA40104</strong></li>
+<li><strong>SA4010_UNQ</strong></li>
+<li><strong>DA0010_PK</strong></li>
+<li><strong>DA00101</strong></li>
+<li><strong>DA00102</strong></li>
+<li><strong>DA0010_UNQ</strong></li>
+<li><strong>SA1010_PK</strong></li>
+<li><strong>SA10101</strong></li>
+<li><strong>SA10102</strong></li>
+<li><strong>SA10103</strong></li>
+<li><strong>SA10104</strong></li>
+<li><strong>SA10105</strong></li>
+<li><strong>SA10106</strong></li>
+<li><strong>SA10107</strong></li>
+<li><em>... e mais 118</em></li>
 </ul>
-<h3>SUBTYPE_GROUP (1)</h3>
+<h3>SUBTYPE_GROUP (112)</h3>
 <ul>
 <li><strong>SGUsuarioEmpresa</strong></li>
+<li><strong>SGClienteEmpresa</strong></li>
+<li><strong>SGSetorEmpresa</strong></li>
+<li><strong>SGNaturezaEmpresa</strong></li>
+<li><strong>SGServicoCliente</strong></li>
+<li><strong>SGServicoSetor</strong></li>
+<li><strong>SGServicoNatureza</strong></li>
+<li><strong>SGServicoExecutante</strong></li>
+<li><strong>SGServicoEmpresa</strong></li>
+<li><strong>SGGestaoServicoUsuario</strong></li>
+<li><strong>SGServicoExecutanteFinal</strong></li>
+<li><strong>SGServicoUsuarioCancelamento</strong></li>
+<li><strong>SGNotificacaoUsuario</strong></li>
+<li><strong>SGFavoritoUsuario</strong></li>
+<li><strong>SGEmpresaAdministrador</strong></li>
+<li><strong>SGServicoEndereco</strong></li>
+<li><strong>SGOrdemExecutanteUsuario</strong></li>
+<li><strong>SGOrdemGestaoServico</strong></li>
+<li><strong>SGFuncaoEmpresa</strong></li>
+<li><strong>SGUsuarioFuncao</strong></li>
+<li><strong>SGOrdemExecutanteTipoHora</strong></li>
+<li><strong>SGFaturamentoUsuario</strong></li>
+<li><strong>SGExecutanteProduto</strong></li>
+<li><strong>SGTipoServico</strong></li>
+<li><strong>SGListaTipoServico</strong></li>
+<li><strong>SGClienteTipoHora</strong></li>
+<li><strong>SGFuncaoTipoHora</strong></li>
+<li><strong>SGFaturaAglutinada</strong></li>
+<li><strong>SGTipoContratoEmpresa</strong></li>
+<li><strong>SGClienteTipoServico</strong></li>
+<li><strong>SGContradoVendedor</strong></li>
+<li><strong>SGExecutanteTipoHora</strong></li>
+<li><strong>SGTecnico</strong></li>
+<li><strong>SGEquipamentoEmpresa</strong></li>
+<li><strong>SGEquipamentoDemanda</strong></li>
+<li><strong>SGPesquisaCliente</strong></li>
+<li><strong>SGMedicaoContrato</strong></li>
+<li><strong>SGMedicaoProduto</strong></li>
+<li><strong>SGMedicaoFuncao</strong></li>
+<li><strong>SGMedicaoUsuario</strong></li>
+<li><strong>SGPontoEmpresa</strong></li>
+<li><strong>SGContratoTipoServico</strong></li>
+<li><strong>SGMedicaoTipoServico</strong></li>
+<li><strong>SGMedicaoUnidade</strong></li>
+<li><strong>SGContratoFaturamentoIndice</strong></li>
+<li><strong>SGCatalogoUnidade</strong></li>
+<li><strong>SGClienteCatalogo</strong></li>
+<li><strong>SGCatalogoEmpresa</strong></li>
+<li><strong>SGDocumentoCliente</strong></li>
+<li><strong>SGDocumentoArea</strong></li>
+<li><em>... e mais 62</em></li>
 </ul>
-<h3>STRUCTURED_DATA_TYPE (1)</h3>
+<h3>STRUCTURED_DATA_TYPE (263)</h3>
 <ul>
 <li><strong>Route</strong></li>
+<li><strong>DirectionsRequestParameters</strong></li>
+<li><strong>GeolocationInfo</strong></li>
+<li><strong>GeolocationProximityAlert</strong></li>
+<li><strong>GeolocationPickerParameters</strong></li>
+<li><strong>Event</strong></li>
+<li><strong>Notification</strong></li>
+<li><strong>LocalizedText</strong></li>
+<li><strong>Target</strong></li>
+<li><strong>Delivery</strong></li>
+<li><strong>Configuration</strong></li>
+<li><strong>ConfigurationProperty</strong></li>
+<li><strong>Messages</strong></li>
+<li><strong>AnalyticsPurchase</strong></li>
+<li><strong>Directions</strong></li>
+<li><strong>TrackingParameters</strong></li>
+<li><strong>LocationInfo</strong></li>
+<li><strong>LocationProximityAlert</strong></li>
+<li><strong>LocationPickerParameters</strong></li>
+<li><strong>GridState</strong></li>
+<li><strong>CrashAnalyticsKeyValue</strong></li>
+<li><strong>AnalyticsKeyValue</strong></li>
+<li><strong>FacebookAccessToken</strong></li>
+<li><strong>NotificationInfo</strong></li>
+<li><strong>SynchronizationInfo</strong></li>
+<li><strong>SynchronizationEventList</strong></li>
+<li><strong>SynchronizationEventResultList</strong></li>
+<li><strong>StorePurchase</strong></li>
+<li><strong>StoreValidationConfig</strong></li>
+<li><strong>PurchaseResult</strong></li>
+<li><strong>PurchaseReceiptInformation</strong></li>
+<li><strong>StoreProduct</strong></li>
+<li><strong>PurchasesInformation</strong></li>
+<li><strong>LocalNotificationsInfo</strong></li>
+<li><strong>MediaItem</strong></li>
+<li><strong>MediaQueue</strong></li>
+<li><strong>MediaQueueState</strong></li>
+<li><strong>MediaItemFinishedInfo</strong></li>
+<li><strong>AudioPlayerSettings</strong></li>
+<li><strong>AudioPlayerCustomAction</strong></li>
+<li><strong>ImagesCollection</strong></li>
+<li><strong>VideoConversionParameters</strong></li>
+<li><strong>LoginExternalAdditionalParameters</strong></li>
+<li><strong>ContactInfo</strong></li>
+<li><strong>ScannedBarcodes</strong></li>
+<li><strong>BeaconInfo</strong></li>
+<li><strong>BeaconProximityAlert</strong></li>
+<li><strong>BeaconRegion</strong></li>
+<li><strong>BeaconState</strong></li>
+<li><strong>SearchScope</strong></li>
+<li><em>... e mais 213</em></li>
 </ul>
 <h2 id="procs">Rotinas</h2>
-<h3>PROCEDURE (1)</h3>
+<h3>PROCEDURE (844)</h3>
 <ul>
 <li><strong>GoogleDirectionsServiceRequest</strong> — <code>parm=parm(in:&amp;DirectionsRequestParameters, out:&amp;Routes, out:&amp;errorMessages)</code></li>
+<li><strong>AddDeviceGroups</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;DeviceToken, in:&amp;Groups, out:&amp;Messages, out:&amp;Success)</code></li>
+<li><strong>AddDeviceTargetFilter</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;DeviceToken, in:&amp;FilterName, in:&amp;FilterValue, out:&amp;Messages, out:&amp;Success)</code></li>
+<li><strong>RemoveDeviceTargetFilter</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;DeviceToken, in:&amp;FilterName, in:&amp;FilterValue, out:&amp;OutMessages, out:&amp;Success)</code></li>
+<li><strong>RemoveDeviceGroups</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;DeviceToken, in:&amp;Groups, out:&amp;Messages, out:&amp;Success)</code></li>
+<li><strong>SendNotification</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;DeviceToken, in:&amp;NotificationMessage, in:&amp;Delivery, out:&amp;Messages, out:&amp;Success)</code></li>
+<li><strong>SendEvent</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;DeviceToken, in:&amp;NotificationEvent, in:&amp;Delivery, out:&amp;Messages, out:&amp;Success)</code></li>
+<li><strong>SendNotificationTargets</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;Target, in:&amp;NotificationMessage, in:&amp;Delivery, out:&amp;Messages, out:&amp;Success)</code></li>
+<li><strong>SendEventTargets</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;Target, in:&amp;Event, in:&amp;Delivery, out:&amp;Messages, out:&amp;Success)</code></li>
+<li><strong>SetDeviceTargetMultipleFilters</strong> — <code>parm=parm(in:&amp;Configuration, in:&amp;DeviceToken, in:&amp;FilterTags, out:&amp;Messages, out:&amp;Success)</code></li>
+<li><strong>OfflineEventReplicator</strong> — <code>parm=parm(in:&amp;GxPendingEvents, in:&amp;GxSyncroInfo, out:&amp;EventResults)</code></li>
+<li><strong>RefreshToken</strong> — <code>parm=parm(in:&amp;OAuthAuthorizationConfig, in:&amp;RefreshToken, out:&amp;OAuthAccessToken, out:&amp;DateTimeTokenExpire, out:&amp;OutMessages, out:&amp;...)</code></li>
+<li><strong>CheckDynamicDefinition</strong> — <code>parm=parm(in:&amp;Instance, out:&amp;IsDynamic, out:&amp;HasErrors, out:&amp;Messages)</code></li>
+<li><strong>SendFlowTriggers</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;Triggers, in:&amp;Flow, out:&amp;Messages)</code></li>
+<li><strong>GetFlowTriggers</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;Flow, out:&amp;Messages, out:&amp;Triggers)</code></li>
+<li><strong>DeleteFlowTriggers</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;Triggers, in:&amp;Flow, out:&amp;Messages)</code></li>
+<li><strong>GetUserContextValue</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;UserId, in:&amp;Parameter, out:&amp;Messages, out:&amp;ParameterValue)</code></li>
+<li><strong>SetUserContextValue</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;UserId, in:&amp;Parameter, in:&amp;ParameterValue)</code></li>
+<li><strong>CleanContext</strong> — <code>parm=parm(in:&amp;Instance)</code></li>
+<li><strong>CleanUserContext</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;UserId)</code></li>
+<li><strong>SetContextValue</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;Parameter, in:&amp;ParameterValue)</code></li>
+<li><strong>GetContextValue</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;Parameter, out:&amp;Messages, out:&amp;ParameterValue)</code></li>
+<li><strong>SendMessage</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;Message, in:&amp;Image, &amp;AnalyzeResponse, out:&amp;Messages)</code></li>
+<li><strong>Analyze</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;Message, &amp;AnalyzeResponse, out:&amp;Messages)</code></li>
+<li><strong>SendEntityValues</strong> — <code>parm=parm(in:&amp;Instance, in:&amp;EntityValues, in:&amp;Entity, out:&amp;Messages)</code></li>
+<li><strong>SendMessage</strong> — <code>parm=parm(in:&amp;ChannelConfiguration, in:&amp;Message, out:&amp;Messages)</code></li>
+<li><strong>SetWebhookURL</strong> — <code>parm=parm(in:&amp;Url, in:&amp;Instance, out:&amp;Messages)</code></li>
+<li><strong>GetMessageData</strong> — <code>parm=parm(in:&amp;Channel, in:&amp;Instance, in:&amp;Query, out:&amp;Message, out:&amp;ChannelConfiguration)</code></li>
+<li><strong>LoadUserKeyValue</strong></li>
+<li><strong>SaveUserKeyValue</strong></li>
+<li><strong>WWP_StorageProvider_GetFilePath</strong></li>
+<li><strong>ListWWPPrograms</strong></li>
+<li><strong>AuditTransaction</strong></li>
+<li><strong>LoadColumnsSelectorState</strong></li>
+<li><strong>LoadWWPContext</strong></li>
+<li><strong>SetWWPContext</strong></li>
+<li><strong>SaveColumnsSelectorState</strong></li>
+<li><strong>WWP_ColumnsSelector_Remove</strong></li>
+<li><strong>WWP_ColumnsSelector_Add</strong></li>
+<li><strong>WWP_ColumnSelector_UpdateColumns</strong></li>
+<li><strong>WWP_ManageFiltersLoadSavedFilters</strong></li>
+<li><strong>WWP_ExportWriteFilter</strong></li>
+<li><strong>WWP_GridStateGetFilterValue</strong></li>
+<li><strong>WWP_GetFilterVal</strong></li>
+<li><strong>WWP_GridStateAddFilterValueAndSel</strong></li>
+<li><strong>WWP_GridStateAddFilterValue</strong></li>
+<li><strong>WWP_ItemInCollection</strong></li>
+<li><strong>WWP_ResetCollapsedRecords</strong></li>
+<li><strong>WWP_Export_SecureText</strong></li>
+<li><strong>LoadGridState</strong></li>
+<li><em>... e mais 794</em></li>
 </ul>
-<h3>EXTERNAL_OBJECT (1)</h3>
+<h3>EXTERNAL_OBJECT (238)</h3>
 <ul>
 <li><strong>Geolocation</strong></li>
+<li><strong>Progress</strong></li>
+<li><strong>Navigation</strong></li>
+<li><strong>Appearance</strong></li>
+<li><strong>DesignSystem</strong></li>
+<li><strong>ConfigurationManager</strong></li>
+<li><strong>ExternalStorage</strong></li>
+<li><strong>Clipboard</strong></li>
+<li><strong>Analytics</strong></li>
+<li><strong>Server</strong></li>
+<li><strong>Runtime</strong></li>
+<li><strong>Log</strong></li>
+<li><strong>Maps</strong></li>
+<li><strong>DynamicCallOld</strong></li>
+<li><strong>DynamicCall</strong></li>
+<li><strong>DynamicCallPropertiesJava</strong></li>
+<li><strong>DynamicCallPropertiesNet</strong></li>
+<li><strong>AnyObject</strong></li>
+<li><strong>DynamicCallMethodProperties</strong></li>
+<li><strong>CrashAnalytics</strong></li>
+<li><strong>Dictionary</strong></li>
+<li><strong>ClientInformation</strong></li>
+<li><strong>ClientStorage</strong></li>
+<li><strong>Socket</strong></li>
+<li><strong>Facebook</strong></li>
+<li><strong>Twitter</strong></li>
+<li><strong>Share</strong></li>
+<li><strong>WeChat</strong></li>
+<li><strong>Socket</strong></li>
+<li><strong>SynchronizationEvents</strong></li>
+<li><strong>Synchronization</strong></li>
+<li><strong>Permissions</strong></li>
+<li><strong>StoreManager</strong></li>
+<li><strong>StoreInterop</strong></li>
+<li><strong>LocalNotifications</strong></li>
+<li><strong>Camera</strong></li>
+<li><strong>PhotoLibrary</strong></li>
+<li><strong>Audio</strong></li>
+<li><strong>AudioRecorder</strong></li>
+<li><strong>Files</strong></li>
+<li><strong>VideoOperations</strong></li>
+<li><strong>DataBase</strong></li>
+<li><strong>Actions</strong></li>
+<li><strong>Contacts</strong></li>
+<li><strong>Calendar</strong></li>
+<li><strong>Interop</strong></li>
+<li><strong>Scanner</strong></li>
+<li><strong>Network</strong></li>
+<li><strong>Beacons</strong></li>
+<li><strong>Search</strong></li>
+<li><em>... e mais 188</em></li>
 </ul>
 <h2 id="ui">Telas e UI</h2>
-<h3>WEB_PANEL (1)</h3>
+<h3>WEB_PANEL (589)</h3>
 <ul>
 <li><strong>AppMasterPage</strong> — <code>form=present</code></li>
+<li><strong>RecentLinks</strong> — <code>form=present</code></li>
+<li><strong>PromptMasterPage</strong> — <code>form=present</code></li>
+<li><strong>RwdMasterPage</strong> — <code>form=present</code></li>
+<li><strong>RwdRecentLinks</strong> — <code>form=present</code></li>
+<li><strong>RwdPromptMasterPage</strong> — <code>form=present</code></li>
+<li><strong>Gx0030</strong> — <code>form=present</code></li>
+<li><strong>Gx0060</strong> — <code>form=present</code></li>
+<li><strong>AcessoCliente</strong> — <code>form=present</code></li>
+<li><strong>WizardStepsArrowWC</strong> — <code>form=present</code></li>
+<li><strong>WizardStepsBulletWC</strong> — <code>form=present</code></li>
+<li><strong>AddressDisplay</strong> — <code>form=present</code></li>
+<li><strong>ExportOptions</strong> — <code>form=present</code></li>
+<li><strong>Home</strong> — <code>form=present</code></li>
+<li><strong>ManageFilters</strong> — <code>form=present</code></li>
+<li><strong>PromptGeolocation</strong> — <code>form=present</code></li>
+<li><strong>SaveFilterAs</strong> — <code>form=present</code></li>
+<li><strong>WWPTabbedView</strong> — <code>form=present</code></li>
+<li><strong>NotAuthorized</strong> — <code>form=present</code></li>
+<li><strong>HomeProgressBarCircleWC</strong> — <code>form=present</code></li>
+<li><strong>HomeProgressBarWC</strong> — <code>form=present</code></li>
+<li><strong>MasterPageFrame</strong> — <code>form=present</code></li>
+<li><strong>WorkWithPlusMasterPagePrompt</strong> — <code>form=present</code></li>
+<li><strong>EmpresaView</strong> — <code>form=present</code></li>
+<li><strong>EmpresaWW</strong> — <code>form=present</code></li>
+<li><strong>EmpresaPrompt</strong> — <code>form=present</code></li>
+<li><strong>EmpresaGeneral</strong> — <code>form=present</code></li>
+<li><strong>UsuarioView</strong> — <code>form=present</code></li>
+<li><strong>UsuarioWW</strong> — <code>form=present</code></li>
+<li><strong>UsuarioPrompt</strong> — <code>form=present</code></li>
+<li><strong>UsuarioGeneral</strong> — <code>form=present</code></li>
+<li><strong>ClienteView</strong> — <code>form=present</code></li>
+<li><strong>ClienteWW</strong> — <code>form=present</code></li>
+<li><strong>ClientePrompt</strong> — <code>form=present</code></li>
+<li><strong>ClienteGeneral</strong> — <code>form=present</code></li>
+<li><strong>SetorView</strong> — <code>form=present</code></li>
+<li><strong>SetorWW</strong> — <code>form=present</code></li>
+<li><strong>SetorPrompt</strong> — <code>form=present</code></li>
+<li><strong>SetorGeneral</strong> — <code>form=present</code></li>
+<li><strong>NaturezaView</strong> — <code>form=present</code></li>
+<li><strong>NaturezaWW</strong> — <code>form=present</code></li>
+<li><strong>NaturezaPrompt</strong> — <code>form=present</code></li>
+<li><strong>NaturezaGeneral</strong> — <code>form=present</code></li>
+<li><strong>WorkWithPlusMasterPage</strong> — <code>form=present</code></li>
+<li><strong>GestaoServicoView</strong> — <code>form=present</code></li>
+<li><strong>GestaoServicoWW</strong> — <code>form=present</code></li>
+<li><strong>GestaoServicoPrompt</strong> — <code>form=present</code></li>
+<li><strong>GestaoServicoGeneral</strong> — <code>form=present</code></li>
+<li><strong>ParametroView</strong> — <code>form=present</code></li>
+<li><strong>ParametroWW</strong> — <code>form=present</code></li>
+<li><em>... e mais 539</em></li>
 </ul>
-<h3>THEME_CLASS (1)</h3>
+<h3>THEME_CLASS (1446)</h3>
 <ul>
 <li><strong>AttSubTitle</strong></li>
+<li><strong>BlobInputAttSubTitle</strong></li>
+<li><strong>BlobContentAttSubTitle</strong></li>
+<li><strong>ReadonlyBlobContentAttSubTitle</strong></li>
+<li><strong>ReadonlyAttSubTitle</strong></li>
+<li><strong>IME_Active</strong></li>
+<li><strong>BlobContentIME_Active</strong></li>
+<li><strong>ReadonlyBlobContentIME_Active</strong></li>
+<li><strong>BlobInputIME_Active</strong></li>
+<li><strong>ReadonlyIME_Active</strong></li>
+<li><strong>IME_Inactive</strong></li>
+<li><strong>BlobContentIME_Inactive</strong></li>
+<li><strong>ReadonlyBlobContentIME_Inactive</strong></li>
+<li><strong>BlobInputIME_Inactive</strong></li>
+<li><strong>ReadonlyIME_Inactive</strong></li>
+<li><strong>IME_Disabled</strong></li>
+<li><strong>FloatingVersionText</strong></li>
+<li><strong>FloatingVersionTextColoured</strong></li>
+<li><strong>VersionText</strong></li>
+<li><strong>BlobContentIME_Disabled</strong></li>
+<li><strong>ReadonlyBlobContentIME_Disabled</strong></li>
+<li><strong>BlobInputIME_Disabled</strong></li>
+<li><strong>ReadonlyIME_Disabled</strong></li>
+<li><strong>CheckboxLabel</strong></li>
+<li><strong>BlobContentCheckboxLabel</strong></li>
+<li><strong>ReadonlyBlobContentCheckboxLabel</strong></li>
+<li><strong>BlobInputCheckboxLabel</strong></li>
+<li><strong>ReadonlyCheckboxLabel</strong></li>
+<li><strong>BottomEnter</strong></li>
+<li><strong>SpecialButtonsDisabled</strong></li>
+<li><strong>ActionButtons</strong></li>
+<li><strong>ButtonDisabled</strong></li>
+<li><strong>ButtonGAM</strong></li>
+<li><strong>VerticalTabGrid</strong></li>
+<li><strong>WorkWith</strong></li>
+<li><strong>ImageHeaderBackground</strong></li>
+<li><strong>ImageTop</strong></li>
+<li><strong>HeaderImage1</strong></li>
+<li><strong>ImageTopHeader</strong></li>
+<li><strong>ImageHandCenter</strong></li>
+<li><strong>ImageHandCenter:hover</strong></li>
+<li><strong>TabPaging</strong></li>
+<li><strong>TabPagingNext</strong></li>
+<li><strong>TabPagingPrevious</strong></li>
+<li><strong>TableGrid</strong></li>
+<li><strong>TableTop</strong></li>
+<li><strong>TableContent</strong></li>
+<li><strong>Table100x100</strong></li>
+<li><strong>TableBorder</strong></li>
+<li><strong>TableLeftMenu</strong></li>
+<li><em>... e mais 1396</em></li>
 </ul>
-<h3>IMAGE (1)</h3>
+<h3>IMAGE (250)</h3>
 <ul>
 <li><strong>asc</strong></li>
+<li><strong>desc</strong></li>
+<li><strong>arrow_double</strong></li>
+<li><strong>search</strong></li>
+<li><strong>show_more</strong></li>
+<li><strong>error_ico</strong></li>
+<li><strong>warning_ico</strong></li>
+<li><strong>success_ico_green</strong></li>
+<li><strong>arrow_first</strong></li>
+<li><strong>arrow_left</strong></li>
+<li><strong>arrow_right</strong></li>
+<li><strong>arrow_last</strong></li>
+<li><strong>resize_ico</strong></li>
+<li><strong>close_ico</strong></li>
+<li><strong>arrow_desc</strong></li>
+<li><strong>arrow_asc</strong></li>
+<li><strong>search</strong></li>
+<li><strong>password_show</strong></li>
+<li><strong>password_hidden</strong></li>
+<li><strong>dot_green</strong></li>
+<li><strong>dot_yellow</strong></li>
+<li><strong>dot_red</strong></li>
+<li><strong>dot_purple</strong></li>
+<li><strong>dot_gray</strong></li>
+<li><strong>edit_light</strong></li>
+<li><strong>delete_light</strong></li>
+<li><strong>projects</strong></li>
+<li><strong>download_ico</strong></li>
+<li><strong>video</strong></li>
+<li><strong>calendar_ico</strong></li>
+<li><strong>minus_light</strong></li>
+<li><strong>plus_light</strong></li>
+<li><strong>prompt_light</strong></li>
+<li><strong>featured_green</strong></li>
+<li><strong>minus</strong></li>
+<li><strong>plus</strong></li>
+<li><strong>filter_light</strong></li>
+<li><strong>filter_applied</strong></li>
+<li><strong>filter</strong></li>
+<li><strong>arrow_left_light</strong></li>
+<li><strong>arrow_right_light</strong></li>
+<li><strong>info_ico_purple</strong></li>
+<li><strong>filter_outlined_light</strong></li>
+<li><strong>resize_column_light</strong></li>
+<li><strong>arrow_asc_light</strong></li>
+<li><strong>arrow_desc_light</strong></li>
+<li><strong>refresh</strong></li>
+<li><strong>settings</strong></li>
+<li><strong>duplicate</strong></li>
+<li><strong>genexus_logo</strong></li>
+<li><em>... e mais 200</em></li>
 </ul>
 <h2 id="patterns">Patterns</h2>
-<h3>WORK_WITH_PLUS_PATTERN (1)</h3>
+<h3>WORK_WITH_PLUS_PATTERN (281)</h3>
 <ul>
 <li><strong>WorkWithPlusAcessoCliente</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusAddressDisplay</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusExportOptions</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusHome</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusManageFilters</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusPromptGeolocation</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusSaveFilterAs</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWizardStepsArrowWC</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWizardStepsBulletWC</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusNotAuthorized</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusHomeProgressBarCircleWC</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWCPB</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusExportReportTemplate_Style1</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusExportReportTemplate_Style2</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusExportReportTemplate_Style3</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusMasterPageFrame</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWorkWithPlusMasterPagePrompt</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusEmpresa</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusUsuario</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusCliente</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusSetor</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusNatureza</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWorkWithPlusMasterPage</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusGestaoServico</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusParametro</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusParametroEmail</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPUsuario</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPRelatorioOrdem</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusDashboardServico</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusEditBookmark</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPExecutarAtendimento</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusNotificacao</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusFavorito</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPContato</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPGestaoServico</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPProgramarAtendimento</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPRelatorioTimeSheet</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPTipoServicoAtividades</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPWizardNovaOS</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPQualificarOS</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusFuncao</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPValoresCliente</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPValoresClienteTipoServico</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusTipoHora</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPMercadoPago</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusFaturamento</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPBaixarPagamento</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPRealizarPagamento</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusWPCheckListAtividades</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><strong>WorkWithPlusMeta</strong> — <code>version=1.3</code>, <code>pattern=07135890</code></li>
+<li><em>... e mais 231</em></li>
 </ul>
 <h2 id="i18n">i18n</h2>
-<p><strong>Linguagem padrão:</strong> (não declarado)</p>
-<p><strong>Translations inline:</strong> 0</p>
+<p><strong>Linguagem padrão:</strong> Portuguese</p>
+<p><strong>Translations inline:</strong> 3109</p>
 <h2 id="warnings">Warnings</h2>
 <ul>
-<li class="warning">KB name absent from &lt;KnowledgeBase&gt; header</li>
+<li class="warning">High UNKNOWN guid count: 5592de59 → 135 objects (consider mapping)</li>
 </ul>
 
 </body>

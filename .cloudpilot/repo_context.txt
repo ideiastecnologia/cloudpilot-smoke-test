@@ -4,57 +4,1060 @@ STACK DETECTADA: GeneXus 18
 ════════════════════════════════════════════════
 
 GENEXUS VERSION: 18 (KMW MajorVersion=4, Build=185416)
-KB NAME: unknown
-TOTAL OBJECTS: 14
+KB NAME: GLPPortal
+KB LANGUAGE: Portuguese
+TOTAL OBJECTS: 5517
 
 OBJECT INVENTORY (by kind):
-    - FOLDER: 1
-    - MODULE: 1
-    - DOMAIN: 1
-    - TRANSACTION: 1
-    - TABLE: 1
-    - INDEX: 1
-    - SUBTYPE_GROUP: 1
-    - STRUCTURED_DATA_TYPE: 1
-    - EXTERNAL_OBJECT: 1
-    - PROCEDURE: 1
-    - WEB_PANEL: 1
-    - THEME_CLASS: 1
-    - IMAGE: 1
-    - WORK_WITH_PLUS_PATTERN: 1
+    - FOLDER: 10
+    - MODULE: 128
+    - DOMAIN: 376
+    - TRANSACTION: 159
+    - TABLE: 158
+    - INDEX: 168
+    - SUBTYPE_GROUP: 112
+    - STRUCTURED_DATA_TYPE: 263
+    - EXTERNAL_OBJECT: 238
+    - PROCEDURE: 844
+    - WEB_PANEL: 589
+    - THEME_CLASS: 1446
+    - IMAGE: 250
+    - WORK_WITH_PLUS_PATTERN: 281
+    - UNKNOWN: 495
+    - UNKNOWN(c84ec0ea): 1
+    - UNKNOWN(1132ac08): 37
+    - UNKNOWN(3affc0b3): 4
+    - UNKNOWN(36e32e2d): 1
+    - UNKNOWN(78cecefe): 6
+    - UNKNOWN(c804fdbd): 7
+    - UNKNOWN(c88fffcd): 51
+    - UNKNOWN(83476c1e): 3
+    - UNKNOWN(562f4793): 21
+    - UNKNOWN(dcdcdcdc): 3
+    - UNKNOWN(88313f43): 3
+    - UNKNOWN(5592de59): 135
+    - UNKNOWN(19abc6ff): 21
+    - UNKNOWN(faeb588c): 1
+    - UNKNOWN(ecececec): 4
+    - UNKNOWN(624a8b31): 4
+    - UNKNOWN(ffd44be7): 78
+    - UNKNOWN(bf08dfb1): 2
+    - UNKNOWN(2a9e9aba): 21
+    - UNKNOWN(78b3fa0e): 10
+    - UNKNOWN(083f1b21): 82
 
-DOMAINS (1):
+DOMAINS (376):
     # name + dataType (extracted from ATTCUSTOMTYPE Property when available)
+    - APIAuthorizationStatus
+    - AccessToken
+    - AccessTokenProvider
+    - ActionTexts
+    - Address
+    - AlertPosition
+    - AlertType
+    - AmbienteMP
+    - ApplicationState
+    - Argon2HashType
+    - Argon2Version
+    - AsymmetricEncryptionAlgorithm
+    - AsymmetricEncryptionPadding
+    - AsymmetricSigningAlgorithm
+    - Ativo
+    - AudioAPISessionType
+    - AuthType
+    - BarcodeType
+    - BeaconProximity
+    - CI
+    - CNPJ
+    - CPF
+    - CallTargetSize
+    - CallType
+    - CameraAPIQuality
+    - CardDetectionMode
+    - Channel
+    - ChannelProperties
+    - ChatbotContextElements
+    - ChatbotGeolocationHelper
+    - ChatbotLayouts
+    - ChatbotMessageTypes
+    - ChatbotNotificationTypes
+    - ChatbotPlatform
+    - ChecksumAlgorithm
+    - Code
+    - ColorScheme
+    - CommandBasedResponseType
+    - CommonCallTarget
+    - CompareKind
+    - Component
+    - Conversational
+    - CreditCardType
+    - Criticidade
+    - CryptoEncryptAlgorithm
+    - CryptoHashAlgorithm
+    - CryptoSignAlgorithm
+    - DVMessageBoolean
+    - DVMessageEffect
+    - DVMessageStyling
+    - DVMessageType
+    - Data
+    - Descricao
+    - Description
+    - Destino
+    - DeviceAuthenticationPolicy
+    - DeviceFolder
+    - DiaSemana
+    - DirectionsServiceProviders
+    - DtHora
+    - DynamicCallOption
+    - Effect
+    - Email
+    - Encoding
+    - EncodingTypes
+    - EnviadoSIVA
+    - ErrorCode
+    - EventAction
+    - EventData
+    - EventErrors
+    - EventExecution
+    - EventStatus
+    - ExportType
+    - ExpressaoRegular
+    - Fabricante
+    - FacebookGridProperties
+    - FacebookHeightRatio
+    - FacebookProperties
+    - FacebookQuickRepliesContentTypes
+    - FacebookQuickRepliesProperties
+    - FacebookWebViewProperties
+    - FetchStatus
+    - FilterOperation
     - FilterRelationType
+    - FlagDomain
+    - FlexAlignContent
+    - FlexAlignItems
+    - FlexDirection
+    - FlexJustifyContent
+    - FlexWrap
+    - FormatoCodigoBarra
+    - GAMAPIMode
+    - GAMAPIModes
+    - GAMAccessMethod
+    - GAMAddress
+    - GAMAllowMultipleConcurrentSessions
+    - GAMAppConnectionModes
+    - GAMApplicationAuthorizarionRequestType
+    - GAMApplicationType
+    - GAMApplicationsListGroupBy
+    - GAMAuditoryDetail
+    - GAMAutExtOAuthVersions
+    - GAMAutExtWebServiceVersions
+    - GAMAuthenticationFunctions
+    - GAMAuthenticationTypeName
+    - GAMAuthenticationTypes
+    - GAMBoolean
+    - GAMBooleanFilter
+    - GAMBrowser
+    - GAMChallenge
+    - GAMClientApplicationId
+    - GAMClientApplicationSecret
+    - GAMConnectionName
+    - GAMConnectionUser
+    - GAMCountryId
+    - GAMDate
+    - GAMDateTime
+    - GAMDescriptionLong
+    - GAMDescriptionMedium
+    - GAMDescriptionMediumVC
+    - GAMDescriptionShort
+    - GAMDeviceId
+    - GAMEMail
+    - GAMEmailTypes
+    - GAMEncryptedData
+    - GAMEncryptionKey
+    - GAMErrorMessages
+    - GAMEventSubscriptionStatus
+    - GAMEvents
+    - GAMExternalAuthentication
+    - GAMExternalAuthenticationResponseMethod
+    - GAMExternalAuthorizationVersions
+    - GAMExternalRefreshToken
+    - GAMGUID
+    - GAMGeneralStatus
+    - GAMGenerateAuditory
+    - GAMGenerateSessionStatistics
+    - GAMIPAddress
+    - GAMIdToken
+    - GAMIdentificatorKey
+    - GAMImage
+    - GAMImageBlob
+    - GAMInitAuthenticationTypeOAuth20
+    - GAMInternalGUIDs
+    - GAMKeyNumLong
+    - GAMKeyNumShort
+    - GAMLanguageCulture
+    - GAMMenuOptionType
+    - GAMOTPGenerationTypes
+    - GAMOperatingSystems
+    - GAMOptionFilter
+    - GAMOrders
+    - GAMPassword
+    - GAMPasswordDB
+    - GAMPermissionAccessType
+    - GAMPermissionAccessTypeDefault
+    - GAMPermissionCheckType
+    - GAMPermissionTypeFilter
+    - GAMPropertyId
+    - GAMPropertyToken
+    - GAMPropertyValue
+    - GAMRecoveryPasswordTypes
+    - GAMRefreshToken
+    - GAMRememberUserTypes
+    - GAMRemoteLogoutBehaviors
+    - GAMRepositoryConnectionTypes
+    - GAMRepositoryNameSpace
+    - GAMRepositoryRememberUserTypes
+    - GAMRepositoryUserIdentifications
+    - GAMSAML20NameIdPolicyFormats
+    - GAMSTSModes
+    - GAMServiceTypesHeader
+    - GAMSessionExternalToken
+    - GAMSessionLogListOrder
+    - GAMSessionLogType
+    - GAMSessionSharedData
+    - GAMSessionStatus
+    - GAMSessionToken
+    - GAMSessionTokenSSO
+    - GAMSessionType
+    - GAMState
+    - GAMString
+    - GAMTimeZone
+    - GAMToken
+    - GAMTracing
+    - GAMURL
+    - GAMUserActivationMethod
+    - GAMUserGender
+    - GAMUserIdentification
+    - GAMUserListOrder
+    - GAMUserLogin
+    - GAMUserStatus
+    - GAMUserTheme
+    - GAMVersion
+    - Geolocation
+    - GoogleChartType
+    - HashAlgorithm
+    - HomeSampleDataStatus
+    - Hora
+    - HorizontalPosition
+    ... and 176 more
 
-PROCEDURES (1):
+PROCEDURES (844):
     # name + parm signature (extracted from Source DSL when available)
+    - APIRequest
+    - AbastecimentoAlmoxarifadoProtheusAPI
+    - AbastecimentoWWExport
+    - AbastecimentoWWExportReport
+    - AbastecimentoWWGetFilterData
+    - AcessoGeral
+    - AcessoMenuModulo
+    - AcessoMenuModuloRotina
+    - AcessoPerfilModuloRotinaFuncao
+    - AddCard
+    - AddDeviceGroups [parm=parm(in:&Configuration, in:&DeviceToken, in:&Groups, out:&Messages, out:&Success)]
+    - AddDeviceTargetFilter [parm=parm(in:&Configuration, in:&DeviceToken, in:&FilterName, in:&FilterValue, out:&Messages, out:&Success)]
+    - AddLogRecord
+    - AlteraClienteProtheusAPI
+    - Analyze [parm=parm(in:&Instance, in:&Message, &AnalyzeResponse, out:&Messages)]
+    - AnexosMedicaoV1
+    - AreaLoadDVCombo
+    - AreaWWExport
+    - AreaWWExportReport
+    - AreaWWGetFilterData
+    - ArrumarClienteLine
+    - AuditTransaction
+    - BloqueioClienteProtheusAPI
+    - BuscaCEPAPI
+    - BuscaRetornoSIVA
+    - BuscaSessaoSD
+    - Calcula_Modulo11
+    - CancelPayment
+    - CancelPayment
+    - CargaInicial
+    - CargaModulos
+    - CatalogoServicoWWExport
+    - CatalogoServicoWWExportReport
+    - CatalogoServicoWWGetFilterData
+    - CheckDataNotInServer
+    - CheckDynamicDefinition [parm=parm(in:&Instance, out:&IsDynamic, out:&HasErrors, out:&Messages)]
+    - CleanContext [parm=parm(in:&Instance)]
+    - CleanUserContext [parm=parm(in:&Instance, in:&UserId)]
+    - ClienteEquipamentoLoadDVCombo
+    - ClienteEquipamentoWWExport
+    - ClienteEquipamentoWWExportReport
+    - ClienteEquipamentoWWGetFilterData
+    - ClienteLoadDVCombo
+    - ClienteLogisticaWWExport
+    - ClienteLogisticaWWGetFilterData
+    - ClienteWWExport
+    - ClienteWWExportReport
+    - ClienteWWGetFilterData
+    - ContratoWWExport
+    - ContratoWWExportReport
+    - ContratoWWGetFilterData
+    - CreateCustomer
+    - CreatePayment
+    - CreatePlan
+    - CreatePreference
+    - CreatePurchaseOrder
+    - CreateSubscription
+    - CreateTestUser
+    - CreateTokenCard
+    - CreatepreApproval
+    - DVMessageBasicNotification
+    - DVMessageBasicNotificationPrompt
+    - DVMessageDesktopNotification
+    - DVMessageGetAdvancedNotificationMsg
+    - DVMessageGetBasicNotificationMsg
+    - DVMessageGetDesktopNotificationMsg
+    - DVMessageNotification
+    - DVMessageNotificationPrompt
+    - DadosMedicaoV1
+    - DeleteFlowTriggers [parm=parm(in:&Instance, in:&Triggers, in:&Flow, out:&Messages)]
+    - DeleteLogRecords
+    - DiaAtrasoWWExport
+    - DiaAtrasoWWExportReport
+    - DiaAtrasoWWGetFilterData
+    - DirectionsServiceRequest
+    - DocumentoWWExport
+    - DocumentoWWExportReport
+    - DocumentoWWGetFilterData
+    - DownloadStorageAPI
+    - EmpresaWWExport
+    - EmpresaWWExportReport
+    - EmpresaWWGetFilterData
+    - EnviaClienteLogisticaSIVA
+    - EnviaListaDocumento
+    - EnviaRelatorioSituacao
+    - EnviaSMSPonto
+    - EnviaSMSPontoApp
+    - EnviarClassificacaoOS
+    - EnviarEmail
+    - EnviarOSPendente
+    - EnvioRotaSIVAAPI
+    - EnvioViagemSIVAAPI
+    - EquipamentoWWExport
+    - EquipamentoWWExportReport
+    - EquipamentoWWGetFilterData
+    - ErrorHandling
+    - ExcelClienteImportadosManual
+    - ExcelComissaoClientesSemConsumo
+    - ExcelComissaoConsumoPrevisto
+    - ExcelComissaoInadimplentes
+    - ExcelComissaoPAbast
+    - ExcelComissaoValorEnvasado
+    - ExcelComissaoValorVolume
+    - ExcelHistoricoAbastecimentoRota
+    - ExcelLogImportacaoAbastecimento
+    - ExcelProgramacaoRota
+    - ExcelSituacaoFinanceiro
+    - ExcelTabelaClientesConsumoMedio250
+    - ExcelTabelaClientesEncerrados
+    - ExcelTabelaClientesNaoAbastecidos
+    - ExcelTabelaClientesNaoAbastecidosData
+    - ExcelTabelaClientesNaoAbastecidosFaltaPag
+    - ExcelTabelaClientesNovos
+    - ExcelTabelaClientesNovosMesIntegral
+    - ExcelTabelaClientesSemConsumo
+    - ExcelTabelaClientesSemConsumoVendedor
+    - ExecucaoRotaExport
+    - ExecucaoRotaExportReport
+    - ExecucaoRotaGetFilterData
+    - ExecucaoRotaSIVAExport
+    - ExecucaoRotaSIVAExportReport
+    - ExportReportTemplate_Style1
+    - ExportReportTemplate_Style2
+    - ExportReportTemplate_Style3
+    - FaturaPrevistaV1
+    - FaturamentoFaturamentoAglutinadoWCGetFilterData
+    - FaturamentoRealizadoV1
+    - FaturamentoRotaProtheusAPI
+    - FaturamentoWWExport
+    - FaturamentoWWExportReport
+    - FaturamentoWWGetFilterData
+    - FavoritoWWExport
+    - FavoritoWWExportReport
+    - FavoritoWWGetFilterData
+    - FilialWWExport
+    - FilialWWExportReport
+    - FilialWWGetFilterData
+    - FinalizarRotaSIVAAPI
+    - FinalizarRotaSIVADados
+    - FinalizarRotaSIVADadosCopy1
+    - FullRefund
+    - FullRefund
+    - FuncaoWWExport
+    - FuncaoWWExportReport
+    - FuncaoWWGetFilterData
+    - GAMCheckUserActivationMethod
+    - GAMConvertErrorsToMessages
+    - GestaoAtivoLoadDVCombo
+    - GestaoAtivoWWExport
+    - GestaoAtivoWWExportReport
+    - GestaoAtivoWWGetFilterData
+    - GestaoServicoLoadDVCombo
+    - GestaoServicoWWExport
+    - GestaoServicoWWExportReport
+    - GestaoServicoWWGetFilterData
+    - GetAccessToken
+    - GetBookmarkFontIcon
+    - GetChatMeta
+    - GetCollectorId
+    - GetComponentById
+    - GetContext
+    - GetContextValue [parm=parm(in:&Instance, in:&Parameter, out:&Messages, out:&ParameterValue)]
+    - GetCredentials
+    - GetCurrentToken
+    - GetCustomPropertyValue
+    - GetFilterByName
+    - GetFlowTriggers [parm=parm(in:&Instance, in:&Flow, out:&Messages, out:&Triggers)]
+    - GetIdentificationTypes
+    - GetInvoicyInfo
+    - GetMenuAuthorizedOptions
+    - GetMenuAuthorizedOptionsRecursive
+    - GetMerchantOrderData
+    - GetMessageData [parm=parm(in:&Channel, in:&Instance, in:&Query, out:&Message, out:&ChannelConfiguration)]
+    - GetNotificationsToDisplay
+    - GetPaymentCollection
+    - GetPaymentMethods
+    - GetPrettyDate
+    - GetPublicKey
+    - GetSponsorId
+    - GetSuscriptionInfo
+    - GetTimeUnitString
+    - GetUserContextValue [parm=parm(in:&Instance, in:&UserId, in:&Parameter, out:&Messages, out:&ParameterValue)]
+    - GetUserCountryId
+    - GetUserId
+    - GetUserIdByDevice
+    - GetWWPTitleSettingsIcons
+    - GetWebComponentById
     - GoogleDirectionsServiceRequest [parm=parm(in:&DirectionsRequestParameters, out:&Routes, out:&errorMessages)]
+    - GxAfterEventReplicator
+    - GxBeforeEventReplicator
+    - GxOnPendingEventFailed
+    - ImportacaoProtheusCliente
+    - ImpressaoFaturamentoBoleto
+    - ImpressaoMedicao
+    - ImpressaoMedicaoIndividual
+    - ImpressaoMedicaoUnica
+    - InclusaoEmpresaV1
+    - InsereClienteProtheusAPI
+    - IsAuthorized
+    - IsMenuAuthorizedOption
+    ... and 644 more
 
-WEB PANELS (1):
+WEB PANELS (589):
     # name + 'has form layout' marker when a Source Part is present
+    - AbastecimentoAnexoPrompt [form=present]
+    - AbastecimentoAnexoWC [form=present]
+    - AbastecimentoGeneral [form=present]
+    - AbastecimentoPrompt [form=present]
+    - AbastecimentoView [form=present]
+    - AbastecimentoWW [form=present]
+    - AcessoCliente [form=present]
+    - AddressDisplay [form=present]
     - AppMasterPage [form=present]
+    - AreaGeneral [form=present]
+    - AreaPrompt [form=present]
+    - AreaUsuarioPrompt [form=present]
+    - AreaUsuarioWC [form=present]
+    - AreaView [form=present]
+    - AreaWW [form=present]
+    - CadastroDocumento [form=present]
+    - CadastroPerfil [form=present]
+    - CatalogoServicoGeneral [form=present]
+    - CatalogoServicoPrompt [form=present]
+    - CatalogoServicoView [form=present]
+    - CatalogoServicoWW [form=present]
+    - ChatBotMasterWeb [form=present]
+    - ClienteContratoPrompt [form=present]
+    - ClienteEnderecoPrompt [form=present]
+    - ClienteEnderecoWC [form=present]
+    - ClienteEquipamentoCampoPrompt [form=present]
+    - ClienteEquipamentoCampoWC [form=present]
+    - ClienteEquipamentoGeneral [form=present]
+    - ClienteEquipamentoPrompt [form=present]
+    - ClienteEquipamentoView [form=present]
+    - ClienteEquipamentoWW [form=present]
+    - ClienteGeneral [form=present]
+    - ClienteLogisticaGeneral [form=present]
+    - ClienteLogisticaPrompt [form=present]
+    - ClienteLogisticaView [form=present]
+    - ClienteLogisticaWC [form=present]
+    - ClienteLogisticaWW [form=present]
+    - ClientePrompt [form=present]
+    - ClienteResponsavelPrompt [form=present]
+    - ClienteResponsavelWC [form=present]
+    - ClienteView [form=present]
+    - ClienteWW [form=present]
+    - ContratoAnexoPrompt [form=present]
+    - ContratoAnexoWC [form=present]
+    - ContratoFaturamentoPrompt [form=present]
+    - ContratoFaturamentoWC [form=present]
+    - ContratoGeneral [form=present]
+    - ContratoIndicePerformancePrompt [form=present]
+    - ContratoIndicePerformanceWC [form=present]
+    - ContratoProdutoPrompt [form=present]
+    - ContratoProdutoWC [form=present]
+    - ContratoProfissionalPrompt [form=present]
+    - ContratoProfissionalWC [form=present]
+    - ContratoPrompt [form=present]
+    - ContratoResponsavelPrompt [form=present]
+    - ContratoResponsavelWC [form=present]
+    - ContratoTipoServicoPrompt [form=present]
+    - ContratoTipoServicoWC [form=present]
+    - ContratoVendedorPrompt [form=present]
+    - ContratoVendedorWC [form=present]
+    - ContratoView [form=present]
+    - ContratoWW [form=present]
+    - CreatePayment [form=present]
+    - CreateSubscriptionCustom [form=present]
+    - CreateSuscriptionBasic [form=present]
+    - DashboardCliente [form=present]
+    - DashboardComissionamento [form=present]
+    - DashboardCompras [form=present]
+    - DashboardContratos [form=present]
+    - DashboardProgramacaoRota [form=present]
+    - DashboardRota [form=present]
+    - DashboardServico [form=present]
+    - DashboardTecnicos [form=present]
+    - DiaAtrasoGeneral [form=present]
+    - DiaAtrasoPrompt [form=present]
+    - DiaAtrasoView [form=present]
+    - DiaAtrasoWW [form=present]
+    - DocumentoAnexoPrompt [form=present]
+    - DocumentoAnexoWC [form=present]
+    - DocumentoGeneral [form=present]
+    - DocumentoPrompt [form=present]
+    - DocumentoRevisaoPrompt [form=present]
+    - DocumentoRevisaoWC [form=present]
+    - DocumentoView [form=present]
+    - DocumentoWW [form=present]
+    - EditBookmark [form=present]
+    - EmpresaGeneral [form=present]
+    - EmpresaPrompt [form=present]
+    - EmpresaView [form=present]
+    - EmpresaWW [form=present]
+    - EquipamentoCampoPrompt [form=present]
+    - EquipamentoCampoWC [form=present]
+    - EquipamentoClienteEquipamentoWC [form=present]
+    - EquipamentoGeneral [form=present]
+    - EquipamentoPrompt [form=present]
+    - EquipamentoView [form=present]
+    - EquipamentoWW [form=present]
+    - ExecucaoRota [form=present]
+    - ExportOptions [form=present]
+    - FaturamentoFaturamentoAglutinadoWC [form=present]
+    - FaturamentoGeneral [form=present]
+    - FaturamentoPrompt [form=present]
+    - FaturamentoView [form=present]
+    - FaturamentoWW [form=present]
+    - FavoritoGeneral [form=present]
+    - FavoritoPrompt [form=present]
+    - FavoritoView [form=present]
+    - FavoritoWW [form=present]
+    - FilialGeneral [form=present]
+    - FilialPrompt [form=present]
+    - FilialView [form=present]
+    - FilialWW [form=present]
+    - FinanceiroAcessoCliente [form=present]
+    - FuncaoFuncaoTipoHoraWC [form=present]
+    - FuncaoGeneral [form=present]
+    - FuncaoPrompt [form=present]
+    - FuncaoView [form=present]
+    - FuncaoWW [form=present]
+    - GAMAppMenuEntry [form=present]
+    - GAMAppMenuOptionEntry [form=present]
+    - GAMAppPermissionChildren [form=present]
+    - GAMAppPermissionEntry [form=present]
+    - GAMAppPermissionSelect [form=present]
+    - GAMApplicationEntry [form=present]
+    - GAMAuthenticationTypeEntry [form=present]
+    - GAMChangeRepository [form=present]
+    - GAMChangeYourPassword [form=present]
+    - GAMConnectionEntry [form=present]
+    - GAMEventSubscriptionEntry [form=present]
+    - GAMExampleChangePassword [form=present]
+    - GAMExampleNotAuthorized [form=present]
+    - GAMExampleRecoverPasswordStep1 [form=present]
+    - GAMExampleRecoverPasswordStep2 [form=present]
+    - GAMExampleRegisterUser [form=present]
+    - GAMExampleSSOLogin [form=present]
+    - GAMExampleUpdateRegisterUser [form=present]
+    - GAMHome [form=present]
+    - GAMRemoteLogin [form=present]
+    - GAMRepositoryConfiguration [form=present]
+    - GAMRepositoryEntry [form=present]
+    - GAMRoleEntry [form=present]
+    - GAMRolePermissionSelect [form=present]
+    - GAMRoleSelect [form=present]
+    - GAMSecurityPolicyEntry [form=present]
+    - GAMSetPassword [form=present]
+    - GAMTestExternalLogin [form=present]
+    - GAMUserEntry [form=present]
+    - GAMUserPermissionSelect [form=present]
+    - GAMUserRoleSelect [form=present]
+    - GAMWCAuthenticationTypeEntryGeneral [form=present]
+    - GAMWCAuthenticationTypeEntryOauth20 [form=present]
+    - GAMWCAuthenticationTypeEntrySaml20 [form=present]
+    - GAMWWAppMenuOptions [form=present]
+    - GAMWWAppMenus [form=present]
+    - GAMWWAppPermissions [form=present]
+    - GAMWWApplications [form=present]
+    - GAMWWAuthTypes [form=present]
+    - GAMWWConnections [form=present]
+    - GAMWWEventSubscriptions [form=present]
+    - GAMWWRepositories [form=present]
+    - GAMWWRolePermissions [form=present]
+    - GAMWWRoleRoles [form=present]
+    - GAMWWRoles [form=present]
+    - GAMWWSecurityPolicy [form=present]
+    - GAMWWUserPermissions [form=present]
+    - GAMWWUserRoles [form=present]
+    - GAMWWUsers [form=present]
+    - GestaoAtivoGeneral [form=present]
+    - GestaoAtivoPrompt [form=present]
+    - GestaoAtivoView [form=present]
+    - GestaoAtivoWW [form=present]
+    - GestaoServicoGeneral [form=present]
+    - GestaoServicoGestaoServicoTipoWC [form=present]
+    - GestaoServicoPrompt [form=present]
+    - GestaoServicoView [form=present]
+    - GestaoServicoWW [form=present]
+    - Gx0030 [form=present]
+    - Gx0060 [form=present]
+    - Home [form=present]
+    - HomeGestaoAtivo [form=present]
+    - HomeProgressBarCircleWC [form=present]
+    - HomeProgressBarWC [form=present]
+    - IndicadoresDocumentos [form=present]
+    - LogRecordGeneral [form=present]
+    - Login [form=present]
+    - ManageFilters [form=present]
+    - MapWebComponent [form=present]
+    - MasterPageFrame [form=present]
+    - MedicaoAnexoPrompt [form=present]
+    - MedicaoAnexoWC [form=present]
+    - MedicaoGeneral [form=present]
+    - MedicaoProdutoPrompt [form=present]
+    - MedicaoProdutoWC [form=present]
+    - MedicaoProfissionalPrompt [form=present]
+    - MedicaoProfissionalWC [form=present]
+    - MedicaoPrompt [form=present]
+    - MedicaoTipoServicoPrompt [form=present]
+    - MedicaoTipoServicoWC [form=present]
+    - MedicaoView [form=present]
+    - MedicaoWW [form=present]
+    ... and 389 more
 
-TRANSACTIONS (1):
+TRANSACTIONS (159):
     # name + level count (best-effort from RawXml structure)
+    - Abastecimento [levels=2]
+    - AbastecimentoAnexo [levels=1]
+    - AccessToken [levels=1]
+    - AnotacaoFinanceiro [levels=1]
+    - Area [levels=2]
+    - AreaUsuario [levels=1]
+    - CC2010 [levels=1]
+    - CT1010 [levels=1]
+    - CTT010 [levels=1]
+    - Cart [levels=2]
+    - CatalogoServico [levels=1]
+    - Cliente [levels=5]
+    - ClienteAnexo [levels=1]
+    - ClienteBC [levels=1]
+    - ClienteCatalogo [levels=1]
+    - ClienteContato [levels=1]
+    - ClienteContrato [levels=1]
+    - ClienteEndereco [levels=1]
+    - ClienteEquipamento [levels=2]
+    - ClienteEquipamentoCampo [levels=1]
+    - ClienteLogistica [levels=1]
+    - ClienteLogisticaBC [levels=1]
+    - ClientePesquisa [levels=2]
+    - ClientePesquisaNota [levels=1]
+    - ClienteTipoHora [levels=1]
+    - ClienteTipoServico [levels=1]
+    - Contrato [levels=9]
+    - ContratoAglutinado [levels=1]
+    - ContratoAnexo [levels=1]
+    - ContratoFaturamento [levels=1]
+    - ContratoIndicePerformance [levels=1]
+    - ContratoProduto [levels=1]
+    - ContratoProfissional [levels=1]
+    - ContratoResponsavel [levels=1]
+    - ContratoTipoServico [levels=1]
+    - ContratoVendedor [levels=1]
+    - DA0010 [levels=1]
+    - DA1010 [levels=1]
+    - DiaAtraso [levels=1]
+    - Documento [levels=3]
+    - DocumentoAnexo [levels=1]
+    - DocumentoRevisao [levels=1]
     - Empresa [levels=1]
+    - EmpresaBC [levels=1]
+    - Equipamento [levels=2]
+    - EquipamentoCampo [levels=1]
+    - Faturamento [levels=1]
+    - FaturamentoAglutinado [levels=1]
+    - Favorito [levels=1]
+    - Filial [levels=1]
+    - Funcao [levels=1]
+    - FuncaoTipoHora [levels=1]
+    - GSEquipamentoCampo [levels=1]
+    - GXChatMessage [levels=1]
+    - GXChatUser [levels=1]
+    - GestaoAtivo [levels=1]
+    - GestaoServico [levels=1]
+    - GestaoServicoAnexo [levels=1]
+    - GestaoServicoBC [levels=1]
+    - GestaoServicoEquipamento [levels=1]
+    - GestaoServicoExecutante [levels=1]
+    - GestaoServicoLista [levels=1]
+    - GestaoServicoProgramada [levels=1]
+    - GestaoServicoRoteiro [levels=1]
+    - GestaoServicoTipo [levels=1]
+    - Item [levels=1]
+    - LogRecord [levels=1]
+    - Medicao [levels=5]
+    - MedicaoAnexo [levels=1]
+    - MedicaoProduto [levels=1]
+    - MedicaoProfissional [levels=1]
+    - MedicaoTipoServico [levels=1]
+    - Mensagem [levels=1]
+    - MercadoPagoInfo [levels=1]
+    - MercadoPagoServices [levels=2]
+    - Meta [levels=1]
+    - MetaCom [levels=1]
+    - Modulo [levels=2]
+    - ModuloRotina [levels=1]
+    - ModuloRotinaTemp [levels=1]
+    - MotivoCancelamento [levels=1]
+    - MotivoDesconto [levels=1]
+    - MotivoNaoAbastecimento [levels=1]
+    - Motorista [levels=1]
+    - NNR010 [levels=1]
+    - Natureza [levels=3]
+    - NaturezaLista [levels=1]
+    - NaturezaRoteiro [levels=1]
+    - NaturezaRoteiroEquipamento [levels=1]
+    - NaturezaRoteiroProduto [levels=1]
+    - Notificacao [levels=1]
+    - OSAnexoTemp [levels=1]
+    - OSRoteiroEquipamento [levels=1]
+    - OSRoteiroProduto [levels=1]
+    - Orcamento [levels=2]
+    - OrcamentoMensal [levels=1]
+    - OrcamentoMensalEmpresa [levels=1]
+    - OrcamentoMensalTipoContrato [levels=1]
+    - OrdemExecutante [levels=3]
+    - OrdemExecutanteAnexo [levels=1]
+    - OrdemExecutanteEquipamento [levels=1]
+    - OrdemExecutanteProduto [levels=1]
+    - PMRFuncao [levels=1]
+    - PMRFuncaoTemp [levels=1]
+    - Parametro [levels=1]
+    - ParametroEmail [levels=1]
+    - PausaRota [levels=1]
+    - Payment [levels=1]
+    - Perfil [levels=3]
+    - PerfilModulo [levels=1]
+    - PerfilModuloRotina [levels=1]
+    - PerfilVeiculo [levels=1]
+    - Periodicidade [levels=1]
+    - Pessoa [levels=1]
+    - Plan [levels=1]
+    - PontoEletronico [levels=2]
+    - PontoEletronicoMarcacao [levels=1]
+    - Produto [levels=1]
+    - ProgramacaoRota [levels=3]
+    - ProgramacaoRotaCliente [levels=1]
+    - ProgramacaoRotaTerritorio [levels=1]
+    - Prospect [levels=3]
+    - ProspectAnexo [levels=1]
+    - ProspectContato [levels=1]
+    - PurchaseOrder [levels=2]
+    - RetornoRotaSIVA [levels=1]
+    - SA1010 [levels=1]
+    - SA2010 [levels=1]
+    - SA3010 [levels=1]
+    - SA4010 [levels=1]
+    - SAH010 [levels=1]
+    - SB1010 [levels=1]
+    - SBE010 [levels=1]
+    - SC7010 [levels=1]
+    - SD2010 [levels=1]
+    - SE1010 [levels=1]
+    - SE4010 [levels=1]
+    - SE5010 [levels=1]
+    - SED010 [levels=1]
+    - SF4010 [levels=1]
+    - SYA010 [levels=1]
+    - Satisfacao [levels=3]
+    - SatisfacaoRequisito [levels=1]
+    - SatisfacaoRequisitoPergunta [levels=1]
+    - Setor [levels=1]
+    - Subscription [levels=3]
+    - Territorio [levels=2]
+    - TerritorioSemana [levels=1]
+    - TipoCombustivel [levels=1]
+    - TipoContrato [levels=1]
+    - TipoDocumento [levels=1]
+    - TipoHora [levels=1]
+    - TipoTanque [levels=1]
+    - UnidadeMedida [levels=1]
+    - User [levels=1]
+    - Usuario [levels=1]
+    - UsuarioBC [levels=1]
+    - Veiculo [levels=2]
+    - VeiculoCombustivel [levels=1]
 
-PATTERN INSTANCES (WorkWithPlus) (1):
+PATTERN INSTANCES (WorkWithPlus) (281):
     # name + pattern GUID + version
+    - WorkWithPlusAbastecimento [version=1.3, pattern=07135890]
     - WorkWithPlusAcessoCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusAddressDisplay [version=1.3, pattern=07135890]
+    - WorkWithPlusArea [version=1.3, pattern=07135890]
+    - WorkWithPlusCadastroDocumento [version=1.3, pattern=07135890]
+    - WorkWithPlusCadastroPerfil [version=1.3, pattern=07135890]
+    - WorkWithPlusCatalogoServico [version=1.3, pattern=07135890]
+    - WorkWithPlusCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusClienteEquipamento [version=1.3, pattern=07135890]
+    - WorkWithPlusClienteLogistica [version=1.3, pattern=07135890]
+    - WorkWithPlusContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusDashboardCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusDashboardComissionamento [version=1.3, pattern=07135890]
+    - WorkWithPlusDashboardCompras [version=1.3, pattern=07135890]
+    - WorkWithPlusDashboardContratos [version=1.3, pattern=07135890]
+    - WorkWithPlusDashboardProgramacaoRota [version=1.3, pattern=07135890]
+    - WorkWithPlusDashboardRota [version=1.3, pattern=07135890]
+    - WorkWithPlusDashboardServico [version=1.3, pattern=07135890]
+    - WorkWithPlusDashboardTecnicos [version=1.3, pattern=07135890]
+    - WorkWithPlusDiaAtraso [version=1.3, pattern=07135890]
+    - WorkWithPlusDocumento [version=1.3, pattern=07135890]
+    - WorkWithPlusEditBookmark [version=1.3, pattern=07135890]
+    - WorkWithPlusEmpresa [version=1.3, pattern=07135890]
+    - WorkWithPlusEquipamento [version=1.3, pattern=07135890]
+    - WorkWithPlusExecucaoRota [version=1.3, pattern=07135890]
+    - WorkWithPlusExportOptions [version=1.3, pattern=07135890]
+    - WorkWithPlusExportReportTemplate_Style1 [version=1.3, pattern=07135890]
+    - WorkWithPlusExportReportTemplate_Style2 [version=1.3, pattern=07135890]
+    - WorkWithPlusExportReportTemplate_Style3 [version=1.3, pattern=07135890]
+    - WorkWithPlusFaturamento [version=1.3, pattern=07135890]
+    - WorkWithPlusFavorito [version=1.3, pattern=07135890]
+    - WorkWithPlusFilial [version=1.3, pattern=07135890]
+    - WorkWithPlusFinanceiroAcessoCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusFuncao [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMAppMenuEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMAppMenuOptionEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMAppPermissionChildren [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMAppPermissionEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMAppPermissionSelect [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMApplicationEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMAuthenticationTypeEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMChangePassword [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMChangeRepository [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMChangeYourPassword [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMConnectionEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMEventSubscriptionEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMExampleNotAuthorized [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMHome [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRecoverPasswordStep1 [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRecoverPasswordStep2 [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRegisterUser [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRemoteLogin [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRepositoryConfiguration [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRepositoryEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRoleEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRolePermissionSelect [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMRoleSelect [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMSSOLogin [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMSecurityPolicyEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMSetPassword [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMTestExternalLogin [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMUpdateRegisterUser [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMUserEntry [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMUserPermissionSelect [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMUserRoleSelect [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWCAuthenticationTypeEntryGeneral [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWCAuthenticationTypeEntryOauth20 [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWCAuthenticationTypeEntrySaml20 [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWAppMenuOptions [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWAppMenus [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWAppPermissions [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWApplications [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWAuthTypes [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWConnections [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWEventSubscriptions [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWRepositories [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWRolePermissions [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWRoleRoles [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWRoles [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWSecurityPolicy [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWUserPermissions [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWUserRoles [version=1.3, pattern=07135890]
+    - WorkWithPlusGAMWWUsers [version=1.3, pattern=07135890]
+    - WorkWithPlusGestaoAtivo [version=1.3, pattern=07135890]
+    - WorkWithPlusGestaoServico [version=1.3, pattern=07135890]
+    - WorkWithPlusHome [version=1.3, pattern=07135890]
+    - WorkWithPlusHomeGestaoAtivo [version=1.3, pattern=07135890]
+    - WorkWithPlusHomeProgressBarCircleWC [version=1.3, pattern=07135890]
+    - WorkWithPlusIndicadoresDocumentos [version=1.3, pattern=07135890]
+    - WorkWithPlusLogin [version=1.3, pattern=07135890]
+    - WorkWithPlusManageFilters [version=1.3, pattern=07135890]
+    - WorkWithPlusMasterPageFrame [version=1.3, pattern=07135890]
+    - WorkWithPlusMedicao [version=1.3, pattern=07135890]
+    - WorkWithPlusMeta [version=1.3, pattern=07135890]
+    - WorkWithPlusMetaCom [version=1.3, pattern=07135890]
+    - WorkWithPlusMetaComissaoWW [version=1.3, pattern=07135890]
+    - WorkWithPlusModulo [version=1.3, pattern=07135890]
+    - WorkWithPlusMotivoCancelamento [version=1.3, pattern=07135890]
+    - WorkWithPlusMotivoDesconto [version=1.3, pattern=07135890]
+    - WorkWithPlusMotivoNaoAbastecimento [version=1.3, pattern=07135890]
+    - WorkWithPlusMotorista [version=1.3, pattern=07135890]
+    - WorkWithPlusNatureza [version=1.3, pattern=07135890]
+    - WorkWithPlusNotAuthorized [version=1.3, pattern=07135890]
+    - WorkWithPlusNotificacao [version=1.3, pattern=07135890]
+    - WorkWithPlusObterRetornoSIVA [version=1.3, pattern=07135890]
+    - WorkWithPlusOrcamento [version=1.3, pattern=07135890]
+    - WorkWithPlusParametro [version=1.3, pattern=07135890]
+    - WorkWithPlusParametroEmail [version=1.3, pattern=07135890]
+    - WorkWithPlusPerfil [version=1.3, pattern=07135890]
+    - WorkWithPlusPerfilVeiculo [version=1.3, pattern=07135890]
+    - WorkWithPlusPeriodicidade [version=1.3, pattern=07135890]
+    - WorkWithPlusPessoa [version=1.3, pattern=07135890]
+    - WorkWithPlusPontoEletronico [version=1.3, pattern=07135890]
+    - WorkWithPlusProduto [version=1.3, pattern=07135890]
+    - WorkWithPlusProgramacaoRota [version=1.3, pattern=07135890]
+    - WorkWithPlusPromptGeolocation [version=1.3, pattern=07135890]
+    - WorkWithPlusProspect [version=1.3, pattern=07135890]
+    - WorkWithPlusRetornoSIVA [version=1.3, pattern=07135890]
+    - WorkWithPlusSIVAExecucaoRota [version=1.3, pattern=07135890]
+    - WorkWithPlusSatisfacao [version=1.3, pattern=07135890]
+    - WorkWithPlusSaveFilterAs [version=1.3, pattern=07135890]
+    - WorkWithPlusSetor [version=1.3, pattern=07135890]
+    - WorkWithPlusTerritorio [version=1.3, pattern=07135890]
+    - WorkWithPlusTipoCombustivel [version=1.3, pattern=07135890]
+    - WorkWithPlusTipoContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusTipoDocumento [version=1.3, pattern=07135890]
+    - WorkWithPlusTipoHora [version=1.3, pattern=07135890]
+    - WorkWithPlusTipoTanque [version=1.3, pattern=07135890]
+    - WorkWithPlusUnidadeMedida [version=1.3, pattern=07135890]
+    - WorkWithPlusUsuario [version=1.3, pattern=07135890]
+    - WorkWithPlusVeiculo [version=1.3, pattern=07135890]
+    - WorkWithPlusVisualizarLog [version=1.3, pattern=07135890]
+    - WorkWithPlusWCAnexosCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWCClienteContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWCContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWCFaturaCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWCFaturaContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWCFaturamentoContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWCFinanceiroCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWCGestaoServicoCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWCHistoricoAbastecimentoRota [version=1.3, pattern=07135890]
+    - WorkWithPlusWCMarcacaoPonto [version=1.3, pattern=07135890]
+    - WorkWithPlusWCMedicaoAnexo [version=1.3, pattern=07135890]
+    - WorkWithPlusWCMedicaoContratoAnexo [version=1.3, pattern=07135890]
+    - WorkWithPlusWCMedicaoFeita [version=1.3, pattern=07135890]
+    - WorkWithPlusWCMedicaoProduto2 [version=1.3, pattern=07135890]
+    - WorkWithPlusWCMedicaoProfissional2 [version=1.3, pattern=07135890]
+    - WorkWithPlusWCMedicaoTipoServico [version=1.3, pattern=07135890]
+    - WorkWithPlusWCOSCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWCOrcadoIndicadores [version=1.3, pattern=07135890]
+    - WorkWithPlusWCOrcamentoEmpresa [version=1.3, pattern=07135890]
+    - WorkWithPlusWCOrcamentoPorTipo [version=1.3, pattern=07135890]
+    - WorkWithPlusWCOrcamentoTipoContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWCOrdensCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWCPB [version=1.3, pattern=07135890]
+    - WorkWithPlusWCPagamentoContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWCRenovacaoContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWCRenovacaoPorEmpresa [version=1.3, pattern=07135890]
+    - WorkWithPlusWCSelecaoClienteLogistica [version=1.3, pattern=07135890]
+    - WorkWithPlusWCSelecaoMedicao [version=1.3, pattern=07135890]
+    - WorkWithPlusWCVisaoGeralContratos [version=1.3, pattern=07135890]
+    - WorkWithPlusWPAbastecimento [version=1.3, pattern=07135890]
+    - WorkWithPlusWPAddValorCampo [version=1.3, pattern=07135890]
+    - WorkWithPlusWPAdicionarCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWPAgendaTecnica [version=1.3, pattern=07135890]
+    - WorkWithPlusWPAgendasMultiplas [version=1.3, pattern=07135890]
+    - WorkWithPlusWPAprovacaoOS [version=1.3, pattern=07135890]
+    - WorkWithPlusWPBaixarFatura [version=1.3, pattern=07135890]
+    - WorkWithPlusWPBaixarPagamento [version=1.3, pattern=07135890]
+    - WorkWithPlusWPBaixarPagamentoMultiplo [version=1.3, pattern=07135890]
+    - WorkWithPlusWPBloqueioProspect [version=1.3, pattern=07135890]
+    - WorkWithPlusWPBoletoCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWPCancelarDocumento [version=1.3, pattern=07135890]
+    - WorkWithPlusWPCancelarOS [version=1.3, pattern=07135890]
+    - WorkWithPlusWPCheckListAtividades [version=1.3, pattern=07135890]
+    - WorkWithPlusWPCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWPClienteAnexo [version=1.3, pattern=07135890]
+    - WorkWithPlusWPClienteLogistica [version=1.3, pattern=07135890]
+    - WorkWithPlusWPClienteServico [version=1.3, pattern=07135890]
+    - WorkWithPlusWPClienteSucesso [version=1.3, pattern=07135890]
+    - WorkWithPlusWPCodigoPIX [version=1.3, pattern=07135890]
+    - WorkWithPlusWPColaborador [version=1.3, pattern=07135890]
+    - WorkWithPlusWPConfirmacaoIngressoEmpresa [version=1.3, pattern=07135890]
+    - WorkWithPlusWPConfirmacaoInscricaoEstadual [version=1.3, pattern=07135890]
+    - WorkWithPlusWPConfirmacaoMotivo [version=1.3, pattern=07135890]
+    - WorkWithPlusWPConfirmacaoPesquisa [version=1.3, pattern=07135890]
+    - WorkWithPlusWPConfirmacaoTrocaCaminhao [version=1.3, pattern=07135890]
+    - WorkWithPlusWPContato [version=1.3, pattern=07135890]
+    - WorkWithPlusWPContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWPContratoCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWPControleCliente [version=1.3, pattern=07135890]
+    - WorkWithPlusWPControleParceiro [version=1.3, pattern=07135890]
+    - WorkWithPlusWPCopiaContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWPCopiarLinkPag [version=1.3, pattern=07135890]
+    - WorkWithPlusWPDadosContrato [version=1.3, pattern=07135890]
+    - WorkWithPlusWPDataSemana [version=1.3, pattern=07135890]
+    - WorkWithPlusWPDistribuicaoOrcamentaria [version=1.3, pattern=07135890]
+    - WorkWithPlusWPDocumentoAnexo [version=1.3, pattern=07135890]
+    - WorkWithPlusWPEfetuaMedicao [version=1.3, pattern=07135890]
+    - WorkWithPlusWPEnvioSIVA [version=1.3, pattern=07135890]
+    ... and 81 more
 
-THEMES / THEME CLASSES (1 total):
+THEMES / THEME CLASSES (1446 total):
     - AttSubTitle
+    - BlobInputAttSubTitle
+    - BlobContentAttSubTitle
+    - ReadonlyBlobContentAttSubTitle
+    - ReadonlyAttSubTitle
+    - IME_Active
+    - BlobContentIME_Active
+    - ReadonlyBlobContentIME_Active
+    - BlobInputIME_Active
+    - ReadonlyIME_Active
+    - IME_Inactive
+    - BlobContentIME_Inactive
+    - ReadonlyBlobContentIME_Inactive
+    - BlobInputIME_Inactive
+    - ReadonlyIME_Inactive
+    - IME_Disabled
+    - FloatingVersionText
+    - FloatingVersionTextColoured
+    - VersionText
+    - BlobContentIME_Disabled
+    ... and 1426 more
 
 I18N:
-    Default language: unknown
-    Inline <Translation> elements: 0
+    Default language: Portuguese
+    Inline <Translation> elements: 3109
 
 PATTERNS DETECTED:
-    - pattern 07135890 — 1 instances
+    - pattern 07135890 — 282 instances
+    - pattern 15cf49b5 — 1 instances
+    - pattern 78cecefe — 7 instances
 
 WARNINGS:
-    - KB name absent from <KnowledgeBase> header
+    - High UNKNOWN guid count: 5592de59 → 135 objects (consider mapping)
 
 INSTRUCOES PARA AGENTES:
     - Este projeto e uma KB GeneXus importada via Legacy Import

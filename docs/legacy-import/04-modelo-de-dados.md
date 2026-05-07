@@ -3,23 +3,413 @@
 ## Domains
 
 - **FilterRelationType**
+- **FilterOperation**
+- **TargetType**
+- **NotificationBadgeType**
+- **StorageProviderType**
+- **RuntimeEnvironment**
+- **MapType**
+- **LogLevel**
+- **TransportType**
+- **DirectionsServiceProviders**
+- **ColorScheme**
+- **DynamicCallOption**
+- **LocationAccuracyAuthorization**
+- **LocationAccuracy**
+- **SocketStatus**
+- **StorePurchaseState**
+- **StorePurchasePlatform**
+- **StoreProductType**
+- **StorePurchaseStatus**
+- **MediaMetadataKey**
+- **MediaStreamType**
+- **VideoFormat**
+- **DeviceFolder**
+- **SaveMode**
+- **ResultCode**
+- **DeviceAuthenticationPolicy**
+- **CardDetectionMode**
+- **CreditCardType**
+- **RegionStatus**
+- **FetchStatus**
+- **OneTimeCode**
+- **MobileSettingsOptions**
+- **MobileSettings**
+- **AccessTokenProvider**
+- **Url**
+- **IMEMode**
+- **Time**
+- **Encoding**
+- **Timezones**
+- **Effect**
+- **CallType**
+- **CryptoEncryptAlgorithm**
+- **CryptoHashAlgorithm**
+- **CryptoSignAlgorithm**
+- **TrnMode**
+- **Address**
+- **Component**
+- **Email**
+- **Geolocation**
+- **Html**
+- **Phone**
+- **APIAuthorizationStatus**
+- **MessageTypes**
+- **ProgressIndicatorType**
+- **RecentLinksOptions**
+- **ObjectName**
+- **CallTargetSize**
+- **EventExecution**
+- **PushNotificationPriority**
+- **SmartDeviceType**
+- **CameraAPIQuality**
+- **AudioAPISessionType**
+- **MediaDuration**
+- **PlaybackState**
+- **NetworkAPIConnectionType**
+- **EventAction**
+- **EventStatus**
+- **EventData**
+- **EventErrors**
+- **ApplicationState**
+- **SynchronizationReceiveResult**
+- **RegionState**
+- **BeaconProximity**
+- **MediaFinishReason**
+- **HttpMethod**
+- **HttpAuthenticationType**
+- **CommonCallTarget**
+- **BarcodeType**
+- **FlexDirection**
+- **FlexWrap**
+- _... e mais 296_
 
 ## Transactions
 
 - **Empresa** — `levels=1`
+- **Usuario** — `levels=1`
+- **Cliente** — `levels=5`
+- **Setor** — `levels=1`
+- **Natureza** — `levels=3`
+- **GestaoServico** — `levels=1`
+- **Parametro** — `levels=1`
+- **ParametroEmail** — `levels=1`
+- **Notificacao** — `levels=1`
+- **Favorito** — `levels=1`
+- **UsuarioBC** — `levels=1`
+- **Mensagem** — `levels=1`
+- **ClienteContato** — `levels=1`
+- **ClienteEndereco** — `levels=1`
+- **GestaoServicoBC** — `levels=1`
+- **GestaoServicoExecutante** — `levels=1`
+- **OrdemExecutante** — `levels=3`
+- **OrdemExecutanteAnexo** — `levels=1`
+- **NaturezaLista** — `levels=1`
+- **GestaoServicoLista** — `levels=1`
+- **Funcao** — `levels=1`
+- **User** — `levels=1`
+- **PurchaseOrder** — `levels=2`
+- **Subscription** — `levels=3`
+- **Plan** — `levels=1`
+- **Payment** — `levels=1`
+- **LogRecord** — `levels=1`
+- **Cart** — `levels=2`
+- **Item** — `levels=1`
+- **AccessToken** — `levels=1`
+- **TipoHora** — `levels=1`
+- **MercadoPagoServices** — `levels=2`
+- **MercadoPagoInfo** — `levels=1`
+- **Faturamento** — `levels=1`
+- **Meta** — `levels=1`
+- **Produto** — `levels=1`
+- **GestaoServicoAnexo** — `levels=1`
+- **GestaoServicoTipo** — `levels=1`
+- **ClienteTipoHora** — `levels=1`
+- **FuncaoTipoHora** — `levels=1`
+- **Contrato** — `levels=9`
+- **ContratoFaturamento** — `levels=1`
+- **FaturamentoAglutinado** — `levels=1`
+- **ContratoAglutinado** — `levels=1`
+- **TipoContrato** — `levels=1`
+- **ContratoAnexo** — `levels=1`
+- **OrdemExecutanteProduto** — `levels=1`
+- **ClienteTipoServico** — `levels=1`
+- **ContratoResponsavel** — `levels=1`
+- **ContratoVendedor** — `levels=1`
+- **GestaoServicoProgramada** — `levels=1`
+- **EmpresaBC** — `levels=1`
+- **Equipamento** — `levels=2`
+- **ClienteEquipamento** — `levels=2`
+- **EquipamentoCampo** — `levels=1`
+- **ClienteEquipamentoCampo** — `levels=1`
+- **GestaoServicoEquipamento** — `levels=1`
+- **GSEquipamentoCampo** — `levels=1`
+- **Satisfacao** — `levels=3`
+- **SatisfacaoRequisito** — `levels=1`
+- **SatisfacaoRequisitoPergunta** — `levels=1`
+- **ClientePesquisa** — `levels=2`
+- **ClientePesquisaNota** — `levels=1`
+- **ContratoProduto** — `levels=1`
+- **ContratoProfissional** — `levels=1`
+- **Medicao** — `levels=5`
+- **MedicaoProduto** — `levels=1`
+- **MedicaoProfissional** — `levels=1`
+- **PontoEletronico** — `levels=2`
+- **PontoEletronicoMarcacao** — `levels=1`
+- **GXChatMessage** — `levels=1`
+- **GXChatUser** — `levels=1`
+- **UnidadeMedida** — `levels=1`
+- **MotivoDesconto** — `levels=1`
+- **ContratoIndicePerformance** — `levels=1`
+- **ContratoTipoServico** — `levels=1`
+- **MedicaoTipoServico** — `levels=1`
+- **CatalogoServico** — `levels=1`
+- **ClienteCatalogo** — `levels=1`
+- **MedicaoAnexo** — `levels=1`
+- _... e mais 79_
 
 ## Tables
 
 - **Empresa**
+- **Usuario**
+- **Setor**
+- **Natureza**
+- **GestaoServico**
+- **Parametro**
+- **ParametroEmail**
+- **Notificacao**
+- **Favorito**
+- **Mensagem**
+- **ClienteEndereco**
+- **ClienteContato**
+- **OrdemExecutante**
+- **OrdemExecutanteAnexo**
+- **NaturezaLista**
+- **GestaoServicoLista**
+- **Funcao**
+- **User**
+- **Cart**
+- **CartItem**
+- **PurchaseOrder**
+- **PurchaseOrderItems**
+- **Item**
+- **Suscription**
+- **SuscriptionInvoicy**
+- **SuscriptionInvoicyPayments**
+- **Plan**
+- **LogRecord**
+- **AccessToken**
+- **TipoHora**
+- **MercadoPagoServices**
+- **MercadoPagoServicesInfo**
+- **Faturamento**
+- **Meta**
+- **Produto**
+- **GestaoServicoAnexo**
+- **GestaoServicoTipo**
+- **Cliente**
+- **ClienteTipoHora**
+- **FuncaoTipoHora**
+- **Contrato**
+- **ContratoResponsavel**
+- **ContratoFaturamento**
+- **FaturamentoAglutinado**
+- **ContratoAglutinado**
+- **TipoContrato**
+- **ContratoAnexo**
+- **ClienteTipoServico**
+- **ContratoVendedor**
+- **GestaoServicoProgramada**
+- **GestaoServicoExecutante**
+- **Equipamento**
+- **EquipamentoCampo**
+- **ClienteEquipamento**
+- **ClienteEquipamentoCampo**
+- **GestaoServicoEquipamento**
+- **GSEquipamentoCampo**
+- **Satisfacao**
+- **SatisfacaoRequisito**
+- **SatisfacaoRequisitoPergunta**
+- **ClientePesquisa**
+- **ClientePesquisaNota**
+- **ContratoProduto**
+- **ContratoProfissional**
+- **Medicao**
+- **MedicaoProduto**
+- **MedicaoProfissional**
+- **ContratoIndicePerformance**
+- **ContratoTipoServico**
+- **MedicaoTipoServico**
+- **PontoEletronico**
+- **PontoEletronicoMarcacao**
+- **GXChatMessage**
+- **GXChatUser**
+- **UnidadeMedida**
+- **MotivoDesconto**
+- **CatalogoServico**
+- **ClienteCatalogo**
+- **MedicaoAnexo**
+- **Orcamento**
+- _... e mais 78_
 
 ## Indexes
 
 - **CC2010_PK**
+- **CC20101**
+- **CC20102**
+- **CC20103**
+- **CC20104**
+- **CC20105**
+- **CC2010_UNQ**
+- **SB1010_PK**
+- **SB10101**
+- **SB10102**
+- **SB10103**
+- **SB10104**
+- **SB10105**
+- **SB10106**
+- **SB10107**
+- **SB10108**
+- **SB10109**
+- **SB1010A**
+- **SB1010B**
+- **SB1010C**
+- **SB1010D**
+- **SB1010_UNQ**
+- **SAH010_PK**
+- **SAH0101**
+- **SAH0102**
+- **SAH0103**
+- **SAH010_UNQ**
+- **SYA010_PK**
+- **SYA0101**
+- **SYA0102**
+- **SYA0103**
+- **SYA010_UNQ**
+- **SA4010_PK**
+- **SA40101**
+- **SA40102**
+- **SA40103**
+- **SA40104**
+- **SA4010_UNQ**
+- **DA0010_PK**
+- **DA00101**
+- **DA00102**
+- **DA0010_UNQ**
+- **SA1010_PK**
+- **SA10101**
+- **SA10102**
+- **SA10103**
+- **SA10104**
+- **SA10105**
+- **SA10106**
+- **SA10107**
+- _... e mais 118_
 
 ## Subtype Groups
 
 - **SGUsuarioEmpresa**
+- **SGClienteEmpresa**
+- **SGSetorEmpresa**
+- **SGNaturezaEmpresa**
+- **SGServicoCliente**
+- **SGServicoSetor**
+- **SGServicoNatureza**
+- **SGServicoExecutante**
+- **SGServicoEmpresa**
+- **SGGestaoServicoUsuario**
+- **SGServicoExecutanteFinal**
+- **SGServicoUsuarioCancelamento**
+- **SGNotificacaoUsuario**
+- **SGFavoritoUsuario**
+- **SGEmpresaAdministrador**
+- **SGServicoEndereco**
+- **SGOrdemExecutanteUsuario**
+- **SGOrdemGestaoServico**
+- **SGFuncaoEmpresa**
+- **SGUsuarioFuncao**
+- **SGOrdemExecutanteTipoHora**
+- **SGFaturamentoUsuario**
+- **SGExecutanteProduto**
+- **SGTipoServico**
+- **SGListaTipoServico**
+- **SGClienteTipoHora**
+- **SGFuncaoTipoHora**
+- **SGFaturaAglutinada**
+- **SGTipoContratoEmpresa**
+- **SGClienteTipoServico**
+- **SGContradoVendedor**
+- **SGExecutanteTipoHora**
+- **SGTecnico**
+- **SGEquipamentoEmpresa**
+- **SGEquipamentoDemanda**
+- **SGPesquisaCliente**
+- **SGMedicaoContrato**
+- **SGMedicaoProduto**
+- **SGMedicaoFuncao**
+- **SGMedicaoUsuario**
+- _... e mais 72_
 
 ## SDTs
 
 - **Route**
+- **DirectionsRequestParameters**
+- **GeolocationInfo**
+- **GeolocationProximityAlert**
+- **GeolocationPickerParameters**
+- **Event**
+- **Notification**
+- **LocalizedText**
+- **Target**
+- **Delivery**
+- **Configuration**
+- **ConfigurationProperty**
+- **Messages**
+- **AnalyticsPurchase**
+- **Directions**
+- **TrackingParameters**
+- **LocationInfo**
+- **LocationProximityAlert**
+- **LocationPickerParameters**
+- **GridState**
+- **CrashAnalyticsKeyValue**
+- **AnalyticsKeyValue**
+- **FacebookAccessToken**
+- **NotificationInfo**
+- **SynchronizationInfo**
+- **SynchronizationEventList**
+- **SynchronizationEventResultList**
+- **StorePurchase**
+- **StoreValidationConfig**
+- **PurchaseResult**
+- **PurchaseReceiptInformation**
+- **StoreProduct**
+- **PurchasesInformation**
+- **LocalNotificationsInfo**
+- **MediaItem**
+- **MediaQueue**
+- **MediaQueueState**
+- **MediaItemFinishedInfo**
+- **AudioPlayerSettings**
+- **AudioPlayerCustomAction**
+- **ImagesCollection**
+- **VideoConversionParameters**
+- **LoginExternalAdditionalParameters**
+- **ContactInfo**
+- **ScannedBarcodes**
+- **BeaconInfo**
+- **BeaconProximityAlert**
+- **BeaconRegion**
+- **BeaconState**
+- **SearchScope**
+- **CardInformation**
+- **MapGeographies**
+- **MapRegion**
+- **OAuthAuthorizationConfig**
+- **Oauth20AccessTokenSDT**
+- **QueryViewerElements**
+- **QueryViewerData**
+- **QueryViewerDragAndDropData**
+- **QueryViewerFilterChangedData**
+- **QueryViewerFilteredData**
+- _... e mais 203_

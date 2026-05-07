@@ -1,11 +1,13 @@
 {
-  "legacyImportId" : "2d9b2f20-0d69-4a13-b2c2-8aca0d0e4183",
-  "originalFilename" : "glpportal-subset.xpz",
-  "sizeBytes" : 11349,
-  "uploadedAt" : "2026-05-07T22:30:46.339432Z",
-  "analyzedAt" : "2026-05-07T22:30:47.184743Z",
+  "legacyImportId" : "51c28669-f896-45e4-b968-a738033ca9ed",
+  "originalFilename" : "glpportal-full.xpz",
+  "sizeBytes" : 25950202,
+  "uploadedAt" : "2026-05-07T23:47:57.255713Z",
+  "analyzedAt" : "2026-05-07T23:48:20.248693Z",
+  "kbName" : "GLPPortal",
   "geneXusVersion" : "18",
   "kmwMajorVersion" : 4,
   "kmwBuild" : 185416,
-  "totalObjects" : 14
+  "kbLanguage" : "Portuguese",
+  "totalObjects" : 5517
 }

@@ -1,15 +1,16 @@
-# Imported Project — Migrated from GeneXus
+# GLPPortal — Migrated from GeneXus
 
-Imported via **CloudPilot Dev Studio Legacy Import** on 2026-05-07T22:30:48.800468860Z.
+Imported via **CloudPilot Dev Studio Legacy Import** on 2026-05-07T23:48:21.133346954Z.
 
 ## Source
 
-- **Knowledge Base**: (unknown)
+- **Knowledge Base**: GLPPortal
 - **GeneXus version**: 18
 - **KMW MajorVersion**: 4
 - **KMW Build**: 185416
-- **Total objects analyzed**: 14
-- **Original XPZ filename**: glpportal-subset.xpz
+- **Total objects analyzed**: 5517
+- **Default language**: Portuguese
+- **Original XPZ filename**: glpportal-full.xpz
 
 ## Documentation
 

@@ -1,10 +1,90 @@
 # Rotinas do Sistema
 
-## Procedures (1)
+## Procedures (844)
 
 Cada procedure abaixo tem sua assinatura `parm()` extraída do Source DSL quando disponível. Ver `repo_context.txt` para a lista completa.
 
 - **GoogleDirectionsServiceRequest** — `parm=parm(in:&DirectionsRequestParameters, out:&Routes, out:&errorMessages)`
+- **AddDeviceGroups** — `parm=parm(in:&Configuration, in:&DeviceToken, in:&Groups, out:&Messages, out:&Success)`
+- **AddDeviceTargetFilter** — `parm=parm(in:&Configuration, in:&DeviceToken, in:&FilterName, in:&FilterValue, out:&Messages, out:&Success)`
+- **RemoveDeviceTargetFilter** — `parm=parm(in:&Configuration, in:&DeviceToken, in:&FilterName, in:&FilterValue, out:&OutMessages, out:&Success)`
+- **RemoveDeviceGroups** — `parm=parm(in:&Configuration, in:&DeviceToken, in:&Groups, out:&Messages, out:&Success)`
+- **SendNotification** — `parm=parm(in:&Configuration, in:&DeviceToken, in:&NotificationMessage, in:&Delivery, out:&Messages, out:&Success)`
+- **SendEvent** — `parm=parm(in:&Configuration, in:&DeviceToken, in:&NotificationEvent, in:&Delivery, out:&Messages, out:&Success)`
+- **SendNotificationTargets** — `parm=parm(in:&Configuration, in:&Target, in:&NotificationMessage, in:&Delivery, out:&Messages, out:&Success)`
+- **SendEventTargets** — `parm=parm(in:&Configuration, in:&Target, in:&Event, in:&Delivery, out:&Messages, out:&Success)`
+- **SetDeviceTargetMultipleFilters** — `parm=parm(in:&Configuration, in:&DeviceToken, in:&FilterTags, out:&Messages, out:&Success)`
+- **OfflineEventReplicator** — `parm=parm(in:&GxPendingEvents, in:&GxSyncroInfo, out:&EventResults)`
+- **RefreshToken** — `parm=parm(in:&OAuthAuthorizationConfig, in:&RefreshToken, out:&OAuthAccessToken, out:&DateTimeTokenExpire, out:&OutMessages, out:&...)`
+- **CheckDynamicDefinition** — `parm=parm(in:&Instance, out:&IsDynamic, out:&HasErrors, out:&Messages)`
+- **SendFlowTriggers** — `parm=parm(in:&Instance, in:&Triggers, in:&Flow, out:&Messages)`
+- **GetFlowTriggers** — `parm=parm(in:&Instance, in:&Flow, out:&Messages, out:&Triggers)`
+- **DeleteFlowTriggers** — `parm=parm(in:&Instance, in:&Triggers, in:&Flow, out:&Messages)`
+- **GetUserContextValue** — `parm=parm(in:&Instance, in:&UserId, in:&Parameter, out:&Messages, out:&ParameterValue)`
+- **SetUserContextValue** — `parm=parm(in:&Instance, in:&UserId, in:&Parameter, in:&ParameterValue)`
+- **CleanContext** — `parm=parm(in:&Instance)`
+- **CleanUserContext** — `parm=parm(in:&Instance, in:&UserId)`
+- **SetContextValue** — `parm=parm(in:&Instance, in:&Parameter, in:&ParameterValue)`
+- **GetContextValue** — `parm=parm(in:&Instance, in:&Parameter, out:&Messages, out:&ParameterValue)`
+- **SendMessage** — `parm=parm(in:&Instance, in:&Message, in:&Image, &AnalyzeResponse, out:&Messages)`
+- **Analyze** — `parm=parm(in:&Instance, in:&Message, &AnalyzeResponse, out:&Messages)`
+- **SendEntityValues** — `parm=parm(in:&Instance, in:&EntityValues, in:&Entity, out:&Messages)`
+- **SendMessage** — `parm=parm(in:&ChannelConfiguration, in:&Message, out:&Messages)`
+- **SetWebhookURL** — `parm=parm(in:&Url, in:&Instance, out:&Messages)`
+- **GetMessageData** — `parm=parm(in:&Channel, in:&Instance, in:&Query, out:&Message, out:&ChannelConfiguration)`
+- **LoadUserKeyValue**
+- **SaveUserKeyValue**
+- **WWP_StorageProvider_GetFilePath**
+- **ListWWPPrograms**
+- **AuditTransaction**
+- **LoadColumnsSelectorState**
+- **LoadWWPContext**
+- **SetWWPContext**
+- **SaveColumnsSelectorState**
+- **WWP_ColumnsSelector_Remove**
+- **WWP_ColumnsSelector_Add**
+- **WWP_ColumnSelector_UpdateColumns**
+- **WWP_ManageFiltersLoadSavedFilters**
+- **WWP_ExportWriteFilter**
+- **WWP_GridStateGetFilterValue**
+- **WWP_GetFilterVal**
+- **WWP_GridStateAddFilterValueAndSel**
+- **WWP_GridStateAddFilterValue**
+- **WWP_ItemInCollection**
+- **WWP_ResetCollapsedRecords**
+- **WWP_Export_SecureText**
+- **LoadGridState**
+- **SaveGridState**
+- **LoadManageFiltersState**
+- **SaveManageFiltersState**
+- **GetFilterByName**
+- **GetWWPTitleSettingsIcons**
+- **WizardAuxiliarDataProcedure**
+- **ExportReportTemplate_Style1**
+- **ExportReportTemplate_Style2**
+- **ExportReportTemplate_Style3**
+- **GetNotificationsToDisplay**
+- **DVMessageBasicNotification**
+- **DVMessageNotification**
+- **DVMessageBasicNotificationPrompt**
+- **DVMessageNotificationPrompt**
+- **DVMessageDesktopNotification**
+- **EmpresaWWGetFilterData**
+- **EmpresaWWExport**
+- **EmpresaWWExportReport**
+- **UsuarioWWGetFilterData**
+- **UsuarioWWExport**
+- **UsuarioWWExportReport**
+- **ClienteWWGetFilterData**
+- **ClienteWWExport**
+- **ClienteWWExportReport**
+- **SetorWWGetFilterData**
+- **SetorWWExport**
+- **SetorWWExportReport**
+- **NaturezaWWGetFilterData**
+- **NaturezaWWExport**
+- **NaturezaWWExportReport**
+- _... e mais 764_
 
 ## DataProviders
 
@@ -13,3 +93,43 @@ _(nenhum encontrado)_
 ## External Objects
 
 - **Geolocation**
+- **Progress**
+- **Navigation**
+- **Appearance**
+- **DesignSystem**
+- **ConfigurationManager**
+- **ExternalStorage**
+- **Clipboard**
+- **Analytics**
+- **Server**
+- **Runtime**
+- **Log**
+- **Maps**
+- **DynamicCallOld**
+- **DynamicCall**
+- **DynamicCallPropertiesJava**
+- **DynamicCallPropertiesNet**
+- **AnyObject**
+- **DynamicCallMethodProperties**
+- **CrashAnalytics**
+- **Dictionary**
+- **ClientInformation**
+- **ClientStorage**
+- **Socket**
+- **Facebook**
+- **Twitter**
+- **Share**
+- **WeChat**
+- **Socket**
+- **SynchronizationEvents**
+- **Synchronization**
+- **Permissions**
+- **StoreManager**
+- **StoreInterop**
+- **LocalNotifications**
+- **Camera**
+- **PhotoLibrary**
+- **Audio**
+- **AudioRecorder**
+- **Files**
+- _... e mais 198_
