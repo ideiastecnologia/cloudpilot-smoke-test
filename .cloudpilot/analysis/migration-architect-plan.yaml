@@ -10,213 +10,159 @@ modules:
     artifacts:
       - name: EmpresaEntity
         type: Entity
-        language: csharp
-        target_path: src/Domain/Entities/EmpresaEntity.cs
+        language: CSharp
+        notes: >
+          Mapear EmpresaId como chave primária (tipo a confirmar — fallback detectado).
+          EmpresaAtivo deve ser mapeado para bool.
+          EmpresaFoto e EmpresaFundoLogin devem ser mapeados para string de URL ou caminho de blob storage.
+          EmpresaEmail deve usar Data Annotation [EmailAddress].
+          EmpresaCNPJ deve usar Data Annotation com validação customizada de CNPJ.
+          EmpresaAdministradorId / EmpresaAdministradorNome sugerem FK para entidade de Usuário/Administrador — confirmar existência no inventário completo.
+          EmpresaTipoRelatorio sugere enum — domínio a ser definido pelo time.
+          EmpresaDominio pode exigir validação de formato de domínio.
         fields:
-          - name: EmpresaId
-            clr_type: string
+          - field: EmpresaId
+            dotnet_type: string
             max_length: 60
-            is_primary_key: true
-          - name: EmpresaNome
-            clr_type: string
+            is_pk: true
+          - field: EmpresaNome
+            dotnet_type: string
             max_length: 60
-          - name: EmpresaCNPJ
-            clr_type: string
+          - field: EmpresaCNPJ
+            dotnet_type: string
             max_length: 60
-          - name: EmpresaContato
-            clr_type: string
+            validation: custom_cnpj
+          - field: EmpresaContato
+            dotnet_type: string
             max_length: 60
-          - name: EmpresaEndereco
-            clr_type: string
+          - field: EmpresaEndereco
+            dotnet_type: string
             max_length: 60
-          - name: EmpresaAdministradorId
-            clr_type: string
+          - field: EmpresaAdministradorId
+            dotnet_type: string
             max_length: 60
-          - name: EmpresaAdministradorNome
-            clr_type: string
+            notes: Possível FK para entidade Administrador/Usuário
+          - field: EmpresaAdministradorNome
+            dotnet_type: string
             max_length: 60
-          - name: EmpresaEmail
-            clr_type: string
+            notes: Extended attribute — considerar remover e buscar via join/FK
+          - field: EmpresaEmail
+            dotnet_type: string
             max_length: 60
-            notes: considerar anotação [EmailAddress] para validação
-          - name: EmpresaAtivo
-            clr_type: bool
-            notes: campo legado declarado como String(60); converter para bool na camada de mapeamento
-          - name: EmpresaFoto
-            clr_type: string
+            validation: EmailAddress
+          - field: EmpresaAtivo
+            dotnet_type: bool
+            notes: Campo legado string — converter para bool
+          - field: EmpresaFoto
+            dotnet_type: string
             max_length: 60
-            notes: pode representar URL ou blob; confirmar estratégia de armazenamento de mídia
-          - name: EmpresaTipoRelatorio
-            clr_type: string
+            notes: Considerar armazenamento em blob storage (Azure Blob / S3)
+          - field: EmpresaTipoRelatorio
+            dotnet_type: string
             max_length: 60
-            notes: candidato a enum; depende de levantamento de valores no legado
-          - name: EmpresaDominio
-            clr_type: string
+            notes: Candidato a enum — domínio a definir
+          - field: EmpresaDominio
+            dotnet_type: string
             max_length: 60
-          - name: EmpresaFundoLogin
-            clr_type: string
+            notes: Considerar validação de formato de domínio web
+          - field: EmpresaFundoLogin
+            dotnet_type: string
             max_length: 60
-            notes: pode representar URL de imagem ou blob; confirmar com equipe de UX
-
-      - name: IEmpresaRepository
-        type: Repository
-        language: csharp
-        target_path: src/Domain/Interfaces/IEmpresaRepository.cs
-        pattern: repository_interface
-        methods:
-          - GetByIdAsync(string empresaId)
-          - GetAllAsync()
-          - AddAsync(EmpresaEntity empresa)
-          - UpdateAsync(EmpresaEntity empresa)
-          - DeleteAsync(string empresaId)
-          - ExistsAsync(string empresaId)
+            notes: Considerar armazenamento em blob storage
 
       - name: EmpresaRepository
         type: Repository
-        language: csharp
-        target_path: src/Infrastructure/Persistence/Repositories/EmpresaRepository.cs
-        pattern: ef_core_repository
-        db_context: AppDbContext
-        notes: DbStrategy REBUILD; esquema gerado via EF Core Migrations; sem reaproveitamento de schema legado
+        language: CSharp
+        interface: IEmpresaRepository
+        base: IRepository<EmpresaEntity, string>
+        notes: >
+          Implementar com Entity Framework Core.
+          Incluir métodos: GetByIdAsync, GetAllAsync, GetAtivasAsync, GetByCNPJAsync.
+          Estratégia REBUILD de banco — não reutilizar schema GeneXus; gerar migrations EF Core do zero.
 
       - name: EmpresaService
         type: Service
-        language: csharp
-        target_path: src/Application/Services/EmpresaService.cs
-        pattern: application_service
-        dependencies:
-          - IEmpresaRepository
-        methods:
-          - GetEmpresaByIdAsync(string empresaId)
-          - ListEmpresasAsync()
-          - CreateEmpresaAsync(EmpresaCreateDto dto)
-          - UpdateEmpresaAsync(string empresaId, EmpresaUpdateDto dto)
-          - DeleteEmpresaAsync(string empresaId)
-        validation: FluentValidation
-        error_handling: RFC7807_ProblemDetails
+        language: CSharp
+        interface: IEmpresaService
+        notes: >
+          Encapsular regras de negócio: validação de CNPJ único, ativação/desativação de empresa.
+          Usar padrão @Transactional equivalente via TransactionScope ou DbContext.SaveChangesAsync.
+          Traduzir regras GeneXus (Error/msg) para exceções de domínio ou ValidationException.
+          Implementar auditoria de CreatedAt / UpdatedAt via interceptors do EF Core.
 
       - name: EmpresaController
         type: Controller
-        language: csharp
-        target_path: src/API/Controllers/EmpresaController.cs
-        pattern: rest_controller
-        base_route: api/v1/empresas
-        endpoints:
-          - method: GET
-            route: ""
-            action: ListEmpresasAsync
-            response: 200_EmpresaListDto
-          - method: GET
-            route: "{empresaId}"
-            action: GetEmpresaByIdAsync
-            response: 200_EmpresaDto | 404
-          - method: POST
-            route: ""
-            action: CreateEmpresaAsync
-            request: EmpresaCreateDto
-            response: 201_EmpresaDto | 400 | 422
-          - method: PUT
-            route: "{empresaId}"
-            action: UpdateEmpresaAsync
-            request: EmpresaUpdateDto
-            response: 200_EmpresaDto | 400 | 404 | 422
-          - method: DELETE
-            route: "{empresaId}"
-            action: DeleteEmpresaAsync
-            response: 204 | 404
-        security: JWT_Bearer
+        language: CSharp
+        route: /api/empresa
+        notes: >
+          Expor endpoints REST: GET /api/empresa, GET /api/empresa/{id}, POST /api/empresa,
+          PUT /api/empresa/{id}, DELETE /api/empresa/{id}.
+          Usar padrão Problem Details (RFC 7807) para erros.
+          Aplicar [Authorize] conforme nível de segurança a definir com o time.
 
       - name: EmpresaDto
         type: DTO
-        language: csharp
-        target_path: src/Application/DTOs/EmpresaDto.cs
+        language: CSharp
         variants:
-          - EmpresaDto
-          - EmpresaCreateDto
-          - EmpresaUpdateDto
-          - EmpresaListDto
+          - EmpresaRequestDto
+          - EmpresaResponseDto
+          - EmpresaListItemDto
+        notes: Separar contratos de entrada e saída. Usar FluentValidation para validações de request.
 
-      - name: EmpresaProfile
-        type: Mapper
-        language: csharp
-        target_path: src/Application/Mappings/EmpresaProfile.cs
-        pattern: AutoMapper_Profile
-        mappings:
-          - EmpresaEntity <-> EmpresaDto
-          - EmpresaCreateDto -> EmpresaEntity
-          - EmpresaUpdateDto -> EmpresaEntity
-
-      - name: AppDbContext_EmpresaConfig
-        type: EFCoreConfiguration
-        language: csharp
-        target_path: src/Infrastructure/Persistence/Configurations/EmpresaConfiguration.cs
-        pattern: IEntityTypeConfiguration
-        notes: definir tabela alvo, chave primária, comprimentos máximos e índices
-
-  - name: Frontend
-    source_entity: AppMasterPage
-    target_package: frontend.empresa
-    artifacts:
-      - name: EmpresaListPage
-        type: ReactPage
-        target_path: frontend/src/pages/empresa/EmpresaListPage.tsx
+      - name: EmpresaReactModule
+        type: UIModule
+        language: TypeScript
+        framework: React
         strategy: PRESERVE_WITH_ADJUSTMENTS
+        ui_source: AppMasterPage
         notes: >
-          Reproduz fluxo de listagem do MasterPage legado com componentes shadcn/ui;
-          usar DataTable com paginação client-side ou server-side conforme volume de dados;
-          manter familiaridade de layout para usuários existentes
+          Inventário de UI retornou AppMasterPage sem tabs detectadas — estrutura de telas a ser
+          reconstruída com base no fluxo funcional da entidade Empresa.
+          Componentes shadcn/ui recomendados: DataTable, Form, Input, Select, Badge (ativo/inativo),
+          Dialog (confirmação de exclusão).
+          Temas: dark-devstudio conforme estratégia PRESERVE_WITH_ADJUSTMENTS.
+          Implementar páginas: EmpresaListPage, EmpresaFormPage (create/edit), EmpresaDetailPage.
+          Integrar via React Query (TanStack Query) para chamadas à API REST.
 
-      - name: EmpresaFormPage
-        type: ReactPage
-        target_path: frontend/src/pages/empresa/EmpresaFormPage.tsx
-        strategy: PRESERVE_WITH_ADJUSTMENTS
-        notes: >
-          Formulário de criação e edição unificado via param mode (create/edit);
-          exibir campo EmpresaFoto como upload com preview;
-          EmpresaAtivo renderizado como toggle/checkbox
-
-      - name: EmpresaDetailPage
-        type: ReactPage
-        target_path: frontend/src/pages/empresa/EmpresaDetailPage.tsx
-        strategy: PRESERVE_WITH_ADJUSTMENTS
-
-      - name: empresaApi
-        type: ReactService
-        target_path: frontend/src/services/empresaApi.ts
-        pattern: RTK_Query_or_Axios_service
-        notes: consumir endpoints REST do EmpresaController
-
-      - name: useEmpresa
-        type: ReactHook
-        target_path: frontend/src/hooks/useEmpresa.ts
-        notes: encapsular lógica de estado e chamadas à API para as páginas de Empresa
-
-db:
+migration_database:
   strategy: REBUILD
-  orm: EF_Core
-  migration_tool: EF_Core_Migrations
-  target_dbms: SQL_Server
-  schema_source: code_first
+  orm: EntityFrameworkCore
+  dbms_target: A_DEFINIR
   notes: >
-    Nenhum schema legado é reaproveitado; o esquema completo será gerado a partir
-    das entidades .NET via Add-Migration / Update-Database.
-    Avaliar estratégia de seeding para dados de referência existentes no legado.
+    Estratégia REBUILD selecionada — nenhuma tabela ou schema GeneXus será reaproveitado.
+    Gerar migrations EF Core do zero com base nas entidades .NET Core definidas.
+    Definir DBMS alvo (SQL Server, PostgreSQL ou outro) com o time de infraestrutura antes de iniciar migrations.
+    Nomear tabelas em PascalCase preservando convenção GeneXus (ex.: Empresa → tabela Empresa).
+    Incluir índices para: EmpresaCNPJ (único), EmpresaAdministradorId (FK se entidade existir).
 
-auth:
-  strategy: JWT_Stateless
-  notes: >
-    GeneXus Users/Roles legado deve ser mapeado para ASP.NET Core Identity ou
-    solução equivalente; confirmar provider de autenticação (Identity Server, Azure AD, etc.)
-    antes de implementar EmpresaController security policy.
+migration_patterns:
+  auth:
+    source: GeneXus GAM (não inventariado explicitamente)
+    target: ASP.NET Core Identity + JWT
+    notes: >
+      Confirmar se GeneXus GAM está presente no inventário completo antes de mapear roles/permissions.
+  validation:
+    source: Rules Error/msg GeneXus
+    target: FluentValidation + ProblemDetails (RFC 7807)
+  error_handling:
+    target: GlobalExceptionMiddleware + IExceptionHandler (.NET 8)
+  audit:
+    fields: [CreatedAt, UpdatedAt, CreatedBy, UpdatedBy]
+    implementation: EF Core SaveChangesInterceptor
+  transactions:
+    source: commit()/rollback() GeneXus
+    target: DbContext.SaveChangesAsync com TransactionScope onde necessário
+  logging:
+    target: Serilog + SLF4J equivalente via ILogger<T>
 
 warnings:
-  - "EmpresaId declarado como String(60) no inventário legado com resolved_from fallback:not-found; confirmar se é GUID, código alfanumérico ou sequencial antes de definir tipo definitivo e estratégia de geração de chave."
-  - "EmpresaAtivo está tipado como String(60) no inventário; converter para bool no mapeamento e validar todos os valores presentes no banco legado antes da migração."
-  - "EmpresaFoto e EmpresaFundoLogin podem representar BLOBs binários ou URLs; definir estratégia de storage (Azure Blob, S3, sistema de arquivos local) antes de implementar upload/download."
-  - "EmpresaTipoRelatorio é candidato a domínio enumerado; levantar conjunto de valores válidos no legado para criar enum C# correspondente e evitar magic strings."
-  - "EmpresaCNPJ requer validação de formato específica (Brasil); adicionar validator customizado com FluentValidation e considerar máscara no frontend."
-  - "EmpresaAdministradorId sugere FK para uma entidade Administrador/Usuário que não consta no inventário fornecido; verificar dependência antes de implementar EmpresaRepository e definir se a FK será enforced no banco."
-  - "AppMasterPage não possui tabs mapeadas no UI Inventory; o layout master (menu, header, footer) deve ser reconstruído como React Layout Component com shadcn/ui; coletar screenshots ou especificação visual do legado para orientar o agente de UI."
-  - "Nenhuma regra de negócio (Rules), evento (Events) ou validação inline do GeneXus foi fornecida para a entidade Empresa; o agente de implementação deve auditar o KB legado para extrair e portar essas regras para FluentValidation e camada de Service antes de finalizar EmpresaService."
-  - "db_strategy REBUILD implica ausência de migração incremental de schema; planejar estratégia de ETL ou script de carga inicial para dados de produção existentes."
-  - "Sem mapeamento de autenticação/autorização no inventário fornecido; definir política de segurança para EmpresaController (roles, claims) alinhada com o modelo de segurança do sistema completo."
+  - "Todos os campos do inventário de Empresa têm resolved_from: fallback:not-found — os tipos GeneXus reais não foram resolvidos. Revisar o inventário original antes de iniciar implementação para confirmar tipos (Numeric, VarChar, Boolean, Image etc.)."
+  - "EmpresaId: tipo declarado como String (length 60) mas em GeneXus PKs numéricas são comuns. Confirmar se é Autonumber Numeric ou identificador externo (CNPJ, código de integração) antes de mapear para o banco."
+  - "EmpresaAtivo declarado como String — confirmar se é booleano (Sim/Não) ou enumeração (ex.: A/I) no sistema legado. Impacta regras de negócio e filtros de listagem."
+  - "EmpresaAdministradorId e EmpresaAdministradorNome sugerem FK para entidade de Usuário/Administrador não presente no inventário entregue. Verificar se essa entidade existe no sistema legado e incluí-la no escopo de migração."
+  - "EmpresaTipoRelatorio aparenta ser um domínio enumerado GeneXus. Levantar os valores válidos no sistema legado e criar enum .NET correspondente antes de implementar o controller."
+  - "EmpresaFoto e EmpresaFundoLogin sugerem armazenamento de imagens. Definir estratégia de blob storage (Azure Blob Storage, AWS S3 ou sistema de arquivos local) antes de implementar upload/download."
+  - "AppMasterPage retornou tabs vazias no inventário de UI — estrutura de navegação do frontend não foi capturada automaticamente. Realizar análise manual do MasterPage GeneXus para reconstruir o layout de navegação no React."
+  - "Estratégia REBUILD de banco selecionada: nenhum dado legado será migrado automaticamente. Planejar script de migração de dados (ETL) se houver dados em produção a preservar."
+  - "DBMS alvo não definido no wizard. Confirmar com time de infraestrutura (SQL Server, PostgreSQL etc.) antes de configurar provider do EF Core e gerar migrations."
+  - "Inventário recebido contém apenas a entidade Empresa. Se o sistema GLPPortal possuir mais entidades (Usuário, Administrador, Relatório etc.), reenviar inventário completo para geração do migration-plan abrangente."
