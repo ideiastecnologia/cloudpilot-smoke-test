@@ -20,26 +20,26 @@ Contagens por tipo extraídas da KB durante a análise estrutural.
 | WORK_WITH_PLUS_PATTERN | 281 | patterns generativos |
 | UNKNOWN | 495 |  |
 | UNKNOWN | 1 | guid prefix `c84ec0ea` |
-| UNKNOWN | 37 | guid prefix `1132ac08` |
-| UNKNOWN | 4 | guid prefix `3affc0b3` |
-| UNKNOWN | 1 | guid prefix `36e32e2d` |
-| UNKNOWN | 6 | guid prefix `78cecefe` |
-| UNKNOWN | 7 | guid prefix `c804fdbd` |
-| UNKNOWN | 51 | guid prefix `c88fffcd` |
-| UNKNOWN | 3 | guid prefix `83476c1e` |
-| UNKNOWN | 21 | guid prefix `562f4793` |
-| UNKNOWN | 3 | guid prefix `dcdcdcdc` |
-| UNKNOWN | 3 | guid prefix `88313f43` |
-| UNKNOWN | 135 | guid prefix `5592de59` |
-| UNKNOWN | 21 | guid prefix `19abc6ff` |
-| UNKNOWN | 1 | guid prefix `faeb588c` |
-| UNKNOWN | 4 | guid prefix `ecececec` |
-| UNKNOWN | 4 | guid prefix `624a8b31` |
-| UNKNOWN | 78 | guid prefix `ffd44be7` |
-| UNKNOWN | 2 | guid prefix `bf08dfb1` |
-| UNKNOWN | 21 | guid prefix `2a9e9aba` |
-| UNKNOWN | 10 | guid prefix `78b3fa0e` |
 | UNKNOWN | 82 | guid prefix `083f1b21` |
+| UNKNOWN | 10 | guid prefix `78b3fa0e` |
+| UNKNOWN | 21 | guid prefix `2a9e9aba` |
+| UNKNOWN | 2 | guid prefix `bf08dfb1` |
+| UNKNOWN | 78 | guid prefix `ffd44be7` |
+| UNKNOWN | 4 | guid prefix `624a8b31` |
+| UNKNOWN | 4 | guid prefix `ecececec` |
+| UNKNOWN | 1 | guid prefix `faeb588c` |
+| UNKNOWN | 21 | guid prefix `19abc6ff` |
+| UNKNOWN | 135 | guid prefix `5592de59` |
+| UNKNOWN | 3 | guid prefix `88313f43` |
+| UNKNOWN | 3 | guid prefix `dcdcdcdc` |
+| UNKNOWN | 21 | guid prefix `562f4793` |
+| UNKNOWN | 3 | guid prefix `83476c1e` |
+| UNKNOWN | 51 | guid prefix `c88fffcd` |
+| UNKNOWN | 7 | guid prefix `c804fdbd` |
+| UNKNOWN | 6 | guid prefix `78cecefe` |
+| UNKNOWN | 1 | guid prefix `36e32e2d` |
+| UNKNOWN | 4 | guid prefix `3affc0b3` |
+| UNKNOWN | 37 | guid prefix `1132ac08` |
 
 ## Warnings do analyzer
 
