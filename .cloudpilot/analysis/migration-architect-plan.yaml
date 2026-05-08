@@ -6,53 +6,96 @@ modules:
   - name: Empresa
     source_entity: Empresa
     target_package: com.glpportal.empresa
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - EmpresaView
       - EmpresaWW
-      - EmpresaGeneral
       - EmpresaPrompt
+      - EmpresaGeneral
+    notes: Inclui campos de foto, domínio, fundo de login e tipo de relatório; avaliar armazenamento de blobs.
 
   - name: EmpresaBC
     source_entity: EmpresaBC
     target_package: com.glpportal.empresa
     artifacts: [Entity, Repository, Service]
-    notes: Merge into Empresa entity; BC variant maps to same domain model
+    notes: Alias de Empresa para operações de BusinessComponent; consolidar com módulo Empresa.
 
   - name: Usuario
     source_entity: Usuario
     target_package: com.glpportal.usuario
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - UsuarioView
       - UsuarioWW
-      - UsuarioGeneral
       - UsuarioPrompt
+      - UsuarioGeneral
       - WPUsuario
+      - ViewUser
+      - WWUser
+    notes: Contém campos de jornada, ponto, GUID e perfil; mapear UsuarioPerfil para enum ou entidade separada.
 
   - name: UsuarioBC
     source_entity: UsuarioBC
     target_package: com.glpportal.usuario
     artifacts: [Entity, Repository, Service]
-    notes: Merge into Usuario entity; subset of fields
+    notes: Alias de Usuario para operações BC; consolidar com módulo Usuario.
+
+  - name: Perfil
+    source_entity: Perfil
+    target_package: com.glpportal.perfil
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - PerfilView
+      - PerfilWW
+      - CadastroPerfil
+      - PerfilGeneral
+      - PerfilPrompt
+    notes: Hierarquia Perfil → PerfilModulo → PerfilModuloRotina; mapear como agregado com coleções aninhadas.
+
+  - name: PerfilModulo
+    source_entity: PerfilModulo
+    target_package: com.glpportal.perfil
+    artifacts: [Entity, Repository, Service]
+    notes: Sublevel de Perfil; modelar como entidade filha com FK para Perfil e Modulo.
+
+  - name: PerfilModuloRotina
+    source_entity: PerfilModuloRotina
+    target_package: com.glpportal.perfil
+    artifacts: [Entity, Repository, Service]
+    notes: Sublevel de PerfilModulo; modelar como entidade filha com FKs compostas.
+
+  - name: Modulo
+    source_entity: Modulo
+    target_package: com.glpportal.modulo
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - ModuloView
+      - ModuloWW
+      - ModuloGeneral
+      - ModuloPrompt
+    notes: Entidade de controle de acesso; não confundir com módulos de pacote Java/C#.
+
+  - name: ModuloRotina
+    source_entity: ModuloRotina
+    target_package: com.glpportal.modulo
+    artifacts: [Entity, Repository, Service]
+    notes: Sublevel de Modulo; mapear como entidade filha.
+
+  - name: PMRFuncao
+    source_entity: PMRFuncao
+    target_package: com.glpportal.perfil
+    artifacts: [Entity, Repository, Service]
+    notes: Tabela de junção Perfil-Modulo-Rotina-Funcao; avaliar se é view ou entidade persistida.
 
   - name: Cliente
     source_entity: Cliente
     target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Endereco
-      - Logistica
-      - Responsavel
-      - Contrato
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - ClienteView
       - ClienteWW
-      - ClienteGeneral
       - ClientePrompt
-      - WPInserirCliente
-      - WPSelecaoCliente
-      - WPCliente
+      - ClienteGeneral
       - WizardClienteNova
       - WizardClienteNovaDados
       - WizardClienteNovaEndereco
@@ -60,521 +103,496 @@ modules:
       - WizardClienteNovaValorHH
       - WizardClienteNovaValorTipoServico
       - WizardClienteNovaFinalizacao
+      - DashboardCliente
+      - WPInserirCliente
+      - WPSelecaoCliente
+      - WPControleCliente
+      - WPClienteSucesso
+    notes: Entidade central com muitos sublevels (Endereco, Logistica, Responsavel, Contrato); mapear como agregado DDD com repositórios filhos.
 
   - name: ClienteBC
     source_entity: ClienteBC
     target_package: com.glpportal.cliente
     artifacts: [Entity, Repository, Service]
-    notes: Merge into Cliente entity
+    notes: Alias de Cliente para operações BC; consolidar com módulo Cliente.
 
   - name: ClienteEndereco
     source_entity: ClienteEndereco
     target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
     ui_forms:
-      - ClienteEnderecoPrompt
       - ClienteEnderecoWC
-
-  - name: ClienteContato
-    source_entity: ClienteContato
-    target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPContato
-
-  - name: ClienteAnexo
-    source_entity: ClienteAnexo
-    target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPClienteAnexo
-      - WCAnexosCliente
+      - ClienteEnderecoPrompt
+    notes: Sublevel de Cliente; mapear como entidade @OneToMany com FK ClienteId.
 
   - name: ClienteLogistica
     source_entity: ClienteLogistica
     target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - ClienteLogisticaView
       - ClienteLogisticaWW
       - ClienteLogisticaGeneral
-      - ClienteLogisticaPrompt
       - ClienteLogisticaWC
+      - ClienteLogisticaPrompt
       - WPClienteLogistica
+    notes: Contém geolocalização (lat/lon), tancagem, periodicidade e territórios; mapear campos geográficos adequadamente.
 
   - name: ClienteLogisticaBC
     source_entity: ClienteLogisticaBC
     target_package: com.glpportal.cliente
     artifacts: [Entity, Repository, Service]
-    notes: Merge into ClienteLogistica entity
+    notes: Alias BC de ClienteLogistica; consolidar.
+
+  - name: ClienteContato
+    source_entity: ClienteContato
+    target_package: com.glpportal.cliente
+    artifacts: [Entity, Repository, Service]
+    notes: Entidade de contato associada a Cliente e endereço.
 
   - name: ClienteContrato
     source_entity: ClienteContrato
     target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service]
+    notes: Sublevel contrato do cliente; verificar sobreposição com entidade Contrato.
+
+  - name: ClienteResponsavel
+    source_entity: Cliente
+    target_package: com.glpportal.cliente
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ClienteContratoPrompt
-      - WCClienteContrato
+      - ClienteResponsavelWC
+      - ClienteResponsavelPrompt
+    notes: Sublevel Responsavel de Cliente; mapear como @OneToMany.
+
+  - name: ClienteAnexo
+    source_entity: ClienteAnexo
+    target_package: com.glpportal.cliente
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WCAnexosCliente
+      - WPClienteAnexo
+    notes: Armazenamento de PDF/anexos de cliente; avaliar storage provider (Azure Blob / S3).
 
   - name: ClienteTipoHora
     source_entity: ClienteTipoHora
     target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service]
+    notes: Tabela de valores de tipo de hora por cliente.
 
   - name: ClienteTipoServico
     source_entity: ClienteTipoServico
     target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPValoresCliente
-      - WPValoresClienteTipoServico
+    artifacts: [Entity, Repository, Service]
+    notes: Tabela de valores de tipo de serviço por cliente.
+
+  - name: ClienteCatalogo
+    source_entity: ClienteCatalogo
+    target_package: com.glpportal.cliente
+    artifacts: [Entity, Repository, Service]
+    notes: Associação entre cliente e catálogo de serviços.
 
   - name: ClienteEquipamento
     source_entity: ClienteEquipamento
-    target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Campo
+    target_package: com.glpportal.equipamento
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - ClienteEquipamentoView
       - ClienteEquipamentoWW
       - ClienteEquipamentoGeneral
       - ClienteEquipamentoPrompt
       - WPInsereClienteEquipamento
-      - WPAddValorCampo
+    notes: Associação cliente-equipamento com campos dinâmicos via sublevel Campo.
 
   - name: ClienteEquipamentoCampo
     source_entity: ClienteEquipamentoCampo
-    target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
+    target_package: com.glpportal.equipamento
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ClienteEquipamentoCampoPrompt
       - ClienteEquipamentoCampoWC
-
-  - name: ClienteCatalogo
-    source_entity: ClienteCatalogo
-    target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPClienteServico
-
-  - name: ClientePesquisa
-    source_entity: ClientePesquisa
-    target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
-    sub_entities:
-      - Nota
-    ui_forms:
-      - WPPesquisaSatisfacaoCliente
-      - WPConfirmacaoPesquisa
-      - WPSelecaoSatisfacao
-      - WCPequisaSatisfacao
-
-  - name: ClientePesquisaNota
-    source_entity: ClientePesquisaNota
-    target_package: com.glpportal.cliente
-    artifacts: [Entity, Repository, Service, Controller]
+      - ClienteEquipamentoCampoPrompt
+    notes: Campos dinâmicos de equipamento por cliente; avaliar JSON column ou EAV pattern.
 
   - name: Setor
     source_entity: Setor
     target_package: com.glpportal.setor
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - SetorView
       - SetorWW
-      - SetorGeneral
       - SetorPrompt
+      - SetorGeneral
 
   - name: Natureza
     source_entity: Natureza
     target_package: com.glpportal.natureza
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Lista
-      - Roteiro
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - NaturezaView
       - NaturezaWW
-      - NaturezaGeneral
       - NaturezaPrompt
+      - NaturezaGeneral
+    notes: Contém sublevels Lista e Roteiro; mapear como coleções @OneToMany.
 
   - name: NaturezaLista
     source_entity: NaturezaLista
     target_package: com.glpportal.natureza
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - NaturezaListaPrompt
       - NaturezaListaWC
+      - NaturezaListaPrompt
 
   - name: NaturezaRoteiro
     source_entity: NaturezaRoteiro
     target_package: com.glpportal.natureza
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - NaturezaRoteiroPrompt
       - NaturezaRoteiroWC
+      - NaturezaRoteiroPrompt
 
   - name: NaturezaRoteiroEquipamento
     source_entity: NaturezaRoteiroEquipamento
     target_package: com.glpportal.natureza
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPNaturezaRoteiroEquipamento
+    artifacts: [Entity, Repository, Service]
 
   - name: NaturezaRoteiroProduto
     source_entity: NaturezaRoteiroProduto
     target_package: com.glpportal.natureza
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPNaturezaRoteiroProduto
-
-  - name: GestaoServico
-    source_entity: GestaoServico
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - GestaoServicoView
-      - GestaoServicoWW
-      - GestaoServicoGeneral
-      - GestaoServicoPrompt
-      - WPGestaoServico
-      - WPWizardNovaOS
-      - WPWizardNovaOSStepDados
-      - WPWizardNovaOSStepOk
-      - WPWizardNovaOSStepProgramacao
-      - WPWizardNovaOSAnexos
-      - WPCancelarOS
-      - WPQualificarOS
-      - WPAprovacaoOS
-
-  - name: GestaoServicoBC
-    source_entity: GestaoServicoBC
-    target_package: com.glpportal.gestaoservico
     artifacts: [Entity, Repository, Service]
-    notes: Merge into GestaoServico entity
-
-  - name: GestaoServicoExecutante
-    source_entity: GestaoServicoExecutante
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WCExecutante
-      - WCAtividadesExecutantes
-
-  - name: GestaoServicoAnexo
-    source_entity: GestaoServicoAnexo
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPAnexos
-      - WCAnexos
-
-  - name: GestaoServicoLista
-    source_entity: GestaoServicoLista
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPCheckListAtividades
-      - WCCheckList
-
-  - name: GestaoServicoRoteiro
-    source_entity: GestaoServicoRoteiro
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WCRoteiro
-      - WPTipoServicoRoteiro
-      - WPNovoItemRoteiro
-
-  - name: GestaoServicoProgramada
-    source_entity: GestaoServicoProgramada
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPProgramarAtendimento
-
-  - name: GestaoServicoTipo
-    source_entity: GestaoServicoTipo
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - GestaoServicoGestaoServicoTipoWC
-      - WPTipoServicoAtividades
-
-  - name: GestaoServicoEquipamento
-    source_entity: GestaoServicoEquipamento
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WCEquipamentoOS
-
-  - name: GSEquipamentoCampo
-    source_entity: GSEquipamentoCampo
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: OSRoteiroEquipamento
-    source_entity: OSRoteiroEquipamento
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: OSRoteiroProduto
-    source_entity: OSRoteiroProduto
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: OSAnexoTemp
-    source_entity: OSAnexoTemp
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service]
-    notes: Temporary entity; evaluate if persistent storage is needed or replace with in-memory/cache
-
-  - name: OrdemExecutante
-    source_entity: OrdemExecutante
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Anexo
-      - Produto
-    ui_forms:
-      - WPExecutarAtendimento
-      - WPImprimirAtendimento
-
-  - name: OrdemExecutanteAnexo
-    source_entity: OrdemExecutanteAnexo
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: OrdemExecutanteProduto
-    source_entity: OrdemExecutanteProduto
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: OrdemExecutanteEquipamento
-    source_entity: OrdemExecutanteEquipamento
-    target_package: com.glpportal.gestaoservico
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: Parametro
-    source_entity: Parametro
-    target_package: com.glpportal.parametro
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - ParametroView
-      - ParametroWW
-      - ParametroGeneral
-      - ParametroPrompt
-
-  - name: ParametroEmail
-    source_entity: ParametroEmail
-    target_package: com.glpportal.parametro
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - ParametroEmailView
-      - ParametroEmailWW
-      - ParametroEmailGeneral
-      - ParametroEmailPrompt
-
-  - name: Notificacao
-    source_entity: Notificacao
-    target_package: com.glpportal.notificacao
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - NotificacaoView
-      - NotificacaoWW
-      - NotificacaoGeneral
-      - NotificacaoPrompt
-
-  - name: Favorito
-    source_entity: Favorito
-    target_package: com.glpportal.favorito
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - FavoritoView
-      - FavoritoWW
-      - FavoritoGeneral
-      - FavoritoPrompt
-      - EditBookmark
-
-  - name: Mensagem
-    source_entity: Mensagem
-    target_package: com.glpportal.mensagem
-    artifacts: [Entity, Repository, Service, Controller]
 
   - name: Funcao
     source_entity: Funcao
     target_package: com.glpportal.funcao
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - FuncaoView
       - FuncaoWW
-      - FuncaoGeneral
       - FuncaoPrompt
-      - WPValorFuncao
+      - FuncaoGeneral
 
   - name: FuncaoTipoHora
     source_entity: FuncaoTipoHora
     target_package: com.glpportal.funcao
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
       - FuncaoFuncaoTipoHoraWC
 
   - name: TipoHora
     source_entity: TipoHora
     target_package: com.glpportal.tipohora
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - TipoHoraView
       - TipoHoraWW
-      - TipoHoraGeneral
       - TipoHoraPrompt
+      - TipoHoraGeneral
 
-  - name: Produto
-    source_entity: Produto
-    target_package: com.glpportal.produto
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+  - name: GestaoServico
+    source_entity: GestaoServico
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
-      - ProdutoView
-      - ProdutoWW
-      - ProdutoGeneral
-      - ProdutoPrompt
-      - WPProduto
+      - GestaoServicoView
+      - GestaoServicoWW
+      - GestaoServicoPrompt
+      - GestaoServicoGeneral
+      - WPGestaoServico
+      - WPWizardNovaOS
+      - WPWizardNovaOSStepDados
+      - WPWizardNovaOSStepProgramacao
+      - WPWizardNovaOSStepOk
+      - WPWizardNovaOSAnexos
+      - DashboardServico
+      - WPCancelarOS
+      - WPQualificarOS
+      - WPAprovacaoOS
+    notes: Entidade central de OS; status, prioridade e tipo como enums; campos de cancelamento e aprovação como value objects.
+
+  - name: GestaoServicoBC
+    source_entity: GestaoServicoBC
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service]
+    notes: Alias BC de GestaoServico; consolidar.
+
+  - name: GestaoServicoExecutante
+    source_entity: GestaoServicoExecutante
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WCExecutante
+      - WCAtividadesExecutantes
+
+  - name: GestaoServicoLista
+    source_entity: GestaoServicoLista
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WCCheckList
+      - WPCheckListAtividades
+      - WPTipoServicoAtividades
+
+  - name: GestaoServicoRoteiro
+    source_entity: GestaoServicoRoteiro
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WCRoteiro
+
+  - name: GestaoServicoAnexo
+    source_entity: GestaoServicoAnexo
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WCAnexos
+      - WPAnexos
+
+  - name: GestaoServicoTipo
+    source_entity: GestaoServicoTipo
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - GestaoServicoGestaoServicoTipoWC
+
+  - name: GestaoServicoEquipamento
+    source_entity: GestaoServicoEquipamento
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WCEquipamentoOS
+
+  - name: GestaoServicoProgramada
+    source_entity: GestaoServicoProgramada
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WPProgramarAtendimento
+
+  - name: OSRoteiroEquipamento
+    source_entity: OSRoteiroEquipamento
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service]
+
+  - name: OSRoteiroProduto
+    source_entity: OSRoteiroProduto
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service]
+
+  - name: GSEquipamentoCampo
+    source_entity: GSEquipamentoCampo
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service]
+
+  - name: OrdemExecutante
+    source_entity: OrdemExecutante
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - WPExecutarAtendimento
+      - WPImprimirAtendimento
+    notes: Contém sublevels Anexo e Produto; mapear como @OneToMany.
+
+  - name: OrdemExecutanteAnexo
+    source_entity: OrdemExecutanteAnexo
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service]
+
+  - name: OrdemExecutanteProduto
+    source_entity: OrdemExecutanteProduto
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WCProdutos
+
+  - name: OrdemExecutanteEquipamento
+    source_entity: OrdemExecutanteEquipamento
+    target_package: com.glpportal.gestaoservico
+    artifacts: [Entity, Repository, Service]
+
+  - name: Parametro
+    source_entity: Parametro
+    target_package: com.glpportal.parametro
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - ParametroView
+      - ParametroWW
+      - ParametroPrompt
+      - ParametroGeneral
+
+  - name: ParametroEmail
+    source_entity: ParametroEmail
+    target_package: com.glpportal.parametro
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - ParametroEmailView
+      - ParametroEmailWW
+      - ParametroEmailPrompt
+      - ParametroEmailGeneral
+    notes: Configuração SMTP; senha deve ser armazenada com criptografia (não texto plano).
+
+  - name: Notificacao
+    source_entity: Notificacao
+    target_package: com.glpportal.notificacao
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - NotificacaoView
+      - NotificacaoWW
+      - NotificacaoPrompt
+      - NotificacaoGeneral
+
+  - name: Favorito
+    source_entity: Favorito
+    target_package: com.glpportal.favorito
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - FavoritoView
+      - FavoritoWW
+      - FavoritoPrompt
+      - FavoritoGeneral
+      - EditBookmark
+
+  - name: Mensagem
+    source_entity: Mensagem
+    target_package: com.glpportal.mensagem
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - PanelChatWeb
+      - ChatBotMasterWeb
+
+  - name: GXChatMessage
+    source_entity: GXChatMessage
+    target_package: com.glpportal.mensagem
+    artifacts: [Entity, Repository, Service]
+    notes: Mensagens de chat WebSocket; avaliar SignalR (.NET Core) como substituto.
+
+  - name: GXChatUser
+    source_entity: GXChatUser
+    target_package: com.glpportal.mensagem
+    artifacts: [Entity, Repository, Service]
 
   - name: Contrato
     source_entity: Contrato
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Responsavel
-      - Faturamento
-      - Anexo
-      - Vendedor
-      - Produto
-      - Profissional
-      - IndicePerformance
-      - TipoServico
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - ContratoView
       - ContratoWW
-      - ContratoGeneral
       - ContratoPrompt
+      - ContratoGeneral
       - WPContrato
       - WPContratoCliente
       - WPDadosContrato
+      - DashboardContratos
       - WPCopiaContrato
+    notes: Agregado complexo com sublevels Responsavel, Faturamento, Anexo, Vendedor, Produto, Profissional, IndicePerformance, TipoServico; modelar como agregado DDD.
 
   - name: ContratoFaturamento
     source_entity: ContratoFaturamento
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ContratoFaturamentoPrompt
       - ContratoFaturamentoWC
+      - ContratoFaturamentoPrompt
+      - WCFaturaContrato
 
   - name: ContratoAnexo
     source_entity: ContratoAnexo
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ContratoAnexoPrompt
       - ContratoAnexoWC
-
-  - name: ContratoResponsavel
-    source_entity: ContratoResponsavel
-    target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - ContratoResponsavelPrompt
-      - ContratoResponsavelWC
+      - ContratoAnexoPrompt
 
   - name: ContratoVendedor
     source_entity: ContratoVendedor
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ContratoVendedorPrompt
       - ContratoVendedorWC
+      - ContratoVendedorPrompt
 
   - name: ContratoProduto
     source_entity: ContratoProduto
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ContratoProdutoPrompt
       - ContratoProdutoWC
+      - ContratoProdutoPrompt
 
   - name: ContratoProfissional
     source_entity: ContratoProfissional
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ContratoProfissionalPrompt
       - ContratoProfissionalWC
+      - ContratoProfissionalPrompt
+
+  - name: ContratoResponsavel
+    source_entity: ContratoResponsavel
+    target_package: com.glpportal.contrato
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - ContratoResponsavelWC
+      - ContratoResponsavelPrompt
 
   - name: ContratoIndicePerformance
     source_entity: ContratoIndicePerformance
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ContratoIndicePerformancePrompt
       - ContratoIndicePerformanceWC
+      - ContratoIndicePerformancePrompt
 
   - name: ContratoTipoServico
     source_entity: ContratoTipoServico
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - ContratoTipoServicoPrompt
       - ContratoTipoServicoWC
+      - ContratoTipoServicoPrompt
 
   - name: TipoContrato
     source_entity: TipoContrato
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - TipoContratoView
       - TipoContratoWW
-      - TipoContratoGeneral
       - TipoContratoPrompt
+      - TipoContratoGeneral
 
   - name: ContratoAglutinado
     source_entity: ContratoAglutinado
     target_package: com.glpportal.contrato
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPPagarFatura
-      - WPPagarFaturaMultiplo
+    artifacts: [Entity, Repository, Service]
+    notes: Faturamento aglutinado de contrato; avaliar relacionamento com FaturamentoAglutinado.
 
   - name: Faturamento
     source_entity: Faturamento
     target_package: com.glpportal.faturamento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - FaturamentoView
       - FaturamentoWW
-      - FaturamentoGeneral
       - FaturamentoPrompt
+      - FaturamentoGeneral
+      - WPFaturamentoCliente
       - WPBaixarPagamento
-      - WPBaixarPagamentoMultiplo
       - WPRealizarPagamento
+      - WPBaixarPagamentoMultiplo
       - WPRealizarPagamentoMultiplo
       - WPCopiarLinkPag
-      - WPFaturamentoCliente
 
   - name: FaturamentoAglutinado
     source_entity: FaturamentoAglutinado
     target_package: com.glpportal.faturamento
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - FaturamentoFaturamentoAglutinadoWC
 
   - name: Medicao
     source_entity: Medicao
     target_package: com.glpportal.medicao
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Produto
-      - Profissional
-      - TipoServico
-      - Anexo
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - MedicaoView
       - MedicaoWW
@@ -584,43 +602,173 @@ modules:
       - WPEfetuaMedicao
       - WPImprimirMedicao
       - WPMedicaoParceiro
+    notes: Sublevels Produto, Profissional, TipoServico, Anexo; modelar como agregado.
 
   - name: MedicaoProduto
     source_entity: MedicaoProduto
     target_package: com.glpportal.medicao
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - MedicaoProdutoPrompt
       - MedicaoProdutoWC
+      - MedicaoProdutoPrompt
 
   - name: MedicaoProfissional
     source_entity: MedicaoProfissional
     target_package: com.glpportal.medicao
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - MedicaoProfissionalPrompt
       - MedicaoProfissionalWC
+      - MedicaoProfissionalPrompt
 
   - name: MedicaoTipoServico
     source_entity: MedicaoTipoServico
     target_package: com.glpportal.medicao
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - MedicaoTipoServicoPrompt
       - MedicaoTipoServicoWC
+      - MedicaoTipoServicoPrompt
 
   - name: MedicaoAnexo
     source_entity: MedicaoAnexo
     target_package: com.glpportal.medicao
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, ReactComponent]
     ui_forms:
-      - MedicaoAnexoPrompt
       - MedicaoAnexoWC
+      - MedicaoAnexoPrompt
+
+  - name: Produto
+    source_entity: Produto
+    target_package: com.glpportal.produto
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - ProdutoView
+      - ProdutoWW
+      - ProdutoPrompt
+      - ProdutoGeneral
+
+  - name: CatalogoServico
+    source_entity: CatalogoServico
+    target_package: com.glpportal.catalogo
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - CatalogoServicoView
+      - CatalogoServicoWW
+      - CatalogoServicoGeneral
+      - CatalogoServicoPrompt
+      - WPClienteServico
+
+  - name: UnidadeMedida
+    source_entity: UnidadeMedida
+    target_package: com.glpportal.unidade
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - UnidadeMedidaView
+      - UnidadeMedidaWW
+      - UnidadeMedidaGeneral
+      - UnidadeMedidaPrompt
+
+  - name: MotivoDesconto
+    source_entity: MotivoDesconto
+    target_package: com.glpportal.financeiro
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - MotivoDescontoView
+      - MotivoDescontoWW
+      - MotivoDescontoGeneral
+      - MotivoDescontoPrompt
+
+  - name: Satisfacao
+    source_entity: Satisfacao
+    target_package: com.glpportal.satisfacao
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - SatisfacaoView
+      - SatisfacaoWW
+      - SatisfacaoGeneral
+      - SatisfacaoPrompt
+      - WPPesquisaSatisfacaoCliente
+      - WPSelecaoSatisfacao
+    notes: Sublevels Requisito e Pergunta; modelar hierarquia de 3 níveis.
+
+  - name: SatisfacaoRequisito
+    source_entity: SatisfacaoRequisito
+    target_package: com.glpportal.satisfacao
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - SatisfacaoRequisitoWC
+      - SatisfacaoRequisitoPrompt
+
+  - name: SatisfacaoRequisitoPergunta
+    source_entity: SatisfacaoRequisitoPergunta
+    target_package: com.glpportal.satisfacao
+    artifacts: [Entity, Repository, Service]
+
+  - name: ClientePesquisa
+    source_entity: ClientePesquisa
+    target_package: com.glpportal.satisfacao
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - WCPequisaSatisfacao
+      - SatisfacaoClienteWC
+
+  - name: ClientePesquisaNota
+    source_entity: ClientePesquisaNota
+    target_package: com.glpportal.satisfacao
+    artifacts: [Entity, Repository, Service]
+
+  - name: Equipamento
+    source_entity: Equipamento
+    target_package: com.glpportal.equipamento
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - EquipamentoView
+      - EquipamentoWW
+      - EquipamentoPrompt
+      - EquipamentoGeneral
+    notes: Sublevel Campo com campos dinâmicos; avaliar modelo flexível (JSON ou EAV).
+
+  - name: EquipamentoCampo
+    source_entity: EquipamentoCampo
+    target_package: com.glpportal.equipamento
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - EquipamentoCampoWC
+      - EquipamentoCampoPrompt
+
+  - name: Orcamento
+    source_entity: Orcamento
+    target_package: com.glpportal.orcamento
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - OrcamentoView
+      - OrcamentoWW
+      - OrcamentoGeneral
+      - OrcamentoPrompt
+      - WPDistribuicaoOrcamentaria
+    notes: Sublevel Mensal com 12 campos de mês; avaliar normalização em tabela separada.
+
+  - name: OrcamentoMensal
+    source_entity: OrcamentoMensal
+    target_package: com.glpportal.orcamento
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - OrcamentoMensalWC
+      - OrcamentoMensalPrompt
+
+  - name: OrcamentoMensalTipoContrato
+    source_entity: OrcamentoMensalTipoContrato
+    target_package: com.glpportal.orcamento
+    artifacts: [Entity, Repository, Service]
+
+  - name: OrcamentoMensalEmpresa
+    source_entity: OrcamentoMensalEmpresa
+    target_package: com.glpportal.orcamento
+    artifacts: [Entity, Repository, Service]
 
   - name: Meta
     source_entity: Meta
     target_package: com.glpportal.meta
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - MetaView
       - MetaWW
@@ -630,494 +778,18 @@ modules:
   - name: MetaCom
     source_entity: MetaCom
     target_package: com.glpportal.meta
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - MetaComView
       - MetaComWW
       - MetaComGeneral
       - MetaComPrompt
-      - MetaComissaoWW
-      - WbpMetaComissao
       - DashboardComissionamento
-
-  - name: Satisfacao
-    source_entity: Satisfacao
-    target_package: com.glpportal.satisfacao
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Requisito
-    ui_forms:
-      - SatisfacaoView
-      - SatisfacaoWW
-      - SatisfacaoGeneral
-      - SatisfacaoPrompt
-
-  - name: SatisfacaoRequisito
-    source_entity: SatisfacaoRequisito
-    target_package: com.glpportal.satisfacao
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - SatisfacaoRequisitoPrompt
-      - SatisfacaoRequisitoWC
-
-  - name: SatisfacaoRequisitoPergunta
-    source_entity: SatisfacaoRequisitoPergunta
-    target_package: com.glpportal.satisfacao
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - SatisfacaoPerguntaPrompt
-
-  - name: Equipamento
-    source_entity: Equipamento
-    target_package: com.glpportal.equipamento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Campo
-    ui_forms:
-      - EquipamentoView
-      - EquipamentoWW
-      - EquipamentoGeneral
-      - EquipamentoPrompt
-      - WPNovoEquipamento
-
-  - name: EquipamentoCampo
-    source_entity: EquipamentoCampo
-    target_package: com.glpportal.equipamento
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - EquipamentoCampoPrompt
-      - EquipamentoCampoWC
-
-  - name: CatalogoServico
-    source_entity: CatalogoServico
-    target_package: com.glpportal.catalogo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - CatalogoServicoView
-      - CatalogoServicoWW
-      - CatalogoServicoGeneral
-      - CatalogoServicoPrompt
-
-  - name: UnidadeMedida
-    source_entity: UnidadeMedida
-    target_package: com.glpportal.unidade
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - UnidadeMedidaView
-      - UnidadeMedidaWW
-      - UnidadeMedidaGeneral
-      - UnidadeMedidaPrompt
-
-  - name: MotivoDesconto
-    source_entity: MotivoDesconto
-    target_package: com.glpportal.motivo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - MotivoDescontoView
-      - MotivoDescontoWW
-      - MotivoDescontoGeneral
-      - MotivoDescontoPrompt
-
-  - name: MotivoCancelamento
-    source_entity: MotivoCancelamento
-    target_package: com.glpportal.motivo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - MotivoCancelamentoView
-      - MotivoCancelamentoWW
-      - MotivoCancelamentoGeneral
-      - MotivoCancelamentoPrompt
-
-  - name: MotivoNaoAbastecimento
-    source_entity: MotivoNaoAbastecimento
-    target_package: com.glpportal.motivo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - MotivoNaoAbastecimentoView
-      - MotivoNaoAbastecimentoWW
-      - MotivoNaoAbastecimentoGeneral
-      - MotivoNaoAbastecimentoPrompt
-
-  - name: Orcamento
-    source_entity: Orcamento
-    target_package: com.glpportal.orcamento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Mensal
-    ui_forms:
-      - OrcamentoView
-      - OrcamentoWW
-      - OrcamentoGeneral
-      - OrcamentoPrompt
-      - WPDistribuicaoOrcamentaria
-
-  - name: OrcamentoMensal
-    source_entity: OrcamentoMensal
-    target_package: com.glpportal.orcamento
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - OrcamentoMensalPrompt
-      - OrcamentoMensalWC
-
-  - name: OrcamentoMensalTipoContrato
-    source_entity: OrcamentoMensalTipoContrato
-    target_package: com.glpportal.orcamento
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: OrcamentoMensalEmpresa
-    source_entity: OrcamentoMensalEmpresa
-    target_package: com.glpportal.orcamento
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: Area
-    source_entity: Area
-    target_package: com.glpportal.area
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Usuario
-    ui_forms:
-      - AreaView
-      - AreaWW
-      - AreaGeneral
-      - AreaPrompt
-
-  - name: AreaUsuario
-    source_entity: AreaUsuario
-    target_package: com.glpportal.area
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - AreaUsuarioPrompt
-      - AreaUsuarioWC
-
-  - name: TipoDocumento
-    source_entity: TipoDocumento
-    target_package: com.glpportal.documento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - TipoDocumentoView
-      - TipoDocumentoWW
-      - TipoDocumentoGeneral
-      - TipoDocumentoPrompt
-
-  - name: Documento
-    source_entity: Documento
-    target_package: com.glpportal.documento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Anexo
-      - Revisao
-    ui_forms:
-      - DocumentoView
-      - DocumentoWW
-      - DocumentoGeneral
-      - DocumentoPrompt
-      - CadastroDocumento
-      - WPRenovarDocumento
-      - WPCancelarDocumento
-      - WPDocumentoAnexo
-      - WPTrocaUsuario
-      - IndicadoresDocumentos
-
-  - name: DocumentoAnexo
-    source_entity: DocumentoAnexo
-    target_package: com.glpportal.documento
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - DocumentoAnexoPrompt
-      - DocumentoAnexoWC
-
-  - name: DocumentoRevisao
-    source_entity: DocumentoRevisao
-    target_package: com.glpportal.documento
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - DocumentoRevisaoPrompt
-      - DocumentoRevisaoWC
-
-  - name: Modulo
-    source_entity: Modulo
-    target_package: com.glpportal.modulo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Rotina
-    ui_forms:
-      - ModuloView
-      - ModuloWW
-      - ModuloGeneral
-      - ModuloPrompt
-
-  - name: ModuloRotina
-    source_entity: ModuloRotina
-    target_package: com.glpportal.modulo
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - ModuloRotinaPrompt
-      - ModuloRotinaWC
-
-  - name: Perfil
-    source_entity: Perfil
-    target_package: com.glpportal.perfil
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Modulo
-    ui_forms:
-      - PerfilView
-      - PerfilWW
-      - PerfilGeneral
-      - PerfilPrompt
-      - CadastroPerfil
-      - WPRotinas
-      - WPRotinaFuncao
-
-  - name: PerfilModulo
-    source_entity: PerfilModulo
-    target_package: com.glpportal.perfil
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - PerfilModuloPrompt
-
-  - name: PerfilModuloRotina
-    source_entity: PerfilModuloRotina
-    target_package: com.glpportal.perfil
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - PerfilRotinaPrompt
-
-  - name: PMRFuncao
-    source_entity: PMRFuncao
-    target_package: com.glpportal.perfil
-    artifacts: [Entity, Repository, Service]
-    notes: Intermediate mapping table; evaluate consolidation into PerfilModuloRotina
-
-  - name: Prospect
-    source_entity: Prospect
-    target_package: com.glpportal.prospect
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Contato
-      - Anexo
-    ui_forms:
-      - ProspectView
-      - ProspectWW
-      - ProspectGeneral
-      - ProspectPrompt
-      - WizardProspect
-      - WizardProspectCadastro
-      - WizardProspectAnexo
-      - WizardProspectFaturamento
-      - WPBloqueioProspect
-      - WPLiberacaoProspect
-
-  - name: ProspectContato
-    source_entity: ProspectContato
-    target_package: com.glpportal.prospect
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - ProspectContatoPrompt
-
-  - name: ProspectAnexo
-    source_entity: ProspectAnexo
-    target_package: com.glpportal.prospect
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - ProspectAnexoPrompt
-      - ProspectAnexoWC
-
-  - name: Periodicidade
-    source_entity: Periodicidade
-    target_package: com.glpportal.logistica
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - PeriodicidadeView
-      - PeriodicidadeWW
-      - PeriodicidadeGeneral
-      - PeriodicidadePrompt
-
-  - name: Territorio
-    source_entity: Territorio
-    target_package: com.glpportal.logistica
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Semana
-    ui_forms:
-      - TerritorioView
-      - TerritorioWW
-      - TerritorioGeneral
-      - TerritorioPrompt
-      - WPTerritorio
-
-  - name: TerritorioSemana
-    source_entity: TerritorioSemana
-    target_package: com.glpportal.logistica
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - TerritorioSemanaPrompt
-      - TerritorioSemanaWC
-
-  - name: TipoTanque
-    source_entity: TipoTanque
-    target_package: com.glpportal.logistica
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - TipoTanqueView
-      - TipoTanqueWW
-      - TipoTanqueGeneral
-      - TipoTanquePrompt
-
-  - name: PerfilVeiculo
-    source_entity: PerfilVeiculo
-    target_package: com.glpportal.veiculo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - PerfilVeiculoView
-      - PerfilVeiculoWW
-      - PerfilVeiculoGeneral
-      - PerfilVeiculoPrompt
-
-  - name: TipoCombustivel
-    source_entity: TipoCombustivel
-    target_package: com.glpportal.veiculo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - TipoCombustivelView
-      - TipoCombustivelWW
-      - TipoCombustivelGeneral
-      - TipoCombustivelPrompt
-
-  - name: Motorista
-    source_entity: Motorista
-    target_package: com.glpportal.veiculo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - MotoristaView
-      - MotoristaWW
-      - MotoristaGeneral
-      - MotoristaPrompt
-
-  - name: Veiculo
-    source_entity: Veiculo
-    target_package: com.glpportal.veiculo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Combustivel
-    ui_forms:
-      - VeiculoView
-      - VeiculoWW
-      - VeiculoGeneral
-      - VeiculoPrompt
-      - WPVeiculo
-
-  - name: VeiculoCombustivel
-    source_entity: VeiculoCombustivel
-    target_package: com.glpportal.veiculo
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - VeiculoCombustivelPrompt
-      - VeiculoCombustivelWC
-
-  - name: Abastecimento
-    source_entity: Abastecimento
-    target_package: com.glpportal.abastecimento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Anexo
-    ui_forms:
-      - AbastecimentoView
-      - AbastecimentoWW
-      - AbastecimentoGeneral
-      - AbastecimentoPrompt
-      - WPAbastecimento
-      - WPImportarAbastecimento
-      - WPImportarAbastecimentoSucesso
-
-  - name: AbastecimentoAnexo
-    source_entity: AbastecimentoAnexo
-    target_package: com.glpportal.abastecimento
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - AbastecimentoAnexoPrompt
-      - AbastecimentoAnexoWC
-
-  - name: Filial
-    source_entity: Filial
-    target_package: com.glpportal.filial
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - FilialView
-      - FilialWW
-      - FilialGeneral
-      - FilialPrompt
-
-  - name: Pessoa
-    source_entity: Pessoa
-    target_package: com.glpportal.pessoa
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    ui_forms:
-      - PessoaView
-      - PessoaWW
-      - PessoaGeneral
-      - PessoaPrompt
-
-  - name: ProgramacaoRota
-    source_entity: ProgramacaoRota
-    target_package: com.glpportal.rota
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Territorio
-      - Cliente
-    ui_forms:
-      - ProgramacaoRotaView
-      - ProgramacaoRotaWW
-      - ProgramacaoRotaGeneral
-      - ProgramacaoRotaPrompt
-      - WPProgramacaoRota
-      - ExecucaoRota
-      - WPExecucaoRota
-      - SIVAExecucaoRota
-      - DashboardRota
-      - DashboardProgramacaoRota
-
-  - name: ProgramacaoRotaTerritorio
-    source_entity: ProgramacaoRotaTerritorio
-    target_package: com.glpportal.rota
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - ProgramacaoRotaTerritorioPrompt
-      - ProgramacaoRotaTerritorioWC
-
-  - name: ProgramacaoRotaCliente
-    source_entity: ProgramacaoRotaCliente
-    target_package: com.glpportal.rota
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - ProgramacaoRotaClientePrompt
-      - ProgramacaoRotaClienteWC
-
-  - name: PausaRota
-    source_entity: PausaRota
-    target_package: com.glpportal.rota
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - WPMotivoPausa
-      - WPRetornoPausa
-      - ProgramacaoRotaPausaRotaWC
-
-  - name: RetornoRotaSIVA
-    source_entity: RetornoRotaSIVA
-    target_package: com.glpportal.rota
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - RetornoSIVA
-      - ObterRetornoSIVA
-      - WPEnvioSIVA
-      - WPErroIntegracaoSIVA
 
   - name: PontoEletronico
     source_entity: PontoEletronico
     target_package: com.glpportal.ponto
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Marcacao
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - PontoEletronicoView
       - PontoEletronicoWW
@@ -1129,44 +801,327 @@ modules:
   - name: PontoEletronicoMarcacao
     source_entity: PontoEletronicoMarcacao
     target_package: com.glpportal.ponto
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - PontoEletronicoMarcacaoWC
+      - PontoEletronicoMarcacaoPrompt
+      - WCMarcacaoPonto
+
+  - name: Area
+    source_entity: Area
+    target_package: com.glpportal.area
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - AreaView
+      - AreaWW
+      - AreaGeneral
+      - AreaPrompt
+
+  - name: AreaUsuario
+    source_entity: AreaUsuario
+    target_package: com.glpportal.area
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - AreaUsuarioWC
+      - AreaUsuarioPrompt
+
+  - name: TipoDocumento
+    source_entity: TipoDocumento
+    target_package: com.glpportal.documento
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - TipoDocumentoView
+      - TipoDocumentoWW
+      - TipoDocumentoGeneral
+      - TipoDocumentoPrompt
+
+  - name: Documento
+    source_entity: Documento
+    target_package: com.glpportal.documento
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - DocumentoView
+      - DocumentoWW
+      - DocumentoGeneral
+      - DocumentoPrompt
+      - CadastroDocumento
+      - IndicadoresDocumentos
+      - WPRenovarDocumento
+      - WPCancelarDocumento
+    notes: Sublevels Anexo e Revisao; fluxo de status (vigente, cancelado, renovado) deve ser implementado como state machine.
+
+  - name: DocumentoAnexo
+    source_entity: DocumentoAnexo
+    target_package: com.glpportal.documento
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - DocumentoAnexoWC
+      - DocumentoAnexoPrompt
+
+  - name: DocumentoRevisao
+    source_entity: DocumentoRevisao
+    target_package: com.glpportal.documento
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - DocumentoRevisaoWC
+      - DocumentoRevisaoPrompt
+
+  - name: MotivoCancelamento
+    source_entity: MotivoCancelamento
+    target_package: com.glpportal.cancelamento
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - MotivoCancelamentoView
+      - MotivoCancelamentoWW
+      - MotivoCancelamentoGeneral
+      - MotivoCancelamentoPrompt
+
+  - name: Prospect
+    source_entity: Prospect
+    target_package: com.glpportal.prospect
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - ProspectView
+      - ProspectWW
+      - ProspectGeneral
+      - ProspectPrompt
+      - WizardProspect
+      - WizardProspectCadastro
+      - WizardProspectAnexo
+      - WizardProspectFaturamento
+      - WPBloqueioProspect
+      - WPLiberacaoProspect
+    notes: Sublevels Contato e Anexo; status como enum (Ativo, Bloqueado).
+
+  - name: ProspectContato
+    source_entity: ProspectContato
+    target_package: com.glpportal.prospect
+    artifacts: [Entity, Repository, Service]
+    ui_forms:
+      - ProspectContatoPrompt
+
+  - name: ProspectAnexo
+    source_entity: ProspectAnexo
+    target_package: com.glpportal.prospect
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - ProspectAnexoWC
+      - ProspectAnexoPrompt
+
+  - name: TipoCombustivel
+    source_entity: TipoCombustivel
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - TipoCombustivelView
+      - TipoCombustivelWW
+      - TipoCombustivelPrompt
+      - TipoCombustivelGeneral
+
+  - name: Motorista
+    source_entity: Motorista
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - MotoristaView
+      - MotoristaWW
+      - MotoristaPrompt
+      - MotoristaGeneral
+
+  - name: Veiculo
+    source_entity: Veiculo
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - VeiculoView
+      - VeiculoWW
+      - VeiculoPrompt
+      - VeiculoGeneral
+      - WPVeiculo
+
+  - name: VeiculoCombustivel
+    source_entity: VeiculoCombustivel
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - VeiculoCombustivelWC
+      - VeiculoCombustivelPrompt
+
+  - name: PerfilVeiculo
+    source_entity: PerfilVeiculo
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - PerfilVeiculoView
+      - PerfilVeiculoWW
+      - PerfilVeiculoPrompt
+      - PerfilVeiculoGeneral
+
+  - name: Abastecimento
+    source_entity: Abastecimento
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - AbastecimentoView
+      - AbastecimentoWW
+      - AbastecimentoPrompt
+      - AbastecimentoGeneral
+      - WPAbastecimento
+      - WPImportarAbastecimento
+
+  - name: AbastecimentoAnexo
+    source_entity: AbastecimentoAnexo
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - AbastecimentoAnexoWC
+      - AbastecimentoAnexoPrompt
+
+  - name: Territorio
+    source_entity: Territorio
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - TerritorioView
+      - TerritorioWW
+      - TerritorioPrompt
+      - TerritorioGeneral
+      - WPTerritorio
+
+  - name: TerritorioSemana
+    source_entity: TerritorioSemana
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - TerritorioSemanaWC
+      - TerritorioSemanaPrompt
+
+  - name: TipoTanque
+    source_entity: TipoTanque
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - TipoTanqueView
+      - TipoTanqueWW
+      - TipoTanquePrompt
+      - TipoTanqueGeneral
+
+  - name: Periodicidade
+    source_entity: Periodicidade
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - PeriodicidadeView
+      - PeriodicidadeWW
+      - PeriodicidadePrompt
+      - PeriodicidadeGeneral
+
+  - name: Filial
+    source_entity: Filial
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - FilialView
+      - FilialWW
+      - FilialPrompt
+      - FilialGeneral
+
+  - name: Pessoa
+    source_entity: Pessoa
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - PessoaView
+      - PessoaWW
+      - PessoaPrompt
+      - PessoaGeneral
+      - WPColaborador
+
+  - name: MotivoNaoAbastecimento
+    source_entity: MotivoNaoAbastecimento
+    target_package: com.glpportal.logistica
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - MotivoNaoAbastecimentoView
+      - MotivoNaoAbastecimentoWW
+      - MotivoNaoAbastecimentoPrompt
+      - MotivoNaoAbastecimentoGeneral
+
+  - name: ProgramacaoRota
+    source_entity: ProgramacaoRota
+    target_package: com.glpportal.rota
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - ProgramacaoRotaView
+      - ProgramacaoRotaWW
+      - ProgramacaoRotaPrompt
+      - ProgramacaoRotaGeneral
+      - WPProgramacaoRota
+      - ExecucaoRota
+      - WPExecucaoRota
+      - DashboardRota
+      - DashboardProgramacaoRota
+      - SIVAExecucaoRota
+    notes: Sublevels Territorio e Cliente com muitos campos de status de execução; modelar como agregado com eventos de domínio para integração SIVA.
+
+  - name: ProgramacaoRotaTerritorio
+    source_entity: ProgramacaoRotaTerritorio
+    target_package: com.glpportal.rota
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - ProgramacaoRotaTerritorioWC
+      - ProgramacaoRotaTerritorioPrompt
+
+  - name: ProgramacaoRotaCliente
+    source_entity: ProgramacaoRotaCliente
+    target_package: com.glpportal.rota
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - ProgramacaoRotaClienteWC
+      - ProgramacaoRotaClientePrompt
+
+  - name: PausaRota
+    source_entity: PausaRota
+    target_package: com.glpportal.rota
+    artifacts: [Entity, Repository, Service, ReactComponent]
+    ui_forms:
+      - ProgramacaoRotaPausaRotaWC
+      - WPMotivoPausa
+      - WPRetornoPausa
+
+  - name: RetornoRotaSIVA
+    source_entity: RetornoRotaSIVA
+    target_package: com.glpportal.rota
     artifacts: [Entity, Repository, Service, Controller]
     ui_forms:
-      - PontoEletronicoMarcacaoPrompt
-      - PontoEletronicoMarcacaoWC
-      - WCMarcacaoPonto
+      - RetornoSIVA
+      - ObterRetornoSIVA
+    notes: Integração com sistema SIVA; avaliar webhook ou polling; campos com nomenclatura snake_case herdada.
 
   - name: GestaoAtivo
     source_entity: GestaoAtivo
-    target_package: com.glpportal.gestaoativo
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    target_package: com.glpportal.ativo
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - GestaoAtivoView
       - GestaoAtivoWW
       - GestaoAtivoGeneral
       - GestaoAtivoPrompt
       - WizardGestaoAtivo
-      - WizardGestaoAtivoStepCliente
-      - WizardGestaoAtivoStepTanque
-      - WizardGestaoAtivoStepSerie
-      - WizardGestaoAtivoStepPatrimonio
-      - WizardGestaoAtivoStepFabricacao
-      - WizardGestaoAtivoStepRequalificacao
-      - WizardGestaoAtivoStepFabricante
-      - WizardGestaoAtivoStepFoto
       - HomeGestaoAtivo
-      - WizardGestaoAtivoGridClientes
+    notes: Gestão de tanques/ativos; wizard de cadastro em múltiplos steps.
 
   - name: AnotacaoFinanceiro
     source_entity: AnotacaoFinanceiro
     target_package: com.glpportal.financeiro
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - WPFinanceiroAnotacao
 
   - name: DiaAtraso
     source_entity: DiaAtraso
     target_package: com.glpportal.financeiro
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - DiaAtrasoView
       - DiaAtrasoWW
@@ -1176,365 +1131,161 @@ modules:
   - name: LogRecord
     source_entity: LogRecord
     target_package: com.glpportal.log
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - ViewLogRecord
       - WWLogRecord
       - LogRecordGeneral
       - VisualizarLog
 
-  - name: GXChatMessage
-    source_entity: GXChatMessage
-    target_package: com.glpportal.chat
-    artifacts: [Entity, Repository, Service, Controller]
-    ui_forms:
-      - PanelChatWeb
-      - ChatBotMasterWeb
-
-  - name: GXChatUser
-    source_entity: GXChatUser
-    target_package: com.glpportal.chat
-    artifacts: [Entity, Repository, Service, Controller]
-
   - name: AccessToken
     source_entity: AccessToken
     target_package: com.glpportal.auth
     artifacts: [Entity, Repository, Service]
-    notes: Replace GeneXus AccessToken pattern with ASP.NET Core JWT Bearer tokens and refresh token mechanism
+    notes: Tokens de acesso; avaliar substituição por JWT stateless com refresh token.
 
   - name: User
     source_entity: User
     target_package: com.glpportal.auth
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - ViewUser
       - WWUser
       - UserGeneral
-
-  - name: MercadoPagoServices
-    source_entity: MercadoPagoServices
-    target_package: com.glpportal.pagamento
-    artifacts: [Entity, Repository, Service, Controller]
-    sub_entities:
-      - Info
-    ui_forms:
-      - WPMercadoPago
-
-  - name: MercadoPagoInfo
-    source_entity: MercadoPagoInfo
-    target_package: com.glpportal.pagamento
-    artifacts: [Entity, Repository, Service, Controller]
-
-  - name: PurchaseOrder
-    source_entity: PurchaseOrder
-    target_package: com.glpportal.pagamento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Items
-    ui_forms:
-      - ViewPurchaseOrder
-      - WWPurchaseOrder
-      - PurchaseOrderGeneral
-      - PurchaseOrderItemsWC
-
-  - name: Subscription
-    source_entity: Subscription
-    target_package: com.glpportal.pagamento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
-    sub_entities:
-      - Invoicy
-    ui_forms:
-      - ViewSubscription
-      - WWSubscription
-      - SubscriptionGeneral
-      - SubscriptionInvoicyWC
-      - CreateSuscriptionBasic
-      - CreateSubscriptionCustom
+    notes: Entidade de usuário de pagamento (MercadoPago); não confundir com Usuario do portal.
 
   - name: Plan
     source_entity: Plan
     target_package: com.glpportal.pagamento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - ViewPlan
       - WWPlan
       - PlanGeneral
-      - PlanSubscriptionWC
+
+  - name: Subscription
+    source_entity: Subscription
+    target_package: com.glpportal.pagamento
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - ViewSubscription
+      - WWSubscription
+      - SubscriptionGeneral
+      - CreateSuscriptionBasic
+      - CreateSubscriptionCustom
+    notes: Sublevels Invoicy e Payments; integração MercadoPago.
+
+  - name: PurchaseOrder
+    source_entity: PurchaseOrder
+    target_package: com.glpportal.pagamento
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
+    ui_forms:
+      - ViewPurchaseOrder
+      - WWPurchaseOrder
+      - PurchaseOrderGeneral
+      - CreatePayment
 
   - name: Payment
     source_entity: Payment
     target_package: com.glpportal.pagamento
-    artifacts: [Entity, Repository, Service, Controller, ReactComponent]
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
       - ViewPayment
       - WWPayment
       - PaymentGeneral
-      - Paymentswc
-      - CreatePayment
-      - WPFazerPagamento
-      - WPPagamentoFinal
 
-  - name: Cart
-    source_entity: Cart
+  - name: MercadoPagoServices
+    source_entity: MercadoPagoServices
     target_package: com.glpportal.pagamento
-    artifacts: [Entity, Repository, Service, Controller]
-    sub_entities:
-      - Item
+    artifacts: [Entity, Repository, Service, Controller, ReactPage, ReactComponent]
     ui_forms:
-      - SiteCart
+      - WPMercadoPago
+    notes: Sublevels Info com credenciais por ambiente; senhas e tokens NÃO devem ser persistidos em texto plano.
+
+  - name: MercadoPagoInfo
+    source_entity: MercadoPagoInfo
+    target_package: com.glpportal.pagamento
+    artifacts: [Entity, Repository, Service]
+    notes: Credenciais MercadoPago por ambiente; usar Azure Key Vault ou similar.
 
   - name: Item
     source_entity: Item
     target_package: com.glpportal.pagamento
-    artifacts: [Entity, Repository, Service, Controller]
+    artifacts: [Entity, Repository, Service]
 
-  - name: SA1010_ClienteProtheus
+  - name: Cart
+    source_entity: Cart
+    target_package: com.glpportal.pagamento
+    artifacts: [Entity, Repository, Service, ReactPage, ReactComponent]
+    ui_forms:
+      - SiteCart
+      - SiteHome
+
+  - name: Faturamento_Financeiro
+    source_entity: Faturamento
+    target_package: com.glpportal.financeiro
+    artifacts: [ReactPage, ReactComponent]
+    ui_forms:
+      - FinanceiroAcessoCliente
+      - WCFinanceiroCliente
+      - WPBoletoCliente
+      - WPCodigoPIX
+      - WPFazerPagamento
+      - WPPagamentoFinal
+    notes: Portal de acesso do cliente ao financeiro; requer autenticação separada do portal interno.
+
+  - name: ProtheusTables
     source_entity: SA1010
     target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SA1010 read-only integration table; map only fields required for sync; do not expose via REST directly
-
-  - name: SA2010_FornecedorProtheus
-    source_entity: SA2010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SA2010 read-only supplier reference
-
-  - name: SA3010_VendedorProtheus
-    source_entity: SA3010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SA3010 read-only seller reference
-
-  - name: SA4010_TransportadoraProtheus
-    source_entity: SA4010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SA4010 read-only transporter reference
-
-  - name: SB1010_ProdutoProtheus
-    source_entity: SB1010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SB1010 product catalog; read-only sync source with 200+ columns requiring field mapping analysis
-
-  - name: SE1010_TituloProtheus
-    source_entity: SE1010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SE1010 financial title; read-only; large schema requiring selective field projection
-
-  - name: SE4010_CondicaoPagamentoProtheus
-    source_entity: SE4010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SE4010 payment condition reference
-
-  - name: SE5010_MovimentoBancarioProtheus
-    source_entity: SE5010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SE5010 bank movement; read-only reference
-
-  - name: SED010_NaturezaFinanceiraProtheus
-    source_entity: SED010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SED010 financial nature; read-only
-
-  - name: SF4010_TESProtheus
-    source_entity: SF4010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SF4010 fiscal operation; extremely large schema (300+ fields); requires selective projection
-
-  - name: CT1010_PlanoContasProtheus
-    source_entity: CT1010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus CT1010 chart of accounts; read-only reference
-
-  - name: CTT010_CentroCustoProtheus
-    source_entity: CTT010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus CTT010 cost center; read-only reference
-
-  - name: DA0010_TabelaPrecoProtheus
-    source_entity: DA0010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus DA0010 price table; read-only reference
-
-  - name: DA1010_ItemTabelaPrecoProtheus
-    source_entity: DA1010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus DA1010 price table item; read-only reference
-
-  - name: SBE010_LocalEstoqueProtheus
-    source_entity: SBE010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SBE010 stock location; read-only reference
-
-  - name: SAH010_UnidadeMedidaProtheus
-    source_entity: SAH010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SAH010 unit of measure; read-only reference
-
-  - name: SYA010_PaisProtheus
-    source_entity: SYA010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SYA010 country; read-only reference
-
-  - name: CC2010_MunicipioProtheus
-    source_entity: CC2010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus CC2010 municipality; read-only reference
-
-  - name: NNR010_ArmazemProtheus
-    source_entity: NNR010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus NNR010 warehouse; read-only reference
-
-  - name: SC7010_SolicitacaoCompraProtheus
-    source_entity: SC7010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SC7010 purchase request; read-only reference
-
-  - name: SD2010_ItensFaturamentoProtheus
-    source_entity: SD2010
-    target_package: com.glpportal.integracao.protheus
-    artifacts: [Entity, Repository, Service]
-    notes: Protheus SD2010 billing items; read-only reference
-
-  - name: ModuloRotinaTemp
-    source_entity: ModuloRotinaTemp
-    target_package: com.glpportal.perfil
-    artifacts: [Entity, Repository, Service]
-    notes: Temporary/staging table used during permission setup; evaluate replacement with in-memory processing
-
-  - name: PMRFuncaoTemp
-    source_entity: PMRFuncaoTemp
-    target_package: com.glpportal.perfil
-    artifacts: [Entity, Repository, Service]
-    notes: Temporary/staging table for permission-function mapping; evaluate replacement with in-memory processing
-
-dashboards:
-  - source: DashboardServico
-    target_component: DashboardServico
-    target_package: com.glpportal.dashboard
-  - source: DashboardTecnicos
-    target_component: DashboardTecnicos
-    target_package: com.glpportal.dashboard
-  - source: DashboardContratos
-    target_component: DashboardContratos
-    target_package: com.glpportal.dashboard
-  - source: DashboardCliente
-    target_component: DashboardCliente
-    target_package: com.glpportal.dashboard
-  - source: DashboardRota
-    target_component: DashboardRota
-    target_package: com.glpportal.dashboard
-  - source: DashboardCompras
-    target_component: DashboardCompras
-    target_package: com.glpportal.dashboard
-  - source: DashboardProgramacaoRota
-    target_component: DashboardProgramacaoRota
-    target_package: com.glpportal.dashboard
-  - source: DashboardComissionamento
-    target_component: DashboardComissionamento
-    target_package: com.glpportal.dashboard
-
-cross_cutting:
-  auth:
-    strategy: JWT_BEARER
+    artifacts: [ReadOnlyEntity, Repository, Service]
     notes: >
-      GeneXus GAM integrated security must be replaced with ASP.NET Core Identity +
-      JWT Bearer tokens. AccessToken entity maps to refresh token table.
-      Roles/permissions from Perfil/Modulo/Rotina/PMRFuncao hierarchy must be
-      translated to ASP.NET Core Claims-based authorization policies.
-  validation:
-    strategy: FLUENT_VALIDATION
-    notes: >
-      GeneXus inline rules (Error, Default, NoAccept) must be translated to
-      FluentValidation validators in the Service layer and DataAnnotations on DTOs.
-  error_handling:
-    strategy: PROBLEM_DETAILS_RFC7807
-    notes: >
-      GeneXus msg() and Error() rules map to ProblemDetails middleware in ASP.NET Core.
-      Global exception handler required for unhandled exceptions.
-  logging:
-    strategy: SERILOG
-    notes: >
-      Replace GeneXus LogRecord entity-based logging with Serilog structured logging.
-      Retain LogRecord entity for business audit trail only.
-  email:
-    strategy: SMTP_SERVICE
-    notes: >
-      ParametroEmail entity drives SMTP configuration; implement IEmailService
-      abstraction backed by SmtpClient or SendGrid depending on environment.
-  real_time:
-    strategy: SIGNALR
-    notes: >
-      GXChatMessage and GXChatUser entities indicate real-time chat; implement
-      SignalR hub for PanelChatWeb and ChatBotMasterWeb replacements.
-  mercadopago:
-    strategy: MERCADOPAGO_SDK_DOTNET
-    notes: >
-      MercadoPagoServices drives payment gateway integration; use official
-      MercadoPago .NET SDK. Sandbox/production environment controlled by
-      MercadoPagoServicesAmbiente field.
-  maps:
-    strategy: GOOGLE_MAPS_REACT
-    notes: >
-      MapWebComponent requires Google Maps React integration.
-      ClienteLogisticaLatitude/Longitude fields drive map pins.
-  protheus_integration:
-    strategy: REST_OR_DIRECT_DB_READ_ONLY
-    notes: >
-      All SAxxxx/SDxxxx/SFxxxx/CTxxxx/DAxxxx Protheus tables are read-only
-      integration sources. Implement dedicated integration adapters/repositories
-      with explicit connection strings separate from the main application database.
-      Do not include Protheus tables in EF Core migrations for the application DB.
-  file_storage:
-    strategy: BLOB_STORAGE
-    notes: >
-      Multiple entities store file references (BlobFile, Foto, Arquivo, Anexo fields).
-      Implement IFileStorageService abstraction; recommend Azure Blob Storage or
-      AWS S3 for production. GeneXus blob fields must be migrated or externalized.
+      Tabelas Protheus lidas como externas: SA1010 (Clientes), SA2010 (Fornecedores),
+      SA3010 (Vendedores), SA4010 (Transportadoras), SB1010 (Produtos), SE4010 (CondicoesPagamento),
+      SE1010 (TitulosReceber), SE5010 (Baixas), SED010 (NaturezasFinanceiras),
+      SF4010 (TES), CTT010 (CentroCusto), CT1010 (PlanoContas), DA0010 (TabelaPreco),
+      DA1010 (ItensTabPreco), NNR010 (Armazens), SBE010 (Localizacoes), SAH010 (UnidadesMedida),
+      CC2010 (Municipios), SYA010 (Paises), CTT010 (CentroCusto), SD2010 (NFs saída), SC7010 (SC7).
+      Todas têm campos R_E_C_N_O_ e D_E_L_E_T_ típicos do Protheus; mapear como readonly views
+      ou via camada de integração REST com TOTVS Protheus. NÃO recriar no banco novo.
 
-db_rebuild_notes:
-  - All entity IDs appear as String(60) in the semantic inventory due to GeneXus fallback resolution; conduct data profiling to determine actual key types (numeric autonumber vs UUID vs string) before schema generation
-  - GeneXus sub_entities (levels) map to separate tables with composite FK to parent PK; preserve this in REBUILD schema
-  - BC (Business Component) variants of entities (EmpresaBC, UsuarioBC, GestaoServicoBC, ClienteBC, ClienteLogisticaBC) are design-time artifacts and should NOT generate separate tables; merge fields into canonical entity table
-  - Temp entities (ModuloRotinaTemp, PMRFuncaoTemp, OSAnexoTemp) require evaluation; prefer in-memory or Redis cache over persistent tables
-  - Protheus integration tables (SA1010, SB1010, SE1010, SF4010, etc.) must use a dedicated read-only database context pointing to the Protheus SQL Server instance; do NOT migrate data into the new application database
-  - ClienteResponsavel sub_entity in Cliente conflicts with standalone ClienteContato and ContratoResponsavel entities; normalize during REBUILD to avoid duplication
-  - GestaoServicoExecutante and OrdemExecutante have overlapping concerns; consolidate into single execution tracking entity after domain analysis
+  - name: Auth
+    source_entity: Login
+    target_package: com.glpportal.auth
+    artifacts: [JwtService, AuthController, ReactLoginPage, ReactAuthGuard]
+    ui_forms:
+      - Login
+      - WPEsqueciSenha
+      - WPNovaConta
+      - WPNovaEmpresa
+      - WPPrimeiroAcesso
+      - WPEsqueciSenhaCliente
+      - WPConfirmacaoIngressoEmpresa
+    notes: Substituir autenticação GAM GeneXus por ASP.NET Core Identity + JWT stateless com refresh token; manter suporte a multi-empresa.
 
 warnings:
-  - CRITICAL: All fields in the semantic inventory resolved as String(60) due to fallback resolution; a complete data profiling pass on the production GeneXus database is mandatory before generating EF Core entity classes and migrations
-  - CRITICAL: Protheus integration tables (SA1010, SB1010, SE1010, SF4010, CT1010, CTT010, SED010, SF4010, DA0010, DA1010, SBE010, SAH010, SYA010, CC2010, NNR010, SC7010, SD2010) contain hundreds of cryptic ERP columns; implement selective projection DTOs and never map all columns into domain entities
-  - HIGH: GeneXus GAM (Generalized Access Management) is heavily used for auth (Login, GAMHome, GAMWWUsers, GAMRoleEntry, etc.); full replacement with ASP.NET Core Identity + JWT is required and must be planned as a separate migration sprint
-  - HIGH: AcessoCliente and WorkWithPlusMasterPageAcessoCliente suggest a separate portal for clients (FinanceiroAcessoCliente, WPPrimeiroAcesso, WPEsqueciSenhaCliente); this client-facing portal requires a dedicated React app or route namespace separate from the internal admin UI
-  - HIGH: RetornoRotaSIVA entity indicates integration with an external SIVA logistics system; reverse-engineer the SIVA API contract before implementing RetornoRotaSIVA service
-  - HIGH: MercadoPago integration spans PurchaseOrder, Subscription, Plan, Payment, Cart, Item, AccessToken entities; test sandbox credentials must be obtained before Sprint 1 of payment module
-  - MEDIUM: GXChatMessage/GXChatUser entities suggest an embedded chat system; evaluate whether to reuse an existing chat solution (e.g., Intercom, Crisp) or implement custom SignalR hub
-  - MEDIUM: Multiple Wizard UI patterns (WizardClienteNova, WizardGestaoAtivo, WizardProspect, WPWizardNovaOS) exist; implement a reusable React multi-step form component to avoid code duplication
-  - MEDIUM: OSAnexoTemp, ModuloRotinaTemp, PMRFuncaoTemp are temporary/staging tables; confirm with business whether they need persistence or can be replaced with session/cache storage
-  - MEDIUM: GestaoServicoProgramada and OrdemExecutante both track scheduling/execution of service orders; clarify business rules to avoid duplicated state management in the new system
-  - MEDIUM: ClienteLogisticaBC is a near-duplicate of ClienteLogistica; ensure only one canonical entity is created in the REBUILD schema
-  - LOW: MapWebComponent and PromptGeolocation indicate geo features requiring Google Maps or equivalent API key provisioning in all environments
-  - LOW: WPRelatorioOrdem, WPRelatorioTimeSheet, WPRelatorioPonto, WPRelatorioSituacao are report screens; implement as PDF export endpoints using a reporting library (e.g., QuestPDF, FastReport) rather than legacy GeneXus report layouts
-  - LOW: DashboardServico, DashboardTecnicos, DashboardContratos, DashboardRota, DashboardCompras, DashboardProgramacaoRota, DashboardComissionamento, DashboardCliente require charting libraries in React (e.g., Recharts, Chart.js); confirm KPI definitions with business before implementation
-  - LOW: Scheduler-related screens (WPAgendaTecnica, WPDetalheAgendaTecnica, SchedulerDetailsForm, WPAgendasMultiplas) require a calendar/scheduler React component (e.g., FullCalendar, react-big-calendar)
-  - LOW: SiteHome, SiteCart, CreateSuscriptionBasic, CreateSubscriptionCustom, RefundsBasic, RefundsCustom suggest a public-facing e-commerce or subscription site; determine if this is a separate front-end deployment
-  - LOW: WWP_SelectImportFile and WPImportacao indicate bulk import screens; implement as file upload + background job processing using ASP.NET Core hosted services or Azure Functions
-  - LOW: WPExportarHistoricoRota, WPExportarClientesNA, WPExportarRota indicate data export screens; implement as streaming Excel/CSV endpoints using EPPlus or CsvHelper
+  - "ENTIDADES DUPLICADAS: Empresa/EmpresaBC, Usuario/UsuarioBC, Cliente/ClienteBC, GestaoServico/GestaoServicoBC, ClienteLogistica/ClienteLogisticaBC existem como pares Transaction+BC; consolidar em uma única entidade .NET Core com repositório e service únicos."
+  - "CAMPOS GENÉRICOS: Todos os campos do inventário foram tipados como String(60) no fallback; a equipe deve revisar e atribuir tipos corretos (decimal, datetime, boolean, int, etc.) antes de gerar migrações de banco."
+  - "TABELAS PROTHEUS (SA1010, SB1010, SE1010, etc.): São tabelas legadas de ERP externo; NÃO devem ser recriadas no banco novo. Implementar como integrações via API REST Protheus ou views somente-leitura com conexão separada."
+  - "CAMPOS DE SENHA EM TEXTO PLANO: ParametroEmail.ParametroEmailSenha, Usuario.UsuarioSenha, Cliente.ClienteSenha, MercadoPagoInfo.MercadoPagoAccessToken devem ser armazenados com criptografia (BCrypt / Azure Key Vault); nunca em texto plano."
+  - "CAMPOS GEOGRÁFICOS: ClienteLogistica.Latitude/Longitude, ClienteLogistica.EnderecoGeo devem ser mapeados para tipos geoespaciais (NetTopologySuite + SQL Server Geography ou PostGIS); não como strings."
+  - "CAMPOS DINÂMICOS EAV: Equipamento.Campo e ClienteEquipamento.Campo possuem tipo/tamanho variável por instância; avaliar coluna JSON (NVARCHAR(MAX) + JsonDocument) ou padrão EAV com tabela de metadados."
+  - "INTEGRAÇÃO SIVA: RetornoRotaSIVA usa nomenclatura snake_case e estrutura de retorno de API externa; implementar adapter/anti-corruption layer para isolar do domínio interno."
+  - "INTEGRAÇÃO MERCADOPAGO: Subscription, PurchaseOrder, Plan dependem de webhooks e credenciais por ambiente; implementar com padrão Outbox e idempotência para evitar duplicação de cobranças."
+  - "AUTENTICAÇÃO GAM: Sistema legado usa GeneXus GAM para autenticação. Migrar para ASP.NET Core Identity + JWT. Os WebPanels de GAM (GAMHome, GAMWWUsers, etc.) devem ser reimplementados como React + Identity Server ou equivalente."
+  - "CAMPO GUID: Usuario.UsuarioGUID deve ser substituído por Guid nativo do .NET; avaliar se é usado como token de reset de senha ou identificador externo."
+  - "CAMPOS DE FOTO/IMAGEM: EmpresaFoto, UsuarioFoto, GestaoAtivoFoto, ProspectAnexoPDF, OrdemExecutanteAnexoFoto armazenam caminhos ou blobs; definir estratégia de storage (Azure Blob Storage / AWS S3) antes da implementação."
+  - "MÓDULOS ORCAMENTO com 12 campos mensais (Jan..Dez): Normalizar em tabela OrcamentoMensalValor com colunas (OrcamentoId, Mes, Valor) ao invés de 12 colunas fixas."
+  - "CAMPO WHATSAPP: Usuario.UsuarioPontoWpp sugere integração com WhatsApp Business API; documentar e implementar como serviço externo separado."
+  - "FORMULA/CAMPOS CALCULADOS GeneXus: Campos como GestaoServico.GestaoServicoTempoAberto, GestaoServico.GestaoServicoDiasAberto, Cliente.ClienteEnderecoCompleto são fórmulas GeneXus; reimplementar como propriedades calculadas no domínio ou views de banco."
+  - "TABELA ModuloRotinaTemp e PMRFuncaoTemp: São tabelas temporárias de processamento GeneXus; avaliar se devem persistir ou ser substituídas por lógica em memória no service .NET."
+  - "CHAT EM TEMPO REAL: GXChatMessage e GXChatUser usam infraestrutura de notificação GeneXus; substituir por SignalR Hub no ASP.NET Core com persistência no banco."
+  - "MULTI-EMPRESA: O sistema tem campo EmpresaId em praticamente todas as entidades indicando isolamento multi-tenant por empresa; implementar Row-Level Security ou filtros de tenant no DbContext do Entity Framework Core."
+  - "FORMULÁRIOS SEM TABS MAPEADAS: Todos os 300+ formulários UI têm tabs vazias no inventário; a equipe de front-end deve inspecionar manualmente os WebPanels GeneXus exportados para mapear campos, grids e eventos antes de implementar os componentes React."
+  - "DASHBOARDS: DashboardServico, DashboardTecnicos, DashboardContratos, DashboardRota, DashboardCompras, DashboardProgramacaoRota, DashboardComissionamento, DashboardCliente requerem definição de KPIs e queries antes da implementação; não há inventário de métricas no sistema fonte."
+  - "WIZARD STEPS: Múltiplos wizards (WPWizardNovaOS, WizardClienteNova, WizardProspect, WizardGestaoAtivo) devem ser implementados como componentes React com estado gerenciado (Zustand/Redux) e validação por step."
+  - "SCHEDULER/AGENDA: WPAgendaTecnica e SchedulerDetailsForm sugerem componente de calendário/agenda; avaliar biblioteca React (FullCalendar, React Big Calendar) compatível com shadcn."
+  - "MAPA: MapWebComponent sugere integração com Google Maps / Leaflet para visualização geoespacial de rotas e clientes."
+  - "IMPORTAÇÃO DE DADOS: WWP_SelectImportFile e WPImportacao indicam funcionalidade de importação em lote; implementar com background jobs (Hangfire / .NET Hosted Services) para arquivos grandes."
+  - "ACESSO CLIENTE: WorkWithPlusMasterPageAcessoCliente, FinanceiroAcessoCliente e AcessoCliente sugerem portal externo para clientes finais com autenticação separada do portal interno; considerar aplicação React separada ou roteamento por subdomínio."
+  - "RELATÓRIOS: WPRelatorioOrdem, WPRelatorioTimeSheet, WPRelatorioPonto, WPImprimirAtendimento, WPImprimirMedicao, WPRelatorioSituacao, WPExportarHistoricoRota sugerem geração de PDF; implementar com QuestPDF ou FastReport para .NET Core."
+  - "INTEGRAÇÃO TOTVS PROTHEUS via tabelas SA1010..SE5010: Avaliar se acesso será direto ao banco Protheus (readonly connection string) ou via TOTVS Fluig / REST API Protheus; esta decisão impacta a arquitetura do módulo ProtheusTables."
