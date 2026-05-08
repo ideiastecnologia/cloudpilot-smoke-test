@@ -5,8 +5,8 @@
 | Pattern GUID (prefix) | Instâncias |
 |----------------------|-----------|
 | `78cecefe` | 7 |
-| `15cf49b5` | 1 |
 | `07135890` | 282 |
+| `15cf49b5` | 1 |
 
 ## Object kinds geradas por patterns
 

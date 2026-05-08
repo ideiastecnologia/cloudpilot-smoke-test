@@ -27,27 +27,27 @@ Esta KB GeneXus contém 5517 objetos no total, distribuídos entre 15 tipos iden
 | IMAGE | 250 |
 | WORK_WITH_PLUS_PATTERN | 281 |
 | UNKNOWN | 495 |
-| UNKNOWN(c84ec0ea) | 1 |
-| UNKNOWN(083f1b21) | 82 |
-| UNKNOWN(78b3fa0e) | 10 |
-| UNKNOWN(2a9e9aba) | 21 |
-| UNKNOWN(bf08dfb1) | 2 |
 | UNKNOWN(ffd44be7) | 78 |
-| UNKNOWN(624a8b31) | 4 |
-| UNKNOWN(ecececec) | 4 |
-| UNKNOWN(faeb588c) | 1 |
-| UNKNOWN(19abc6ff) | 21 |
-| UNKNOWN(5592de59) | 135 |
-| UNKNOWN(88313f43) | 3 |
-| UNKNOWN(dcdcdcdc) | 3 |
-| UNKNOWN(562f4793) | 21 |
-| UNKNOWN(83476c1e) | 3 |
-| UNKNOWN(c88fffcd) | 51 |
-| UNKNOWN(c804fdbd) | 7 |
-| UNKNOWN(78cecefe) | 6 |
-| UNKNOWN(36e32e2d) | 1 |
-| UNKNOWN(3affc0b3) | 4 |
+| UNKNOWN(bf08dfb1) | 2 |
+| UNKNOWN(2a9e9aba) | 21 |
+| UNKNOWN(78b3fa0e) | 10 |
+| UNKNOWN(083f1b21) | 82 |
+| UNKNOWN(c84ec0ea) | 1 |
 | UNKNOWN(1132ac08) | 37 |
+| UNKNOWN(3affc0b3) | 4 |
+| UNKNOWN(36e32e2d) | 1 |
+| UNKNOWN(78cecefe) | 6 |
+| UNKNOWN(c804fdbd) | 7 |
+| UNKNOWN(c88fffcd) | 51 |
+| UNKNOWN(83476c1e) | 3 |
+| UNKNOWN(562f4793) | 21 |
+| UNKNOWN(dcdcdcdc) | 3 |
+| UNKNOWN(88313f43) | 3 |
+| UNKNOWN(5592de59) | 135 |
+| UNKNOWN(19abc6ff) | 21 |
+| UNKNOWN(faeb588c) | 1 |
+| UNKNOWN(ecececec) | 4 |
+| UNKNOWN(624a8b31) | 4 |
 
 ## Sinais de complexidade
 

@@ -1,6 +1,6 @@
 # GLPPortal — Migrated from GeneXus
 
-Imported via **CloudPilot Dev Studio Legacy Import** on 2026-05-08T00:53:56.287559771Z.
+Imported via **CloudPilot Dev Studio Legacy Import** on 2026-05-08T01:24:51.450506277Z.
 
 ## Source
 
