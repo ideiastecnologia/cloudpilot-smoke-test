@@ -7,8 +7,8 @@
 
 ## Source KB Snapshot
 
-- Total objects: 14
-- KB name: (unknown)
+- Total objects: 5517
+- KB name: GLPPortal
 - GeneXus version: 18
 
 ## Notes

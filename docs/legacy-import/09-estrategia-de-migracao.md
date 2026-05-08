@@ -6,6 +6,6 @@ Esta migração preserva a lógica de negócio e o comportamento observado, mode
 
 ## KB de origem
 
-- Nome: ?
+- Nome: GLPPortal
 - GeneXus: 18
-- Objetos totais: 14
+- Objetos totais: 5517
