@@ -19,6 +19,10 @@ Contagens por tipo extraídas da KB durante a análise estrutural.
 | IMAGE | 250 | ícones e imagens embutidas |
 | WORK_WITH_PLUS_PATTERN | 281 | patterns generativos |
 | UNKNOWN | 495 |  |
+| UNKNOWN | 21 | guid prefix `2a9e9aba` |
+| UNKNOWN | 10 | guid prefix `78b3fa0e` |
+| UNKNOWN | 82 | guid prefix `083f1b21` |
+| UNKNOWN | 1 | guid prefix `c84ec0ea` |
 | UNKNOWN | 37 | guid prefix `1132ac08` |
 | UNKNOWN | 4 | guid prefix `3affc0b3` |
 | UNKNOWN | 1 | guid prefix `36e32e2d` |
@@ -36,10 +40,6 @@ Contagens por tipo extraídas da KB durante a análise estrutural.
 | UNKNOWN | 4 | guid prefix `624a8b31` |
 | UNKNOWN | 78 | guid prefix `ffd44be7` |
 | UNKNOWN | 2 | guid prefix `bf08dfb1` |
-| UNKNOWN | 21 | guid prefix `2a9e9aba` |
-| UNKNOWN | 10 | guid prefix `78b3fa0e` |
-| UNKNOWN | 82 | guid prefix `083f1b21` |
-| UNKNOWN | 1 | guid prefix `c84ec0ea` |
 
 ## Warnings do analyzer
 
