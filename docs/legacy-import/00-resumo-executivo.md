@@ -27,6 +27,8 @@ Esta KB GeneXus contém 5517 objetos no total, distribuídos entre 15 tipos iden
 | IMAGE | 250 |
 | WORK_WITH_PLUS_PATTERN | 281 |
 | UNKNOWN | 495 |
+| UNKNOWN(ffd44be7) | 78 |
+| UNKNOWN(bf08dfb1) | 2 |
 | UNKNOWN(2a9e9aba) | 21 |
 | UNKNOWN(78b3fa0e) | 10 |
 | UNKNOWN(083f1b21) | 82 |
@@ -46,8 +48,6 @@ Esta KB GeneXus contém 5517 objetos no total, distribuídos entre 15 tipos iden
 | UNKNOWN(faeb588c) | 1 |
 | UNKNOWN(ecececec) | 4 |
 | UNKNOWN(624a8b31) | 4 |
-| UNKNOWN(ffd44be7) | 78 |
-| UNKNOWN(bf08dfb1) | 2 |
 
 ## Sinais de complexidade
 

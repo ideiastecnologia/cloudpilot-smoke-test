@@ -24,6 +24,8 @@ OBJECT INVENTORY (by kind):
     - IMAGE: 250
     - WORK_WITH_PLUS_PATTERN: 281
     - UNKNOWN: 495
+    - UNKNOWN(ffd44be7): 78
+    - UNKNOWN(bf08dfb1): 2
     - UNKNOWN(2a9e9aba): 21
     - UNKNOWN(78b3fa0e): 10
     - UNKNOWN(083f1b21): 82
@@ -43,8 +45,6 @@ OBJECT INVENTORY (by kind):
     - UNKNOWN(faeb588c): 1
     - UNKNOWN(ecececec): 4
     - UNKNOWN(624a8b31): 4
-    - UNKNOWN(ffd44be7): 78
-    - UNKNOWN(bf08dfb1): 2
 
 DOMAINS (376):
     # name + dataType (extracted from ATTCUSTOMTYPE Property when available)
